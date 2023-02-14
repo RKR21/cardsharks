@@ -7,7 +7,9 @@ import com.estore.api.estoreapi.model.Product;
  * Defines methods for the InventoryDAO api
  * 
  * @author Elijah Lenhard
- */
+ * @author Adrian Marcellus
+*/
+
 public interface InventoryDAO {
     
     /**
@@ -54,8 +56,7 @@ public interface InventoryDAO {
      * or null if the {@link Product product} was not found
      * @throws IOException
      */
-    Product deleteProduct(int id) throws IOException;
-
+    boolean deleteProduct(int id) throws IOException;
     /**
      * Adds a new {@link Product product} to the database
      * @param product {@link Product product} object to be added 
@@ -65,7 +66,4 @@ public interface InventoryDAO {
      * @throws IOException
      */
     Product createProduct(Product product) throws IOException;
-    
-
-
 }

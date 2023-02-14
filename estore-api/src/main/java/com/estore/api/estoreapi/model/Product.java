@@ -68,9 +68,6 @@ public class Product {
     public void setPrice(double price){
         this.price = price;
     }
-
-
-
     @Override
     public String toString() {
         return String.format(STRING_FORMAT,id,name,price);
