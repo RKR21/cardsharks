@@ -1,4 +1,4 @@
-package com.persistence;
+package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;

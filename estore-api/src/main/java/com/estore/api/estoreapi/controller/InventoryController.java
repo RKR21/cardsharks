@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import com.persistence.InventoryDAO;
+
 import com.estore.api.estoreapi.model.Product;
+import com.estore.api.estoreapi.persistence.InventoryDAO;
 
 /**
  * Handles the REST API requests for the Hero resource
