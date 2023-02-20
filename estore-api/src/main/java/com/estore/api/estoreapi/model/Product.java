@@ -14,7 +14,7 @@ public class Product {
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
     @JsonProperty("price") private double price;
-
+    @JsonProperty("quantity") private int quantity;
     
     /**
      * Create a new Product object
@@ -24,11 +24,13 @@ public class Product {
      * 
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, 
-        @JsonProperty("price") double price){
+        @JsonProperty("price") double price, @JsonProperty("quantity") int quantity){
         this.id = id;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
     }
+
     /**
      * Retrives the id of the product
      * @return Id of the product
@@ -68,6 +70,23 @@ public class Product {
     public void setPrice(double price){
         this.price = price;
     }
+
+    /**
+     * gets the quantity of a product in the inventory
+     * @return int quantity
+     */
+    public int getQuantity(){
+        return this.quantity;
+    }
+
+    /**
+     * sets the quantity of a product in the inventory
+     * @param quantity amount to set the quantity to
+     */
+    public void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return String.format(STRING_FORMAT,id,name,price);
