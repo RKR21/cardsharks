@@ -32,7 +32,7 @@ public class InventoryFileDAO implements InventoryDAO {
     private String filename;
 
     /**
-     * Creates a Hero File Data Access Object
+     * Creates a Inventory File Data Access Object
      *
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
@@ -124,7 +124,9 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * Retrives an array of all {@link Product products}
+     * @return an array of {@link Product product} objects
+     * @throws IOException 
      */
     @Override
     public Product[] getProducts() {
@@ -134,7 +136,10 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * Retrives an array of all {@link Product products} that contain a substring
+     * @param String substring to search for
+     * @return an array of {@link Product product} objects that contain the substring in their display name
+     * @throws IOException 
      */
     @Override
     public Product[] findProducts(String containsText) {
@@ -144,7 +149,12 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * Retrives the {@link Product product} with the given id
+     * @param id id of the {@link Product product} to be returned
+     * @return the {@link Product product} object with the id given
+     * <br>
+     * null if no {@link Product product} with the given id exists
+     * @throws IOException
      */
     @Override
     public Product getProduct(int id) {
@@ -157,7 +167,12 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * Adds a new {@link Product product} to the database
+     * @param product {@link Product product} object to be added 
+     * <br>
+     * id is ignored and handled seperatly to maintain consistincy.
+     * @return new {@link Product product} object or null if unsuccessful
+     * @throws IOException
      */
     @Override
     public Product createProduct(Product product) throws IOException {
@@ -170,7 +185,13 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * updates an existing {@link Product product} 
+     * @param product new {@link Product product} object
+     * @return the {@link Product product} object that was updated
+     * <br>
+     * or null if no object was found
+     * 
+     * @throws IOException
      */
     @Override
     public Product updateProduct(Product product) throws IOException {
@@ -184,7 +205,12 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     ** {@inheritDoc}
+     * deletes a {@link Product product} from the database
+     * @param id id of the {@link Product product} to be deleted
+     * @return the {@link Product product} that was deleted
+     * <br>
+     * or null if the {@link Product product} was not found
+     * @throws IOException
      */
     @Override
     public boolean deleteProduct(int id) throws IOException {
