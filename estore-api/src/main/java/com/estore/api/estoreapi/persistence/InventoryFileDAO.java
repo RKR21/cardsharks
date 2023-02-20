@@ -89,6 +89,21 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
+     * Checks all existing {@linkplain Product products} for an exact match with the name string. 
+     * Returns ture if found false otherwise
+     * @param name String to be checked for
+     * @return True if {@link Product product} with exact name was found false otherwise.
+     */
+    private boolean nameExists(String name){
+        for (Product product : products.values()) {
+            if (product.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Saves the {@linkplain Product products} from the map into the file as an array of JSON objects
      *
      * @return true if the {@link Product products} were written successfully
@@ -177,6 +192,9 @@ public class InventoryFileDAO implements InventoryDAO {
     @Override
     public Product createProduct(Product product) throws IOException {
         synchronized(products) {
+            if (nameExists(product.getName())){
+                return null;
+            }
             Product newProduct = new Product(nextId(), product.getName(), product.getPrice(), product.getQuantity());
             products.put(newProduct.getId(),newProduct);
             save();
