@@ -14,56 +14,69 @@ public interface InventoryDAO {
     
     /**
      * Retrives an array of all {@link Product products}
+     * 
      * @return an array of {@link Product product} objects
-     * @throws IOException 
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product[] getProducts() throws IOException;
 
     /**
      * Retrives the {@link Product product} with the given id
+     * 
      * @param id id of the {@link Product product} to be returned
+     * 
      * @return the {@link Product product} object with the id given
-     * <br>
      * null if no {@link Product product} with the given id exists
-     * @throws IOException
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product getProduct(int id) throws IOException;
 
     /**
      * Retrives an array of all {@link Product products} that contain a substring
+     * 
      * @param String substring to search for
+     * 
      * @return an array of {@link Product product} objects that contain the substring in their display name
-     * @throws IOException 
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product[] findProducts(String subString) throws IOException;
 
     /**
      * updates an existing {@link Product product} 
+     * 
      * @param product new {@link Product product} object
+     * 
      * @return the {@link Product product} object that was updated
-     * <br>
      * or null if no object was found
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product updateProduct(Product product) throws IOException;
 
     /**
-     * deletes a {@link Product product} from the database
-     * @param id id of the {@link Product product} to be deleted
-     * @return the {@link Product product} that was deleted
-     * <br>
-     * or null if the {@link Product product} was not found
-     * @throws IOException
+     * Deletes a {@linkplain Product product} with the given id
+     * 
+     * @param id The id of the {@link Product product}
+     * 
+     * @return true if the {@link Product product} was deleted
+     * false if product with the given id does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteProduct(int id) throws IOException;
+    
     /**
      * Adds a new {@link Product product} to the database
+     * 
      * @param product {@link Product product} object to be added 
-     * <br>
      * id is ignored and handled seperatly to maintain consistincy.
+     * 
      * @return new {@link Product product} object or null if unsuccessful
-     * @throws IOException
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product createProduct(Product product) throws IOException;
 }

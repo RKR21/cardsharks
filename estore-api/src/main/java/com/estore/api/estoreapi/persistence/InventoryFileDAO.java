@@ -36,7 +36,7 @@ public class InventoryFileDAO implements InventoryDAO {
      *
      * @param filename Filename to read from and write to
      * @param objectMapper Provides JSON Object to/from Java Object serialization and deserialization
-     *
+     * 
      * @throws IOException when file cannot be accessed or read from
      */
     public InventoryFileDAO(@Value("${products.file}") String filename,ObjectMapper objectMapper) throws IOException {
@@ -47,7 +47,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Generates the next id for a new {@linkplain Product products}
-     *
+     * 
      * @return The next id
      */
     private synchronized static int nextId() {
@@ -58,7 +58,7 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Generates an array of {@linkplain Product products} from the tree map
-     *
+     * 
      * @return  The array of {@link Product products}, may be empty
      */
     private Product[] getProductArray() {
@@ -68,10 +68,9 @@ public class InventoryFileDAO implements InventoryDAO {
     /**
      * Generates an array of {@linkplain Product products} from the tree map for any
      * {@linkplain Product products} that contains the text specified by containsText
-     * <br>
      * If containsText is null, the array contains all of the {@linkplain Product products}
      * in the tree map
-     *
+     * 
      * @return  The array of {@link Product products}, may be empty
      */
     private Product[] getProductArray(String containsText) { // if containsText == null, no filter
@@ -91,7 +90,9 @@ public class InventoryFileDAO implements InventoryDAO {
     /**
      * Checks all existing {@linkplain Product products} for an exact match with the name string. 
      * Returns ture if found false otherwise
+     * 
      * @param name String to be checked for
+     * 
      * @return True if {@link Product product} with exact name was found false otherwise.
      */
     private boolean nameExists(String name){
@@ -105,9 +106,9 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Saves the {@linkplain Product products} from the map into the file as an array of JSON objects
-     *
+     * 
      * @return true if the {@link Product products} were written successfully
-     *
+     * 
      * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
@@ -118,11 +119,10 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Loads {@linkplain Product products} from the JSON file into the map
-     * <br>
      * Also sets next id to one more than the greatest id found in the file
-     *
+     * 
      * @return true if the file was read successfully
-     *
+     * 
      * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
@@ -140,11 +140,13 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Retrives an array of all {@link Product products}
+     * 
      * @return an array of {@link Product product} objects
-     * @throws IOException 
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     @Override
-    public Product[] getProducts() {
+    public Product[] getProducts() throws IOException{
         synchronized(products) {
             return getProductArray();
         }
@@ -152,9 +154,10 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Retrives an array of all {@link Product products} that contain a substring
+     * 
      * @param String substring to search for
+     * 
      * @return an array of {@link Product product} objects that contain the substring in their display name
-     * @throws IOException 
      */
     @Override
     public Product[] findProducts(String containsText) {
@@ -165,11 +168,13 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Retrives the {@link Product product} with the given id
+     * 
      * @param id id of the {@link Product product} to be returned
+     * 
      * @return the {@link Product product} object with the id given
-     * <br>
      * null if no {@link Product product} with the given id exists
-     * @throws IOException
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     @Override
     public Product getProduct(int id) {
@@ -183,11 +188,13 @@ public class InventoryFileDAO implements InventoryDAO {
 
     /**
      * Adds a new {@link Product product} to the database
+     * 
      * @param product {@link Product product} object to be added 
-     * <br>
      * id is ignored and handled seperatly to maintain consistincy.
+     * 
      * @return new {@link Product product} object or null if unsuccessful
-     * @throws IOException
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     @Override
     public Product createProduct(Product product) throws IOException {
@@ -202,14 +209,15 @@ public class InventoryFileDAO implements InventoryDAO {
         }
     }
 
-    /**
+   /**
      * updates an existing {@link Product product} 
+     * 
      * @param product new {@link Product product} object
+     * 
      * @return the {@link Product product} object that was updated
-     * <br>
      * or null if no object was found
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     @Override
     public Product updateProduct(Product product) throws IOException {
@@ -223,12 +231,14 @@ public class InventoryFileDAO implements InventoryDAO {
     }
 
     /**
-     * deletes a {@link Product product} from the database
-     * @param id id of the {@link Product product} to be deleted
-     * @return the {@link Product product} that was deleted
-     * <br>
-     * or null if the {@link Product product} was not found
-     * @throws IOException
+     * Deletes a {@linkplain Product product} with the given id
+     * 
+     * @param id The id of the {@link Product product}
+     * 
+     * @return true if the {@link Product product} was deleted
+     * false if product with the given id does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
      */
     @Override
     public boolean deleteProduct(int id) throws IOException {

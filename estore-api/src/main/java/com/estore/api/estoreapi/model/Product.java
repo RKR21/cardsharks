@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * 
  * @author Elijah Lenhard
+ * @author Adrian Marcellus
  */
 public class Product {
     static final String STRING_FORMAT = "Product [id=%d, name=%s, price=%f]";
@@ -21,7 +22,7 @@ public class Product {
      * @Param id Unique int for the product
      * @Param name Display name of the product
      * @Param price Listed price of the product
-     * 
+     * @param quantity number of product in inventory
      */
     public Product(@JsonProperty("id") int id, @JsonProperty("name") String name, 
         @JsonProperty("price") double price, @JsonProperty("quantity") int quantity){
@@ -33,6 +34,7 @@ public class Product {
 
     /**
      * Retrives the id of the product
+     * 
      * @return Id of the product
      */
     public int getId() {
@@ -41,6 +43,7 @@ public class Product {
 
     /**
      * Retrives the name of the product
+     * 
      * @return name of product
      */
     public String getName(){
@@ -49,6 +52,7 @@ public class Product {
 
     /**
      * Updates the name of the product
+     * 
      * @param String new name for product
      */
     public void setName(String name){
@@ -57,6 +61,7 @@ public class Product {
 
     /**
      * Retrives the price of the product
+     * 
      * @return price of the product
      */
     public double getPrice(){
@@ -65,6 +70,7 @@ public class Product {
 
     /**
      * Updates the price of the product
+     * 
      * @param double new price for product
      */
     public void setPrice(double price){
@@ -73,6 +79,7 @@ public class Product {
 
     /**
      * gets the quantity of a product in the inventory
+     * 
      * @return int quantity
      */
     public int getQuantity(){
@@ -81,15 +88,21 @@ public class Product {
 
     /**
      * sets the quantity of a product in the inventory
+     * 
      * @param quantity amount to set the quantity to
      */
     public void setQuantity(int quantity){
         this.quantity = quantity;
     }
 
+    /**
+     * To String Object Override
+     * 
+     * @return String
+     */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,price);
+        return String.format(STRING_FORMAT,id,name,price,quantity);
     }
     
 }

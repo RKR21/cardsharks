@@ -39,7 +39,6 @@ public class InventoryController {
      * Creates a REST API controller to responds to requests
      *
      * @param inventoryDao The {@link InventoryDAO Product Data Access Object} to perform CRUD operations
-     * <br>
      * This dependency is injected by the Spring Framework
      */
     public InventoryController(InventoryDAO inventoryDao) {
@@ -52,7 +51,7 @@ public class InventoryController {
      * @param id The id used to locate the {@link Product product}
      *
      * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
@@ -75,7 +74,7 @@ public class InventoryController {
      * Responds to the GET request for all {@linkplain Product products}
      *
      * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
-     * HTTP status of OK<br>
+     * HTTP status of OK
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
@@ -103,7 +102,7 @@ public class InventoryController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      * <p>
      * Example: Find all products that contain the text "ma"
-     * GET http://localhost:8080/heroes/?name=ma
+     * GET http://localhost:8080/products/?name=ma
      */
     @GetMapping("/")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
