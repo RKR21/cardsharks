@@ -59,10 +59,9 @@ public class InventoryController {
         LOG.info("GET /products/" + id);
         try {
             Product product = inventoryDao.getProduct(id);
-            if (product != null)
-                return new ResponseEntity<>(product,HttpStatus.OK);
-            else
+            if (product == null)
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(product,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -98,9 +97,8 @@ public class InventoryController {
      * @param name The name parameter which contains the text used to find the {@link Product products}
      *
      * @return ResponseEntity with array of {@link Product product} objects (may be empty) and
-     * HTTP status of OK<br>
+     * HTTP status of OK
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
-     * <p>
      * Example: Find all products that contain the text "ma"
      * GET http://localhost:8080/products/?name=ma
      */
@@ -108,7 +106,10 @@ public class InventoryController {
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         LOG.info("GET /products/?name="+name);
         try {
-            return new ResponseEntity<>(inventoryDao.findProducts(name),HttpStatus.OK);
+            Product[] products = inventoryDao.findProducts(name);
+            if(products.length == 0)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(products,HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
