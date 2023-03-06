@@ -118,7 +118,7 @@ public class InventoryController {
     }
 
     /**
-     * Creates a {@linkplain Product product} with the provided hero object
+     * Creates a {@linkplain Product product} with the provided product object
      *
      * @param product - The {@link HProduct product} to create
      *
