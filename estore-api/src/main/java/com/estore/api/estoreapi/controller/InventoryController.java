@@ -102,7 +102,7 @@ public class InventoryController {
      * Example: Find all products that contain the text "ma"
      * GET http://localhost:8080/products/?name=ma
      */
-    @GetMapping("/")
+    @GetMapping("/search")
     public ResponseEntity<Product[]> searchProducts(@RequestParam String name) {
         LOG.info("GET /products/?name="+name);
         try {
