@@ -24,7 +24,9 @@ import org.junit.jupiter.api.Test;
 /**
  * Test the Inventory File DAO class
  * 
+ * @author SWEN Faculty
  * @author Adrian Marcellus
+ * @author Elijah Lenhard
  */
 @Tag("Persistence-tier")
 public class InventoryFileDAOTest {
@@ -91,4 +93,64 @@ public class InventoryFileDAOTest {
         assertEquals(actual.getName(),product.getName());
     }
 
+    @Test
+    public void testUpdateProduct(){
+        Product product = new Product(14, "Squirtle", 2.50, 15);
+        
+        Product updated = assertDoesNotThrow(()-> inventoryFileDAO.updateProduct(product), "Unexpected exception thrown");
+        
+        assertNotNull(updated);
+        Product actual = inventoryFileDAO.getProduct(product.getId());
+        assertEquals(actual, product);
+    }
+
+    @Test
+    public void testSaveException() throws IOException{
+        doThrow(new IOException()).when(mockObjectMapper).writeValue(any(File.class), any(Product[].class));
+        Product product = new Product(16, "Pikachu", 8.5, 300);
+        assertThrows(IOException.class, () -> inventoryFileDAO.createProduct(product), 
+                    "IOException not Thrown");
+        
+    }
+
+    @Test
+    public void testGetProductNotFound(){
+        Product product = inventoryFileDAO.getProduct(304);
+        assertEquals(product, null);
+    }
+
+    @Test
+    public void testDeleteProductNotFound(){
+        boolean result = assertDoesNotThrow(() -> inventoryFileDAO.deleteProduct(234),
+                                     "Unexpected Exception thrown");
+
+        assertEquals(result, false);
+       
+
+    }
+
+    @Test
+    public void testUpdateHeroNotFound(){
+
+        Product product = new Product(140, "Pikachu", 30.5, 23);
+
+        Product result = assertDoesNotThrow(() -> inventoryFileDAO.updateProduct(product), "Unexpected exception thrown");
+
+        assertNull(result);
+
+    }
+
+    @Test
+    public void testConstructorException() throws IOException{
+        ObjectMapper mockObjectMapper = mock(ObjectMapper.class);
+
+        doThrow(new IOException())
+            .when(mockObjectMapper)
+                .readValue(new File("doesnt_matter.txt"),Product[].class);
+        
+        assertThrows(IOException.class, () -> new InventoryFileDAO("doesnt_matter.txt",mockObjectMapper),
+                                        "IOException not thrown");
+    }
+
 }
+

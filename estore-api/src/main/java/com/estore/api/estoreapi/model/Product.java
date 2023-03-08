@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * @author Adrian Marcellus
  */
 public class Product {
-    static final String STRING_FORMAT = "Product [id=%d, name=%s, price=%f]";
+    static final String STRING_FORMAT = "Product [id=%d, name=%s, price=%f, quantity=%d]";
 
     @JsonProperty("id") private int id;
     @JsonProperty("name") private String name;
@@ -102,7 +102,7 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,price,quantity);
+        return String.format(STRING_FORMAT,id,name,price,quantity,price);
     }
     
 }
