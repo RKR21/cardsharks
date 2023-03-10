@@ -12,6 +12,7 @@ import { HeroesComponent } from './heroes/heroes.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
+import { AdminInventoryControlsComponent } from './admin-inventory-controls/admin-inventory-controls.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { ProductSearchComponent } from './product-search/product-search.componen
     HeroDetailComponent,
     MessagesComponent,
     HeroSearchComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
+    AdminInventoryControlsComponent
   ],
   bootstrap: [ AppComponent ]
 })
