@@ -34,8 +34,23 @@ public class AccountController {
     private static final Logger LOG = Logger.getLogger(AccountController.class.getName());
     private AccountDAO accountDAO;
 
-    public AccountController(AccountDAO accountDao) {
-        this.accountDAO = accountDao;
+    public AccountController(AccountDAO accountDAO) {
+        this.accountDAO = accountDAO;
+    }
+
+    @GetMapping("")
+    public ResponseEntity<Integer> logIn(@RequestParam String userName) {
+        LOG.info("GET /account/" + userName);
+        try {
+            int token = accountDAO.logIn(userName);
+            if (token == 0)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("")
@@ -51,8 +66,8 @@ public class AccountController {
         }
     }
 
-    @DeleteMapping("/{userName}")
-    public ResponseEntity<Account> deleteAccount(@PathVariable String userName) {
+    @DeleteMapping("")
+    public ResponseEntity<Account> deleteAccount(@RequestParam String userName) {
         LOG.info("DELETE /account/" + userName);
         try {
             if(accountDAO.deleteAccount(userName))
@@ -63,64 +78,4 @@ public class AccountController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-/**    @GetMapping("{userName}/cart")
-    public ResponseEntity<Product[]> getCart(@RequestParam String userName) {
-        LOG.info("GET " + userName + "/cart");
-        try {
-            Product[] cart = accountDAO.getCart(userName);
-            if(cart == null)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(cart, HttpStatus.OK);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @PutMapping("{userName}/cart")
-    public ResponseEntity<Product> addToCart
-        (@RequestParam String userName, @RequestBody Product product) 
-    {
-        LOG.info("PUT /" + userName + "/cart_" + product);
-        try {
-            if(accountDAO.addToCart(userName, product) != null)
-                return new ResponseEntity<>(product,HttpStatus.OK);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @DeleteMapping("/{userName}")
-    public ResponseEntity<HttpStatus> removeFromCart
-        (@RequestParam String userName, @PathVariable int index)
-    {
-        LOG.info("DELETE /" + userName + "/cart_" + index);
-        try {
-            if(accountDAO.deleteAccount(userName))
-                return new ResponseEntity<>(HttpStatus.OK);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        } catch (IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @GetMapping("{userName}/inventory")
-    public ResponseEntity<Product[]> getInventory(@RequestParam String userName) {
-        LOG.info("GET /" + userName + "/inventory");
-        try {
-            Product[] inventory = accountDAO.getInventory(userName);
-            if(inventory == null)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(inventory, HttpStatus.OK);
-        }
-        catch(IOException e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
 }

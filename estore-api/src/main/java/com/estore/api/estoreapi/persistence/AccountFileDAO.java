@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.persistence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -67,15 +66,22 @@ public class AccountFileDAO implements AccountDAO {
         }
     }*/
 
+    public int logIn(String userName) throws IOException{
+        synchronized(accounts) {
+            if (accounts.containsKey(userName)){
+                return Account.getToken(userName);
+            }
+            return 0;
+        }
+    } 
+
     @Override
     public Account createAccount(Account account) throws IOException {
         synchronized(accounts) {
             if (accounts.containsKey(account.getUserName())){
                 return null;
             }
-            Account newAccount = new Account(
-                account.getUserName(), new ArrayList<Product>(), new ArrayList<Product>());
-            accounts.put(account.getUserName(), newAccount);
+            accounts.put(account.getUserName(), account);
             save();
             return account;
         }
@@ -88,60 +94,6 @@ public class AccountFileDAO implements AccountDAO {
                 return false;
             accounts.remove(userName);
             return save();
-        }
-    }
-
-    public Product addToCart(String userName, Product product) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return null;
-            accounts.get(userName).addToCart(product);
-            save();
-            return product;
-        }
-    }
-
-    public boolean removeFromCart(String userName, int index) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return false;
-            accounts.get(userName).removeFromCart(index);
-            return save();
-        }
-    }
-
-    public Product[] getCart(String userName) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return null;
-            return accounts.get(userName).getCart();
-        }
-    }
-
-    public Product addToInventory(String userName, Product product) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return null;
-            accounts.get(userName).addToInventory(product);
-            save();
-            return product;
-        }
-    }
-
-    public boolean removeFromInventory(String userName, int index) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return false;
-            accounts.get(userName).removeFromInventory(index);
-            return save();
-        }
-    }
-
-    public Product[] getInventory(String userName) throws IOException{
-        synchronized(accounts){
-            if(!accounts.containsKey(userName))
-                return null;
-            return accounts.get(userName).getInventory();
         }
     }
 }

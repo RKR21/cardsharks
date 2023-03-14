@@ -1,8 +1,6 @@
 package com.estore.api.estoreapi.persistence;
 import java.io.IOException;
 
-import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Io;
-
 import com.estore.api.estoreapi.model.*;
 
 /**
@@ -13,20 +11,9 @@ import com.estore.api.estoreapi.model.*;
 
 public interface AccountDAO {
 
+    int logIn(String userName) throws IOException; //logOut?
+
     Account createAccount(Account account) throws IOException;
 
     boolean deleteAccount(String userName) throws IOException;
-
-    Product addToCart(String userName, Product product) throws IOException;
-
-    boolean removeFromCart(String userName, int index) throws IOException;
-
-    Product[] getCart(String userName) throws IOException;
-
-    Product addToInventory(String userName, Product product) throws IOException;
-
-    boolean removeFromInventory(String userName, int index) throws IOException;
-
-    Product[] getInventory(String userName) throws IOException;
-
 }
