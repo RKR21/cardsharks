@@ -2,31 +2,31 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
+import { Product } from '../product';
+import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'app-hero-detail',
+  selector: 'app-product-detail',
   templateUrl: './hero-detail.component.html',
   styleUrls: [ './hero-detail.component.css' ]
 })
 export class HeroDetailComponent implements OnInit {
-  hero: Hero | undefined;
+  product: Product | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private heroService: HeroService,
+    private productService: ProductService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
-    this.getHero();
+    this.getProduct();
   }
 
-  getHero(): void {
+  getProduct(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+    this.productService.getProduct(id)
+      .subscribe(product => this.product = product);
   }
 
   goBack(): void {
@@ -34,8 +34,8 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save(): void {
-    if (this.hero) {
-      this.heroService.updateHero(this.hero)
+    if (this.product) {
+      this.productService.updateProduct(this.product)
         .subscribe(() => this.goBack());
     }
   }
