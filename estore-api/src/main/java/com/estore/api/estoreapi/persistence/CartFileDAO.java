@@ -56,7 +56,7 @@ public class CartFileDAO implements CartDAO{
         int token = Account.getToken(userName);
         if(carts.containsKey(token))
             return null;
-        Cart newCart = new Cart(token);
+        Cart newCart = new Cart(userName);
         carts.put(token, newCart);
         save();
         return newCart; 

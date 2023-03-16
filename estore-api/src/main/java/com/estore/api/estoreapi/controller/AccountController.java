@@ -39,13 +39,14 @@ public class AccountController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Integer> logIn(@RequestParam String userName) {
-        LOG.info("GET /account/" + userName);
+    public ResponseEntity<Token> logIn(@RequestParam String userName) {
+        LOG.info("GET /account/?userName=" + userName);
         try {
-            int token = accountDAO.logIn(userName);
-            if (token == 0)
+            int tokenNum = accountDAO.logIn(userName);
+            Token token = new Token(tokenNum);
+            if (tokenNum == 0)
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(token, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -68,7 +69,7 @@ public class AccountController {
 
     @DeleteMapping("")
     public ResponseEntity<Account> deleteAccount(@RequestParam String userName) {
-        LOG.info("DELETE /account/" + userName);
+        LOG.info("DELETE /account/?userName=" + userName);
         try {
             if(accountDAO.deleteAccount(userName))
                 return new ResponseEntity<>(HttpStatus.OK);

@@ -9,14 +9,13 @@ import java.util.ArrayList;
  * @author Adrian Marcellus
  */
 public class Cart {
-    static final String STRING_FORMAT = "Cart[token=%d, cart=%d]";
+    static final String STRING_FORMAT = "Cart [userName=%s, cart=%d]";
 
-    @JsonProperty("token") private int token;
+    @JsonProperty("userName") private String userName;
     @JsonProperty("cart") private ArrayList<Product> cart;
 
-    public Cart(@JsonProperty("token") int token)
+    public Cart(@JsonProperty("userName") String userName)
     {
-        this.token = token;
         this.cart = new ArrayList<Product>();
     }
 
@@ -25,7 +24,7 @@ public class Cart {
     }
 
     public int getToken(){
-        return token;
+        return Account.getToken(userName);
     }
 
     public Product addToCart(Product product){
@@ -48,7 +47,7 @@ public class Cart {
 
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT, token, cart);
+        return String.format(STRING_FORMAT, userName, cart);
     }
 
 }

@@ -40,7 +40,7 @@ public class CartController {
 
     @PostMapping("")
     public ResponseEntity<Cart> createCart(@RequestParam String userName) {
-        LOG.info("POST /" + userName);
+        LOG.info("POST /?userName=" + userName);
         try {
             Cart newCart = cartDAO.createCart(userName);
             if(newCart != null)
@@ -54,7 +54,7 @@ public class CartController {
 
     @DeleteMapping("")
     public ResponseEntity<Cart> deleteCart(@RequestParam int token) {
-        LOG.info("DELETE /" + token);
+        LOG.info("DELETE /?token=" + token);
         try {
             if(cartDAO.deleteCart(token))
                 return new ResponseEntity<>(HttpStatus.OK);
