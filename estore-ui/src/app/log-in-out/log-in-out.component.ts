@@ -10,11 +10,11 @@ import { Token } from '../token';
 })
 export class LogInOutComponent {
   constructor(private accountService: AccountService){}
-  private userName = '';
+  private userName = AccountService.getUser();
   private token!: Token;
-  private static tokenValue = 0;
-  displayValue = "You are not logged in"
-  private static isLoggedIn = false;
+  private tokenValue = AccountService.getToken();
+  displayValue = "User: " + AccountService.getUser();
+  private isLoggedIn = AccountService.isLoggedIn();
   getUser(user:string){
     if(user != ''){
       this.userName = user;
@@ -24,12 +24,13 @@ export class LogInOutComponent {
   }
 
   logIn(){
-    if(!LogInOutComponent.isLoggedIn && this.userName != ''){
+    if(!this.isLoggedIn && this.userName != ''){
       if(this.token != null)
-        LogInOutComponent.tokenValue = this.token.token;
-      if(LogInOutComponent.tokenValue > 0){
+        this.tokenValue = this.token.token;
+      if(this.tokenValue > 0){
         this.displayValue = "logged in as: " + this.userName + "token: " + this.token.token;
-        LogInOutComponent.isLoggedIn = true;
+        this.isLoggedIn = true;
+        this.update();
       }
       else
         this.displayValue = "No user: " + this.userName;
@@ -38,31 +39,31 @@ export class LogInOutComponent {
       this.displayValue = "Already logged in";
   }
   logOut(){
-    if(LogInOutComponent.isLoggedIn){
+    if(this.isLoggedIn){
       this.displayValue = "You are no longer logged in"
-      LogInOutComponent.tokenValue = 0;
-      LogInOutComponent.isLoggedIn = false;
+      this.tokenValue = 0;
+      this.isLoggedIn = false;
+      this.update();
     }
     else
       this.displayValue = "You are not logged in"
   }
 
   createAccount(){
-    if(!LogInOutComponent.isLoggedIn && this.userName != ''){
+    if(!this.isLoggedIn && this.userName != ''){
       this.displayValue = "TODO"
     }
   }
 
   deleteAccount(){
-    if(LogInOutComponent.isLoggedIn){
+    if(this.isLoggedIn){
       this.displayValue = "TODO"
     }
   }
 
-  static getToken(){
-    return LogInOutComponent.tokenValue;
-  }
-  static isLogIn(){
-    return LogInOutComponent.isLoggedIn;
+  update(){
+    AccountService.setToken(this.tokenValue);
+    AccountService.setUser(this.userName);
+    AccountService.setLogStatus(this.isLoggedIn);
   }
 }
