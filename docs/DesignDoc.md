@@ -9,9 +9,9 @@ geometry: margin=1in
 > and appear in the generated PDF in italics._
 ​
 ## Team Information
-* Team name: TEAMNAME
+* Team name: CardSharks
 * Team members
-  * MEMBER1
+  * Elijah Lenhard
   * MEMBER2
   * MEMBER3
   * MEMBER4

@@ -13,6 +13,7 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
 import { ProductSearchComponent } from './product-search/product-search.component';
 import { AdminInventoryControlsComponent } from './admin-inventory-controls/admin-inventory-controls.component';
+import { AdminViewDetailsComponent } from './admin-view-details/admin-view-details.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { AdminInventoryControlsComponent } from './admin-inventory-controls/admi
     MessagesComponent,
     HeroSearchComponent,
     ProductSearchComponent,
-    AdminInventoryControlsComponent
+    AdminInventoryControlsComponent,
+    AdminViewDetailsComponent
   ],
   bootstrap: [ AppComponent ]
 })
