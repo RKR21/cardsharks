@@ -14,19 +14,36 @@ public class Cart {
     @JsonProperty("userName") private String userName;
     @JsonProperty("cart") private ArrayList<Product> cart;
 
+    /**
+     * 
+     * @param userName
+     */
     public Cart(@JsonProperty("userName") String userName)
     {
         this.cart = new ArrayList<Product>();
     }
 
+    /**
+     * 
+     * @return
+     */
     public Product[] getCart(){
         return cart.toArray(new Product[cart.size()]);
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getToken(){
         return Account.getToken(userName);
     }
 
+    /**
+     * 
+     * @param product
+     * @return
+     */
     public Product addToCart(Product product){
         for(Product item : cart){
             if(item.getId() == product.getId()){
@@ -39,12 +56,22 @@ public class Cart {
         return product;
     }
 
+    /**
+     * 
+     * @param index
+     * @return
+     */
     public boolean removeFromCart(int index){
         if(index < cart.size() && cart.remove(index) != null)
             return true;
         return false;
     }
 
+    /**
+     * To String Object Override
+     * 
+     * @return String
+     */
     @Override
     public String toString() {
         return String.format(STRING_FORMAT, userName, cart);

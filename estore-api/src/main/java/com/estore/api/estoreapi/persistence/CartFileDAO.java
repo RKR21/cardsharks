@@ -13,6 +13,15 @@ import org.springframework.stereotype.Component;
 
 import com.estore.api.estoreapi.model.*;
 
+/**
+ * Implements the functionality for JSON file-based peristance for Products
+ *
+ * {@literal @}Component Spring annotation instantiates a single instance of this
+ * class and injects the instance into other classes as needed
+ *
+ * @author SWEN Faculty
+ * @author Adrian Marcellus
+ */
 @Component
 public class CartFileDAO implements CartDAO{
     private static final Logger LOG = Logger.getLogger(CartFileDAO.class.getName());
@@ -34,16 +43,32 @@ public class CartFileDAO implements CartDAO{
         load();
     }
 
+    /**
+     * 
+     * @return
+     */
     private Cart[] getCartArray() {
         return carts.values().toArray(new Cart[carts.size()]);
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * @throws IOException
+     */
     private boolean save() throws IOException {
         Cart[] cartArray = getCartArray();
         objectMapper.writeValue(new File(filename), cartArray);
         return true;
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * @throws IOException
+     */
     private boolean load() throws IOException {
         carts = new HashMap<>();
         Cart[] cartArray = objectMapper.readValue(new File(filename), Cart[].class);
@@ -52,6 +77,9 @@ public class CartFileDAO implements CartDAO{
         return true;
     }
 
+    /**
+     * 
+     */
     public Cart createCart(String userName) throws IOException{
         int token = Account.getToken(userName);
         if(carts.containsKey(token))
@@ -62,12 +90,25 @@ public class CartFileDAO implements CartDAO{
         return newCart; 
     }
 
+    /**
+     * Deletes a {@linkplain Product product} with the given id
+     * 
+     * @param id The id of the {@link Product product}
+     * 
+     * @return true if the {@link Product product} was deleted
+     * false if product with the given id does not exist
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
     public boolean deleteCart(int token) throws IOException{
         if(carts.remove(token) ==  null)
             return false;
         return save(); 
     }
 
+    /**
+     * 
+     */
     public Product addToCart(int token, Product product) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))
@@ -78,6 +119,9 @@ public class CartFileDAO implements CartDAO{
         }
     }
 
+    /**
+     * 
+     */
     public boolean removeFromCart(int token, int index) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))
@@ -86,7 +130,9 @@ public class CartFileDAO implements CartDAO{
             return save();
         }
     }
-
+    /**
+     * 
+     */
     public Product[] getCart(int token) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))

@@ -42,16 +42,33 @@ public class AccountFileDAO implements AccountDAO {
         load();
     }
 
+    /**
+     * Generates an array of {@linkplain Product products} from the tree map
+     * 
+     * @return  The array of {@link Product products}, may be empty
+     */
     private Account[] getAccountArray() {
         return accounts.values().toArray(new Account[accounts.size()]);
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * @throws IOException
+     */
     private boolean save() throws IOException {
         Account[] accountArray = getAccountArray();
         objectMapper.writeValue(new File(filename), accountArray);
         return true;
     }
 
+    /**
+     * 
+     * @return
+     * 
+     * @throws IOException
+     */
     private boolean load() throws IOException {
         accounts = new HashMap<>();
         Account[] accountArray = objectMapper.readValue(new File(filename), Account[].class);
@@ -60,12 +77,9 @@ public class AccountFileDAO implements AccountDAO {
         return true;
     }
 
-    /**private Account getAccount(String userName) throws IOException {
-        synchronized(accounts){
-            return accounts.get(userName);
-        }
-    }*/
-
+    /**
+     * 
+     */
     public int logIn(String userName) throws IOException{
         synchronized(accounts) {
             if (accounts.containsKey(userName)){
@@ -75,6 +89,9 @@ public class AccountFileDAO implements AccountDAO {
         }
     } 
 
+    /**
+     * 
+     */
     @Override
     public Account createAccount(Account account) throws IOException {
         synchronized(accounts) {
@@ -87,6 +104,9 @@ public class AccountFileDAO implements AccountDAO {
         }
     }
 
+    /**
+     * 
+     */
     @Override
     public boolean deleteAccount(String userName) throws IOException {
         synchronized(accounts) {
