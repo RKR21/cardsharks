@@ -1,0 +1,28 @@
+<h2>Account</h2>
+
+<input type="text"
+#box
+placeholder="Enter User Name:" 
+name="userName"/>
+
+<button type="button" class="in-button" (click)=getUser(box.value)>
+    Confirm User Name
+</button>
+
+<button type="button" class="in-button" (click)=logIn()>
+    Log In
+</button>
+
+<button type="button" class="out-button" (click)=logOut()>
+    Log Out
+</button>
+
+<button type="button" class="in-button" (click)=createAccount()>
+    Create Account
+</button>
+
+<button type="button" class="out-button" (click)=deleteAccount()>
+    Delete Account
+</button>
+
+<p>{{displayValue}}</p>
