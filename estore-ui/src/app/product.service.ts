@@ -12,7 +12,6 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getProducts(): Observable<Product[]>{
-    console.log("It is being called")
     return this.http.get<Product[]>(this.productsUrl);
   }
 
@@ -33,14 +32,10 @@ export class ProductService {
     
     
     return this.http.get<Product[]>(url).pipe(
-      //console.log("products length =" + products.length)
       map(products => {
-        console.log("products length =" + products.length)
         if (products.length === 0) {
-          console.log("products length =" + products.length)
           return [];
         } else {
-          console.log("products length =" + products.length)
           return products;
         }
       }),
