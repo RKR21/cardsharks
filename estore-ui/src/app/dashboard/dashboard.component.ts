@@ -10,14 +10,14 @@ import { ProductService } from '../product.service';
 export class DashboardComponent implements OnInit {
   products: Product[] = [];
 
-  constructor(private heroService: ProductService) { }
+  constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
 
   getHeroes(): void {
-    this.heroService.getProducts()
+    this.productService.getProducts()
       .subscribe(products => this.products = products.slice(1, 5));
   }
 }

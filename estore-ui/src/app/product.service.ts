@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable, of } from 'rxjs';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 import { Product } from './product';
+import { MessageService } from './message.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'api/heroes'
+  private productsUrl = 'http://localhost:8080/dashboard'
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService) { }
 
   getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.productsUrl);
+    return this.http.get<Product[]>(this.productsUrl)
+    .pipe(
+      )
+    ;
   }
 
   getProduct(id: number): Observable<Product>{
