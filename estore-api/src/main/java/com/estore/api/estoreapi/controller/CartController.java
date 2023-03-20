@@ -20,8 +20,8 @@ import com.estore.api.estoreapi.model.*;
 import com.estore.api.estoreapi.persistence.*;
 
 /**
- * Handles the REST API requests for the Product resource
- * <p>
+ * Handles the REST API requests for the Cart resource
+ * 
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  *
@@ -37,7 +37,7 @@ public class CartController {
     /**
      * Creates a REST API controller to responds to requests
      *
-     * @param inventoryDao The {@link InventoryDAO Product Data Access Object} to perform CRUD operations
+     * @param cartDao The {@link CartDAO Cart Data Access Object} to perform CRUD operations
      * This dependency is injected by the Spring Framework
      */
     public CartController(CartDAO cartDAO) {
@@ -45,12 +45,12 @@ public class CartController {
     }
 
     /**
-     * Creates a {@linkplain Product product} with the provided product object
+     * Creates a {@linkplain Cart cart} with the provided user name
      *
-     * @param product - The {@link HProduct product} to create
+     * @param userName - The user name of the cart to create
      *
-     * @return ResponseEntity with created {@link Product product} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Product product} object already exists<br>
+     * @return ResponseEntity with created {@link Cart cart} object and HTTP status of CREATED
+     * ResponseEntity with HTTP status of CONFLICT if {@link Cart cart} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
@@ -68,9 +68,9 @@ public class CartController {
     }
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Cart cart} with the given token
      *
-     * @param id The id of the {@link Product product} to deleted
+     * @param token The token number of the {@link Cart cart} to deleted
      *
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -90,11 +90,11 @@ public class CartController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Product product} for the given id
+     * Responds to the GET request for a {@linkplain Cart cart}  for the given id
      *
-     * @param id The id used to locate the {@link Product product}
+     * @param token The id used to locate the {@link Cart cart}
      *
-     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Product product} object array and HTTP status of OK if found
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -115,12 +115,13 @@ public class CartController {
 
     
     /**
-     * Updates the {@linkplain Product product} with the provided {@linkplain Product product} object, if it exists
+     * Updates the {@linkplain Cart cart} with the provided {@linkplain Product product} object, if it exists
      *
+     * @param token The id used to locate the {@link Cart cart}
      * @param product The {@link Product product} to update
      *
-     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/{token}")
@@ -140,16 +141,17 @@ public class CartController {
     }
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Cart cart} array field with the given 
      *
-     * @param id The id of the {@link Product product} to deleted
+     * @param token The id used to locate the {@link Cart cart}
+     * @param index The index in the {@link Cart cart} array to delete
      *
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{token}/{index}")
-    public ResponseEntity<HttpStatus> removeFromCart
+    public ResponseEntity<Cart> removeFromCart
         (@PathVariable int token, @PathVariable int index)
     {
         LOG.info("DELETE /cart/" + token + "/" + index);

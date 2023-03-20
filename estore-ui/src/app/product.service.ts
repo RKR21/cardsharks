@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Product } from './product';
 import { MessageService } from './message.service';
 
@@ -25,20 +23,36 @@ export class ProductService {
   }
 
   getProduct(id: number): Observable<Product>{
+    
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url);
   }
 
   searchProducts(term: string): Observable<Product[]> {
+    
     if (!term.trim()) {
       return of([]);
     }
 
-    //const url = `${this.productsUrl}/search?name=${term}`;
-    
-    //const url = `${this.productsUrl}/search?name=${term}&t=${new Date().getTime()}`;
     const url = `${this.productsUrl}/search?name=${term}`;
-    return this.http.get<Product[]>(url);
+    
+    
+    
+    return this.http.get<Product[]>(url).pipe(
+      map(products => {
+        if (products.length === 0) {
+          return [];
+        } else {
+          return products;
+        }
+      }),
+      catchError(error => {
+        console.log("Error occurred:", error);
+        return of([]);
+      })
+    );
+    
+    
   }
   addProduct(hero: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, hero, this.httpOptions).pipe(
@@ -83,4 +97,5 @@ export class ProductService {
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
   }
+
 }

@@ -35,7 +35,7 @@ public class AccountController {
     /**
      * Creates a REST API controller to responds to requests
      *
-     * @param inventoryDao The {@link InventoryDAO Product Data Access Object} to perform CRUD operations
+     * @param accountDao The {@link AccountDAO Account Data Access Object} to perform CRUD operations
      * This dependency is injected by the Spring Framework
      */
     public AccountController(AccountDAO accountDAO) {
@@ -43,11 +43,11 @@ public class AccountController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Product product} for the given id
+     * Responds to the GET request for a {@linkplain Account account} for the given userName
      *
-     * @param id The id used to locate the {@link Product product}
+     * @param userName The user name used to locate the {@link Account account}
      *
-     * @return ResponseEntity with {@link Product product} object and HTTP status of OK if found<br>
+     * @return ResponseEntity with {@link Token token} object and HTTP status of OK if found
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -55,9 +55,8 @@ public class AccountController {
     public ResponseEntity<Token> logIn(@RequestParam String userName) {
         LOG.info("GET /account/?userName=" + userName);
         try {
-            int tokenNum = accountDAO.logIn(userName);
-            Token token = new Token(tokenNum);
-            if (tokenNum == 0)
+            Token token = accountDAO.logIn(userName);
+            if (token.getToken() == 0)
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             return new ResponseEntity<>(token, HttpStatus.OK);
         }
@@ -68,12 +67,12 @@ public class AccountController {
     }
 
     /**
-     * Creates a {@linkplain Product product} with the provided product object
+     * Creates a {@linkplain Account account} with the provided account object
      *
-     * @param product - The {@link HProduct product} to create
+     * @param account - The {@link Account account} to create
      *
-     * @return ResponseEntity with created {@link Product product} object and HTTP status of CREATED<br>
-     * ResponseEntity with HTTP status of CONFLICT if {@link Product product} object already exists<br>
+     * @return ResponseEntity with created {@link Account account} object and HTTP status of CREATED
+     * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
@@ -90,12 +89,12 @@ public class AccountController {
     }
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Account account} with the given id
      *
-     * @param id The id of the {@link Product product} to deleted
+     * @param id The id of the {@link Account account} to deleted
      *
-     * @return ResponseEntity HTTP status of OK if deleted<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * @return ResponseEntity HTTP status of OK if deleted
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("")

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import com.estore.api.estoreapi.model.*;
 
 /**
- * Implements the functionality for JSON file-based peristance for Products
+ * Implements the functionality for JSON file-based peristance for Accounts
  *
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
@@ -43,19 +43,20 @@ public class AccountFileDAO implements AccountDAO {
     }
 
     /**
-     * Generates an array of {@linkplain Product products} from the tree map
+     * Generates an array of {@linkplain Account accounts} from the tree map
      * 
-     * @return  The array of {@link Product products}, may be empty
+     * @return  The array of {@link Account accounts}, may be empty
      */
     private Account[] getAccountArray() {
         return accounts.values().toArray(new Account[accounts.size()]);
     }
 
     /**
+     * Saves the {@linkplain Account accounts} from the map into the file as an array of JSON objects
      * 
-     * @return
+     * @return true if the {@link Account accounts} were written successfully
      * 
-     * @throws IOException
+     * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
         Account[] accountArray = getAccountArray();
@@ -64,10 +65,12 @@ public class AccountFileDAO implements AccountDAO {
     }
 
     /**
+     * Loads {@linkplain Account accounts} from the JSON file into the map
+     * Also sets next id to one more than the greatest id found in the file
      * 
-     * @return
+     * @return true if the file was read successfully
      * 
-     * @throws IOException
+     * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
         accounts = new HashMap<>();
@@ -78,19 +81,20 @@ public class AccountFileDAO implements AccountDAO {
     }
 
     /**
-     * 
+     * AccountDAO Override: Log Into account to get a token.
      */
-    public int logIn(String userName) throws IOException{
+    @Override
+    public Token logIn(String userName) throws IOException{
         synchronized(accounts) {
             if (accounts.containsKey(userName)){
-                return Account.getToken(userName);
+                return new Token(Account.getToken(userName));
             }
-            return 0;
+            return new Token(0);
         }
     } 
 
     /**
-     * 
+     *  AccountDAO Override: Creates an account.
      */
     @Override
     public Account createAccount(Account account) throws IOException {
@@ -105,7 +109,7 @@ public class AccountFileDAO implements AccountDAO {
     }
 
     /**
-     * 
+     * AccountDAO Override: Deletes an account.
      */
     @Override
     public boolean deleteAccount(String userName) throws IOException {

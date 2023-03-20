@@ -10,60 +10,63 @@ import com.estore.api.estoreapi.model.*;
 public interface CartDAO {
 
     /**
-     * Adds a new {@link Product product} to the database
+     * Adds a new {@link Cart cart} to the database
      * 
-     * @param product {@link Product product} object to be added 
+     * @param cart {@link Cart cart} object to be added 
      * id is ignored and handled seperatly to maintain consistincy.
      * 
-     * @return new {@link Product product} object or null if unsuccessful
+     * @return new {@link Cart cart} object or null if unsuccessful
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
     Cart createCart(String userName) throws IOException;
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Cart cart} with the given username
      * 
-     * @param id The id of the {@link Product product}
+     * @param username The username of the {@link Cart cart}
      * 
-     * @return true if the {@link Product product} was deleted
-     * false if product with the given id does not exist
+     * @return true if the {@link Cart cart} was deleted
+     * false if cart with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteCart(int token) throws IOException;
 
     /**
+     * Adds a {@linkplain Product product} to {@link Cart cart} 
      * 
-     * @param token
+     * @param token int token value used to authenticate request and locate cart
      * 
-     * @param product
+     * @param product {@linkplain Product product} to add
      * 
-     * @return
+     * @return the {@linkplain Product product} that was added
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product addToCart(int token, Product product) throws IOException;
 
     /**
+     * Removes a {@linkplain Product product} to {@link Cart cart} 
      * 
-     * @param token
+     * @param token int token value used to authenticate request and locate cart
      * 
-     * @param index
+     * @param index array location to remove a {@linkplain Product product}
      * 
-     * @return
+     * @return the true is successfully removed, false otherwise
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     boolean removeFromCart(int token, int index) throws IOException;
 
     /**
+     * Gets the {@linkplain Product product} array from the {@link Cart cart} 
      * 
-     * @param token
+     * @param token int token value used to authenticate request and locate cart
      * 
-     * @return
+     * @return {@linkplain Product product} array
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     Product[] getCart(int token) throws IOException;
 
