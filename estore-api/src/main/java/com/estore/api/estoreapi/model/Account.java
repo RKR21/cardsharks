@@ -11,19 +11,21 @@ public class Account {
     static final String STRING_FORMAT = "Account [userName=%s]";
 
     @JsonProperty("userName") private String userName;
-    // TODO: Payment profile, inventory, password?
+    // TODO: Payment profile, owned inventory, password?
 
     /**
+     * Constructor for Account
      * 
-     * @param userName
+     * @param userName the account string username
      */
     public Account(@JsonProperty("userName") String userName){
         this.userName = userName;
     }
 
     /**
+     * gets the username field of the account
      * 
-     * @return
+     * @return string username of the account
      */
     public String getUserName(){
         return this.userName;
@@ -40,9 +42,11 @@ public class Account {
     }
 
     /**
+     * Static token generator function.
      * 
-     * @param userName
-     * @return
+     * @param userName string used in generation
+     * 
+     * @return integer token value
      */
     public static int getToken(String userName){
         return userName.hashCode();

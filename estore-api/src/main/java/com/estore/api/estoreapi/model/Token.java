@@ -13,11 +13,21 @@ public class Token {
     @JsonProperty("token") private int token;
 
     /**
+     * Constructor for a token object.
      * 
-     * @param token
+     * @param token value of the token
      */
     public Token(@JsonProperty("token") int token){
         this.token = token;
+    }
+
+    /**
+     * Gets the token value
+     * 
+     * @return int token value
+     */
+    public int getToken(){
+        return this.token;
     }
 
     /**

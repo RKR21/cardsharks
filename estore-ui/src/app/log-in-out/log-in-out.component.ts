@@ -28,7 +28,7 @@ export class LogInOutComponent {
       if(this.token != null)
         this.tokenValue = this.token.token;
       if(this.tokenValue > 0){
-        this.displayValue = "logged in as: " + this.userName + "token: " + this.token.token;
+        this.displayValue = "logged in as: " + this.userName + " token: " + this.token.token;
         this.isLoggedIn = true;
         this.update();
       }

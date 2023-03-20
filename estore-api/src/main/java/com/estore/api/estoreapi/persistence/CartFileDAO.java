@@ -19,7 +19,6 @@ import com.estore.api.estoreapi.model.*;
  * {@literal @}Component Spring annotation instantiates a single instance of this
  * class and injects the instance into other classes as needed
  *
- * @author SWEN Faculty
  * @author Adrian Marcellus
  */
 @Component
@@ -44,18 +43,20 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
+     * Generates an array of {@linkplain Cart carts} from the tree map
      * 
-     * @return
+     * @return  The array of {@link Cart carts}, may be empty
      */
     private Cart[] getCartArray() {
         return carts.values().toArray(new Cart[carts.size()]);
     }
 
     /**
+     * Saves the {@linkplain Cart carts} from the map into the file as an array of JSON objects
      * 
-     * @return
+     * @return true if the {@link Cart carts} were written successfully
      * 
-     * @throws IOException
+     * @throws IOException when file cannot be accessed or written to
      */
     private boolean save() throws IOException {
         Cart[] cartArray = getCartArray();
@@ -64,10 +65,12 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
+     * Loads {@linkplain Cart carts} from the JSON file into the map
+     * Also sets next id to one more than the greatest id found in the file
      * 
-     * @return
+     * @return true if the file was read successfully
      * 
-     * @throws IOException
+     * @throws IOException when file cannot be accessed or read from
      */
     private boolean load() throws IOException {
         carts = new HashMap<>();
@@ -78,8 +81,9 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
-     * 
+     * CartDAO Override: creates a cart.
      */
+    @Override
     public Cart createCart(String userName) throws IOException{
         int token = Account.getToken(userName);
         if(carts.containsKey(token))
@@ -91,15 +95,9 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
-     * 
-     * @param id The id of the {@link Product product}
-     * 
-     * @return true if the {@link Product product} was deleted
-     * false if product with the given id does not exist
-     * 
-     * @throws IOException if underlying storage cannot be accessed
+     * CartDAO Override: deletes a cart.
      */
+    @Override
     public boolean deleteCart(int token) throws IOException{
         if(carts.remove(token) ==  null)
             return false;
@@ -107,8 +105,9 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
-     * 
+     * CartDAO Override: adds to cart.
      */
+    @Override
     public Product addToCart(int token, Product product) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))
@@ -120,19 +119,21 @@ public class CartFileDAO implements CartDAO{
     }
 
     /**
-     * 
+     * CartDAO Override: removes from cart.
      */
+    @Override
     public boolean removeFromCart(int token, int index) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))
                 return false;
-                carts.get(token).removeFromCart(index);
-            return save();
+            return carts.get(token).removeFromCart(index) && save();
         }
     }
+
     /**
-     * 
+     * CartDAO Override: gets cart product array
      */
+    @Override
     public Product[] getCart(int token) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))

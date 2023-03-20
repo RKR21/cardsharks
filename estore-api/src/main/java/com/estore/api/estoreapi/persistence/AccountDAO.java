@@ -12,35 +12,36 @@ import com.estore.api.estoreapi.model.*;
 public interface AccountDAO {
 
     /**
+     * Gets the appropriate {@link Token token} for a {@link Account account}
      * 
+     * @param userName string user name trying to log in 
      * 
-     * @param userName
+     * @return A token with a value of the found account
+     * or 0 for an account that doesn't exist
      * 
-     * @return
-     * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
-    int logIn(String userName) throws IOException;
+    Token logIn(String userName) throws IOException;
 
     /**
-     * Adds a new {@link Product product} to the database
+     * Adds a new {@link Account account} to the database
      * 
-     * @param product {@link Product product} object to be added 
+     * @param account {@link Account account} object to be added 
      * id is ignored and handled seperatly to maintain consistincy.
      * 
-     * @return new {@link Product product} object or null if unsuccessful
+     * @return new {@link Account account} object or null if unsuccessful
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
     Account createAccount(Account account) throws IOException;
 
     /**
-     * Deletes a {@linkplain Product product} with the given id
+     * Deletes a {@linkplain Account account} with the given username
      * 
-     * @param id The id of the {@link Product product}
+     * @param username The username of the {@link Account account}
      * 
-     * @return true if the {@link Product product} was deleted
-     * false if product with the given id does not exist
+     * @return true if the {@link Account account} was deleted
+     * false if account with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
