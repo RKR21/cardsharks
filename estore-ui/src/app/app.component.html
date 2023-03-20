@@ -3,6 +3,9 @@
   <a routerLink="/dashboard">Dashboard</a>
   <a routerLink="/heroes">Heroes</a>
   <a routerLink="/log-in-out">Account</a>
+  <div *ngIf="isAdmin()">
+    <a routerLink="/admin-inventory-controls">Edit Inventory</a>
+  </div>
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

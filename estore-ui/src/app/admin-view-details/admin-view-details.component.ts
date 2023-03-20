@@ -6,11 +6,11 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 
 @Component({
-  selector: 'app-product-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  selector: 'app-admin-view-details',
+  templateUrl: './admin-view-details.component.html',
+  styleUrls: ['./admin-view-details.component.css']
 })
-export class HeroDetailComponent implements OnInit {
+export class AdminViewDetailsComponent {
   product: Product | undefined;
 
   constructor(
