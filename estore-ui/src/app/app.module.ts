@@ -5,12 +5,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './in-memory-data.service';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { HeroesComponent } from './heroes/heroes.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { MessagesComponent } from './messages/messages.component';
+
 import { ProductSearchComponent } from './product-search/product-search.component';
 
 @NgModule({
@@ -19,13 +23,16 @@ import { ProductSearchComponent } from './product-search/product-search.componen
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   declarations: [
     AppComponent,
     DashboardComponent,
+    MessagesComponent,
     HeroesComponent,
     HeroDetailComponent,
-    MessagesComponent,
     HeroSearchComponent,
     ProductSearchComponent
   ],

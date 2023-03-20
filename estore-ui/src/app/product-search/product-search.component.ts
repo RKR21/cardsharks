@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 import { Product } from '../product';
@@ -11,9 +11,8 @@ import { ProductService } from '../product.service';
   styleUrls: ['./product-search.component.css']
 })
 export class ProductSearchComponent implements OnInit{
-  products$: Product[] = [];
+  products$!: Observable<Product[]>;
   private searchTerms = new Subject<string>();
-  private previousTerm = '';
 
   constructor(private productService: ProductService){}
 
@@ -25,7 +24,7 @@ export class ProductSearchComponent implements OnInit{
   
 
   ngOnInit(): void {
-    this.searchTerms.pipe(
+    this.products$ = this.searchTerms.pipe(
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
       // ignore new term if same as previous term
@@ -33,7 +32,7 @@ export class ProductSearchComponent implements OnInit{
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.productService.searchProducts(term))
     )
-    .subscribe(products => this.products$ = products);
+    // .subscribe(products => this.products$ = products);
   }
   
 

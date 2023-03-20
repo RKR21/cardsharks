@@ -1,8 +1,8 @@
 <div id="search-component">
     <h4>Product Search</h4>
-    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="search products"/>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" placeholder="search cards"/>
     <ul class="search-result">
-      <li *ngFor="let product of products$" >
+      <li *ngFor="let product of products$ | async" >
         <a routerLink="/detail/{{product.id}}">
           {{product.name}}
         </a>
