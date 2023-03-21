@@ -30,11 +30,13 @@ export class CartService {
     return this.http.post<Product>(this.cartUrl + "/" + AccountService.getToken(), product, this.httpOptions);
   }
 
-  removeFromCart () {
-    this.log(this.cartUrl + "/{" +
-    AccountService.getToken() + "}/{0}");
-    this.http.delete<Product>(this.cartUrl + "/{" +
-    AccountService.getToken() + "}/{0}", this.httpOptions);
+  removeFromCart (product: Product) {
+    const url = `${this.cartUrl}/${product.id}`;
+
+    return this.http.delete<Product>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted hero id=${product.id}`)),
+      catchError(this.handleError<Product>('deletePItem'))
+    );
   }
 
   /** Log a CartService message with the MessageService */
