@@ -7,7 +7,8 @@ import { AccountService } from './account.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Tour of Heroes';
+
+  title = 'CardSharks';
 
   isAdmin(){
     return (AccountService.getToken()==92668751);
