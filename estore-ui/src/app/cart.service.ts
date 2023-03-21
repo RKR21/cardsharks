@@ -9,7 +9,6 @@ import { Product } from './product';
 export class CartService {
 
   private cartUrl = 'http://localhost:8080/cart'
-  private static token = 0;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +18,10 @@ export class CartService {
 
   getCart(): Observable<Product[]> {
     return this.http.get<Product[]>(this.cartUrl);
+  }
+
+  addToCart(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.cartUrl, product, this.httpOptions);
   }
 
   removeFromCart (id: number): Observable<Product> {

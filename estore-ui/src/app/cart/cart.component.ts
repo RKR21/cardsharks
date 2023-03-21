@@ -1,22 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
-export class CartComponent {
-  products: Product[] = [];
+export class CartComponent implements OnInit {
+  cartItems: Product[] = [];
 
-  constructor (private productService: ProductService) {}
+  constructor (private cartService: CartService) {}
 
-  add (id: number): void {
-    
+  ngOnInit(): void {
+    this.getItems();
+  }
+
+  getItems(): void {
+    this.cartService.getCart()
+      .subscribe(cartItems => this.cartItems = cartItems);
+  }
+
+  add (product: Product): void {
+
+    if (!product.name) { return; }
+    this.cartService.addToCart(product)
+      .subscribe(product => {
+        this.cartItems.push(product)
+      })
   }
 
   delete (product: Product) : void {
-    this.products = this.products.filter (p => p !== product)
+    this.cartItems = this.cartItems.filter (p => p !== product)
   }
 }

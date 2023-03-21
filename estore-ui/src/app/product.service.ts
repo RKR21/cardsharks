@@ -99,10 +99,10 @@ export class ProductService {
     this.messageService.add(`HeroService: ${message}`);
   }
 
-  addToCart (id:number) : Observable<Product> {
-    const url = `${this.productsUrl}/${id}`;
+  addToCart (product: Product) : Observable<Product> {
+    const url = `${this.productsUrl}/${product.id}`;
 
-    return this.http.post<Product>(this.cartUrl, id, this.httpOptions);
+    return this.http.post<Product>(this.cartUrl, product, this.httpOptions);
   }
 
 }
