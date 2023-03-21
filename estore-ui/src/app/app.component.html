@@ -2,7 +2,9 @@
 <nav>
   <a routerLink="/dashboard">Dashboard</a>
   <a routerLink="/heroes">Heroes</a>
-  <a routerLink="/cart">Cart</a>
+  <div *ngIf="isAdmin() == false">
+    <a routerLink="/cart">Cart</a>
+  </div>
   <a routerLink="/log-in-out">Account</a>
   <div *ngIf="isAdmin()">
     <a routerLink="/admin-inventory-controls">Edit Inventory</a>
