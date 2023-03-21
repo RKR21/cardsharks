@@ -15,10 +15,12 @@ export class CartComponent implements OnInit {
     private messageService: MessageService) {}
 
   ngOnInit(): void {
-    this.getItems();
+    this.cartService.getCart().subscribe((cartItems: Product []) => {
+      this.cartItems = cartItems;
+    });
   }
 
-  getItems(): void {
+  getCart(): void {
     this.cartService.getCart()
       .subscribe(cartItems => this.cartItems = cartItems);
   }
@@ -30,7 +32,7 @@ export class CartComponent implements OnInit {
       })
   }
 
-  delete (product: Product) : void {
-    this.cartItems = this.cartItems.filter (p => p !== product)
+  remove (product: Product) : void {
+    this.cartService.removeFromCart(product);
   }
 }
