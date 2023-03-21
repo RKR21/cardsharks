@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'http://localhost:8080/dashboard'
+  private productsUrl = 'http://localhost:8080/products'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
