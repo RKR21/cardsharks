@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, of, tap } from 'rxjs';
+import { AccountService } from './account.service';
 import { MessageService } from './message.service';
 import { Product } from './product';
 
@@ -19,7 +20,7 @@ export class CartService {
     private messageService: MessageService) {}
 
   getCart(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.cartUrl)
+    return this.http.get<Product[]>(this.cartUrl + AccountService.getToken())
     .pipe(
       tap(_ => this.log('fetched cart items')),
       catchError(this.handleError<Product[]>('getCart', [])));
