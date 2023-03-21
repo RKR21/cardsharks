@@ -1,7 +1,6 @@
 <h1>{{title}}</h1>
 <nav>
   <a routerLink="/dashboard">Main Menu</a>
-  <a routerLink="/shopping-cart">Shopping Cart</a>
   <div *ngIf="isAdmin() == false">
     <a routerLink="/cart">Cart</a>
   </div>
