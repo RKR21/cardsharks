@@ -30,9 +30,11 @@ export class CartService {
     return this.http.post<Product>(this.cartUrl + "/" + AccountService.getToken(), product, this.httpOptions);
   }
 
-  removeFromCart (product: Product): Observable<Product> {
-    return this.http.delete<Product>(`${this.cartUrl}/ ' +
-    AccountService.getToken() +/${product.id}`, this.httpOptions);
+  removeFromCart () {
+    this.log(this.cartUrl + "/{" +
+    AccountService.getToken() + "}/{0}");
+    this.http.delete<Product>(this.cartUrl + "/{" +
+    AccountService.getToken() + "}/{0}", this.httpOptions);
   }
 
   /** Log a CartService message with the MessageService */

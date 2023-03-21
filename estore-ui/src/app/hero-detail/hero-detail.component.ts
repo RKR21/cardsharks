@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,6 +17,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
+    private cartService: CartService,
     private location: Location
   ) {}
 
@@ -41,7 +43,7 @@ export class HeroDetailComponent implements OnInit {
 
   addToCart(): void {
     if (this.product) {
-      this.productService.addToCart(this.product)
+      this.cartService.addToCart(this.product)
       this.product.quantity -= 1;
     }
   }

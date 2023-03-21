@@ -151,7 +151,7 @@ public class CartController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{token}/{index}")
-    public ResponseEntity<Cart> removeFromCart
+    public ResponseEntity<Product> removeFromCart
         (@PathVariable int token, @PathVariable int index)
     {
         LOG.info("DELETE /cart/" + token + "/" + index);
