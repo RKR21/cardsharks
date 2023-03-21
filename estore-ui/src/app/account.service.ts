@@ -30,6 +30,7 @@ export class AccountService {
   static setToken(value : number){
     this.token = value;
   }
+  
   static getToken() {
     return this.token;
   }
