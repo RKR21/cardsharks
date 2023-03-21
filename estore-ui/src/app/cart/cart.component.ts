@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +11,8 @@ import { CartService } from '../cart.service';
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];
 
-  constructor (private cartService: CartService) {}
+  constructor (private cartService: CartService,
+    private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.getItems();
@@ -22,7 +24,7 @@ export class CartComponent implements OnInit {
   }
 
   add (product: Product): void {
-    this.cartService.addToCart(product as Product)
+    this.cartService.addToCart(product)
       .subscribe(product => {
         this.cartItems.push(product)
       })
