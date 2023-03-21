@@ -1,7 +1,12 @@
 [
     {
         "userName" :  "testUser", 
-        "cart" : []
+        "cart" : [{
+            "id":1,
+            "name":"Pikachu",
+            "price":25.00,
+            "quantity":5
+        }]
     },
     {
         "userName" :  "stan", 

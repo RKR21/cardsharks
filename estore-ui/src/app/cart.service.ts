@@ -20,20 +20,19 @@ export class CartService {
     private messageService: MessageService) {}
 
   getCart(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.cartUrl + AccountService.getToken())
+    return this.http.get<Product[]>(this.cartUrl + "/" + AccountService.getToken())
     .pipe(
       tap(_ => this.log('fetched cart items')),
       catchError(this.handleError<Product[]>('getCart', [])));
   }
 
   addToCart(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.cartUrl, product, this.httpOptions);
+    return this.http.post<Product>(this.cartUrl + "/" + AccountService.getToken(), product, this.httpOptions);
   }
 
   removeFromCart (product: Product): Observable<Product> {
-    const url = `${this.cartUrl}/${product.id}`;
-
-    return this.http.delete<Product>(url, this.httpOptions);
+    return this.http.delete<Product>(`${this.cartUrl}/ ' +
+    AccountService.getToken() +/${product.id}`, this.httpOptions);
   }
 
   /** Log a CartService message with the MessageService */
