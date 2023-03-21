@@ -3,7 +3,7 @@
         "userName" : "admin"
     },
     {
-        "userName" : "testuser"
+        "userName" : "testUser"
     },
     {
         "userName" : "stan"
@@ -12,6 +12,6 @@
         "userName" : "elijah"
     },
     {
-        "userName" : "angularman"
+        "userName" : "angularMan"
     }
 ]
