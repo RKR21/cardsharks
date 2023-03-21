@@ -10,6 +10,7 @@ import { MessageService } from './message.service';
 })
 export class ProductService {
   private productsUrl = 'http://localhost:8080/products'
+  private cartUrl = 'http://localhost:8080/cart'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -96,6 +97,12 @@ export class ProductService {
   /** Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`HeroService: ${message}`);
+  }
+
+  addToCart (id:number) : Observable<Product> {
+    const url = `${this.productsUrl}/${id}`;
+
+    return this.http.post<Product>(this.cartUrl, id, this.httpOptions);
   }
 
 }
