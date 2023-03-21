@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -10,9 +13,11 @@ import { ProductService } from '../product.service';
   templateUrl: './product-search.component.html',
   styleUrls: ['./product-search.component.css']
 })
+
 export class ProductSearchComponent implements OnInit {
   public term: string = '';
   products: Product[] = [];
+
 
   constructor(private productService: ProductService){}
 
@@ -24,6 +29,6 @@ export class ProductSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 }

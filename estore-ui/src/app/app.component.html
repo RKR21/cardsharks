@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 <nav>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/heroes">Heroes</a>
+  <a routerLink="/dashboard">Main Menu</a>
+  <a routerLink="/shopping-cart">Shopping Cart</a>
   <div *ngIf="isAdmin() == false">
     <a routerLink="/cart">Cart</a>
   </div>
@@ -9,6 +9,7 @@
   <div *ngIf="isAdmin()">
     <a routerLink="/admin-inventory-controls">Edit Inventory</a>
   </div>
+
 </nav>
 <router-outlet></router-outlet>
 <app-messages></app-messages>

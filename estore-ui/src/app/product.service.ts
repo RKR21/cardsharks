@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { tap } from 'rxjs/operators';
+
 import { Product } from './product';
 import { MessageService } from './message.service';
 
@@ -16,11 +18,16 @@ export class ProductService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+
   constructor(private http: HttpClient,
+
     private messageService: MessageService) { }
 
   getProducts(): Observable<Product[]>{
-    return this.http.get<Product[]>(this.productsUrl);
+    return this.http.get<Product[]>(this.productsUrl)
+    .pipe(
+      )
+    ;
   }
 
   getProduct(id: number): Observable<Product>{
