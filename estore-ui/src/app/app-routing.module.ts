@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroesComponent } from './heroes/heroes.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
+import { HeroDetailComponent } from './Hero-detail/hero-detail.component';
 import { LogInOutComponent } from './log-in-out/log-in-out.component';
 import { AdminInventoryControlsComponent } from './admin-inventory-controls/admin-inventory-controls.component';
 import { AdminViewDetailsComponent } from './admin-view-details/admin-view-details.component';

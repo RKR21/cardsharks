@@ -39,4 +39,10 @@ export class HeroDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
   }
+
+  addToCart(): void {
+    if (this.product) {
+      this.productService.addToCart(this.product.id)
+    }
+  }
 }
