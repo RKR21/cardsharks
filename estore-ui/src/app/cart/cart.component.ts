@@ -22,9 +22,7 @@ export class CartComponent implements OnInit {
   }
 
   add (product: Product): void {
-
-    if (!product.name) { return; }
-    this.cartService.addToCart(product)
+    this.cartService.addToCart(product as Product)
       .subscribe(product => {
         this.cartItems.push(product)
       })

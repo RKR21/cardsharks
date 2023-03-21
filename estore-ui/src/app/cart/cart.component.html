@@ -1,4 +1,14 @@
 <h2>Cart</h2>
+
+<div>
+  <label for="new-product">Product name: </label>
+  <input id="new-product" #productName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button">
+    Add product
+  </button>
+</div>
   
 <ul class="cart">
     <li *ngFor="let product of cartItems">
