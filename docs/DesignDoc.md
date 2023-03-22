@@ -26,7 +26,7 @@ This e-store is an online hub that allows users to buy, sell, and trade their tr
 | API | Application Programming Interface |
 | REST | Representational State Transfer(An industry standard for creating APIs) |
 | SPA | Single Page |
-| Persistance | Ability to store and access data across sessions and processes |
+| Persistance | Ability to store and access data across sessions and processes | 
 
 
 ## Requirements
