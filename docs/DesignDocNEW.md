@@ -128,9 +128,10 @@ The Account model stores user information and provides methods to get the UserNa
 ![Model Tier](modelTierUML.png)
 
 ## OO Design Principles
-> _**[Sprint 2, 3 & 4]** Discuss at least **4 key OO Principles** in your current design. This should be taken from your work in "Adherence to Architecture and Design Principles" that you have completed in a previous Sprint. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
+
 
 ![Law of Demeter](lawOfDemeterOO.png)
+
 The Law of Demeter will be followed as all products have private data fields and appropriate getters and setters. The Angular framework will also inherently follow this principle with its use of components. Functionality is encapsulated within components while still allowing interaction between components without sharing internal data. We also use a controller to talk to the Data Access Object interface implementation which stores and modifies the product list in a JSON. So the Angular front end follows the principle as well as the backend. Below demonstrates how the Angular Components talk only to their immediate neighbor, a service, which talks to it’s neighbor and so on, instead of the component directly editing the files or talking to the fileDAO or Controller.
 
 ![Loose Coupling](looseCouplingOO.png)
