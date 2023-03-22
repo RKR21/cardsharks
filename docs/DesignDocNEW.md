@@ -124,9 +124,7 @@ with the e-store application.
 
 The Account model stores user information and provides methods to get the UserName and the Token assigned to it. Each account has an association to the Cart model. One Cart is assigned to One Account. The Cart can add products from the Product model and remove them too. The Product model stores information such as Id, Name, Price, and Quantity for each product. Finally, we have the Token model which verifies each account and identifies the account a cart is assigned to. 
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
+
 ![Model Tier](modelTierUML.png)
 
 ## OO Design Principles
