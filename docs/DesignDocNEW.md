@@ -53,7 +53,7 @@ The e-store owners can modify the inventory as items are bought and sold. Our e-
 
 This section describes the application domain.
 
-![Domain Model](domain-model-placeholder.png)
+
 ![Domain Model](sprint2DomainModel.png)
 
 
