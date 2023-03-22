@@ -178,3 +178,5 @@ There were five stories in total that had passed all their acceptance criteria t
 We ended up writing 67 tests for our java code. We still have an unresolved test that failed in the InventoryFileDAO class. That will be a priority. 
 
 ![Failed Test](testFail.png)
+
+Some tests could be detailed better so that repeat tests don't come up later in development. As of now, there are no glaring errors with the project testing.
