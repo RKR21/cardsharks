@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,7 +92,7 @@ public class AccountController {
     /**
      * Deletes a {@linkplain Account account} with the given id
      *
-     * @param id The id of the {@link Account account} to deleted
+     * @param userName The userName of the {@link Account account} to deleted
      *
      * @return ResponseEntity HTTP status of OK if deleted
      * ResponseEntity with HTTP status of NOT_FOUND if not found
@@ -105,6 +106,80 @@ public class AccountController {
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Creates a {@linkplain Payment payment} with the provided payment object
+     * 
+     * @param userName - The string userName used to locate the {@linkplain Account account} 
+     * @param payment - The {@link Payment payment} to create
+     *
+     * @return ResponseEntity with created {@link Account account} object and HTTP status of CREATED
+     * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @PutMapping("/payment")
+    public ResponseEntity<Payment> addPayment
+        (@RequestParam String userName, @RequestBody Payment payment) 
+    {
+        LOG.info("PUT /account/payment/" + userName);
+        try {
+            if(accountDAO.addToPayments(userName, payment) != null)
+                return new ResponseEntity<>(payment,HttpStatus.CREATED);
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Deletes a {@linkplain Account account} with the given id
+     *
+     * @param userName The string userName used to locate the {@linkplain Account account} 
+     * @param payment - The {@link Payment payment} to create
+     *
+     * @return ResponseEntity HTTP status of OK if deleted
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @DeleteMapping("/payment")
+    public ResponseEntity<Account> removePayment
+        (@RequestParam String userName, @RequestBody Payment payment) 
+    {
+        LOG.info("DELETE /account/payment/?userName=" + userName);
+        try {
+            if(accountDAO.removeFromPayments(userName, payment))
+                return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Responds to the GET request for a {@linkplain Payment payment} array for the given user name
+     *
+     * @param userName The string userName used to locate the {@linkplain Account account} 
+     *
+     * @return ResponseEntity with {@link Product product} object array and HTTP status of OK if found
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/payment")
+    public ResponseEntity<Payment[]> getPayments(@RequestParam String userName) {
+        LOG.info("GET /account/payment/?userName=" + userName);
+        try {
+            Payment[] payments = accountDAO.getPayments(userName);
+            if(payments == null)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(payments, HttpStatus.OK);
+        }
+        catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

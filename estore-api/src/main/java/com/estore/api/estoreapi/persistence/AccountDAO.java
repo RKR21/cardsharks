@@ -46,4 +46,41 @@ public interface AccountDAO {
      * @throws IOException if underlying storage cannot be accessed
      */
     boolean deleteAccount(String userName) throws IOException;
+
+    /**
+     * Adds a {@linkplain Payment payment} to {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @param payment {@linkplain Payment payment} to add
+     * 
+     * @return the {@linkplain Payment payment} that was added
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    Payment addToPayments(String userName, Payment payment) throws IOException;
+
+    /**
+     * Removes a {@linkplain Payment payment} to {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @param payment {@linkplain Payment payment} to add
+     * 
+     * @return the true is successfully removed, false otherwise
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean removeFromPayments(String userName, Payment payment) throws IOException;
+
+    /**
+     * Gets the {@linkplain Payment payment} array from the {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @return {@linkplain Payment payment} array
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    Payment[] getPayments(String userName) throws IOException;
 }

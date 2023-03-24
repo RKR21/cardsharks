@@ -120,4 +120,37 @@ public class AccountFileDAO implements AccountDAO {
             return save();
         }
     }
+
+    /**
+     * AccountDAO Override: adds a Payment.
+     */
+    public Payment addToPayments(String userName, Payment payment) throws IOException{
+        synchronized(accounts) {
+            if(!accounts.containsKey(userName))
+                return null;
+            return accounts.get(userName).addPayment(payment);
+        }
+    }
+
+    /**
+     * AccountDAO Override: Deletes a Payment.
+     */
+    public boolean removeFromPayments(String userName, Payment payment) throws IOException{
+        synchronized(accounts) {
+            if(!accounts.containsKey(userName))
+                return false;
+            return accounts.get(userName).removePayment(payment);
+        }
+    }
+
+    /**
+     * AccountDAO Override: gets payment array.
+     */
+    public Payment[] getPayments(String userName) throws IOException {
+        synchronized(accounts) {
+            if(!accounts.containsKey(userName))
+                return null;
+            return accounts.get(userName).getPayments();
+        }
+    }
 }
