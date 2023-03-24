@@ -65,13 +65,19 @@ public class Cart {
     /**
      * Removes a product from the cart.
      * 
-     * @param index array location of the product to remove
+     * @param id product id to remove
      * 
      * @return true if removed sucessfully false otherwsie
      */
-    public boolean removeFromCart(int index){
-        if(index < cart.size() && cart.remove(index) != null)
-            return true;
+    public boolean removeFromCart(int id){
+        for(Product product : cart)
+            if(product.getId() == id){
+                int quantity = product.getQuantity() - 1;
+                product.setQuantity(quantity);
+                if(quantity <= 0)
+                    cart.remove(product);
+                return true;
+            }
         return false;
     }
 

@@ -144,7 +144,7 @@ public class CartController {
      * Deletes a {@linkplain Cart cart} array field with the given 
      *
      * @param token The id used to locate the {@link Cart cart}
-     * @param index The index in the {@link Cart cart} array to delete
+     * @param id product id to remove
      *
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -152,11 +152,11 @@ public class CartController {
      */
     @DeleteMapping("/{token}/{index}")
     public ResponseEntity<Product> removeFromCart
-        (@PathVariable int token, @PathVariable int index)
+        (@PathVariable int token, @PathVariable int id)
     {
-        LOG.info("DELETE /cart/" + token + "/" + index);
+        LOG.info("DELETE /cart/" + token + "/" + id);
         try {
-            if(cartDAO.removeFromCart(token, index))
+            if(cartDAO.removeFromCart(token, id))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {

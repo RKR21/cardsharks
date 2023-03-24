@@ -51,13 +51,13 @@ public interface CartDAO {
      * 
      * @param token int token value used to authenticate request and locate cart
      * 
-     * @param index array location to remove a {@linkplain Product product}
+     * @param id remove a {@linkplain Product product}
      * 
      * @return the true is successfully removed, false otherwise
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean removeFromCart(int token, int index) throws IOException;
+    boolean removeFromCart(int token, int id) throws IOException;
 
     /**
      * Gets the {@linkplain Product product} array from the {@link Cart cart} 
