@@ -76,9 +76,9 @@ public class CollectionController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("")
-    public ResponseEntity<Collection> deleteCollection(@RequestParam int token) {
-        LOG.info("DELETE /?token=" + token);
+    @DeleteMapping("/{token}")
+    public ResponseEntity<Collection> deleteCollection(@PathVariable int token) {
+        LOG.info("DELETE /{" + token + "}");
         try {
             if(collectionDAO.deleteCollection(token))
                 return new ResponseEntity<>(HttpStatus.OK);

@@ -97,12 +97,13 @@ public class AccountFileDAO implements AccountDAO {
      *  AccountDAO Override: Creates an account.
      */
     @Override
-    public Account createAccount(Account account) throws IOException {
+    public Account createAccount(String userName) throws IOException {
         synchronized(accounts) {
-            if (accounts.containsKey(account.getUserName())){
+            if (accounts.containsKey(userName)){
                 return null;
             }
-            accounts.put(account.getUserName(), account);
+            Account account = new Account(userName);
+            accounts.put(userName, account);
             save();
             return account;
         }
@@ -112,9 +113,9 @@ public class AccountFileDAO implements AccountDAO {
      * AccountDAO Override: Deletes an account.
      */
     @Override
-    public boolean deleteAccount(String userName) throws IOException {
+    public boolean deleteAccount(int token, String userName) throws IOException {
         synchronized(accounts) {
-            if (!accounts.containsKey(userName))
+            if (!accounts.containsKey(userName) || token != Account.getToken(userName))
                 return false;
             accounts.remove(userName);
             return save();

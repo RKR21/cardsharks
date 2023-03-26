@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -77,11 +78,11 @@ public class AccountController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("")
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
-        LOG.info("POST /account/" + account.getUserName());
+    public ResponseEntity<Account> createAccount(@RequestParam String userName) {
+        LOG.info("POST /account/?userName=" + userName);
         try {
-            if(accountDAO.createAccount(account) != null)
-                return new ResponseEntity<>(account,HttpStatus.CREATED);
+            if(accountDAO.createAccount(userName) != null)
+                return new ResponseEntity<>(HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -92,17 +93,20 @@ public class AccountController {
     /**
      * Deletes a {@linkplain Account account} with the given id
      *
+     * @param token token to authenticate
      * @param userName The userName of the {@link Account account} to deleted
      *
      * @return ResponseEntity HTTP status of OK if deleted
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("")
-    public ResponseEntity<Account> deleteAccount(@RequestParam String userName) {
-        LOG.info("DELETE /account/?userName=" + userName);
+    @DeleteMapping("/{token}")
+    public ResponseEntity<Account> deleteAccount
+        (@PathVariable int token, @RequestParam String userName) 
+    {
+        LOG.info("DELETE /account/{" + token + "}?userName=" + userName);
         try {
-            if(accountDAO.deleteAccount(userName))
+            if(accountDAO.deleteAccount(token, userName))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {

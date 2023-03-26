@@ -76,9 +76,9 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("")
-    public ResponseEntity<Cart> deleteCart(@RequestParam int token) {
-        LOG.info("DELETE /?token=" + token);
+    @DeleteMapping("/{token}")
+    public ResponseEntity<Cart> deleteCart(@PathVariable int token) {
+        LOG.info("DELETE /{" + token + "}");
         try {
             if(cartDAO.deleteCart(token))
                 return new ResponseEntity<>(HttpStatus.OK);
