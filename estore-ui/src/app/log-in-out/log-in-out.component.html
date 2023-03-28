@@ -25,4 +25,8 @@ name="userName"/>
     Delete Account
 </button>
 
+<div *ngIf="loggedInAsCustomer()">
+    <a routerLink="/payment-info">Edit Payment Details</a>
+  </div>
+
 <p>{{displayValue}}</p>

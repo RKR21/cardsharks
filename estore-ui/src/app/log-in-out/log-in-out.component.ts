@@ -61,6 +61,14 @@ export class LogInOutComponent {
     }
   }
 
+  loggedInAsCustomer(){
+    if(AccountService.getToken() != 0 && AccountService.getToken() != 92668751){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   update(){
     AccountService.setToken(this.tokenValue);
     AccountService.setUser(this.userName);
