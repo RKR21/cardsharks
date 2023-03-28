@@ -70,9 +70,9 @@ public class Cart {
      * @return true if removed sucessfully false otherwsie
      */
     public boolean removeFromCart(int index){
-        if(index < cart.size() && cart.remove(index) != null)
-            return true;
-        return false;
+        if(index > cart.size())
+            return false;
+        return (cart.remove(index) == null);
     }
 
     /**

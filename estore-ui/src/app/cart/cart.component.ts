@@ -10,6 +10,7 @@ import { MessageService } from '../message.service';
 })
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];
+  displayValue = "Please work";
 
   constructor (private cartService: CartService,
     private messageService: MessageService) {}
@@ -33,7 +34,9 @@ export class CartComponent implements OnInit {
   }
 
   remove (product: Product) : void {
-    this.cartItems = this.cartItems.filter(p => p !== product)
+    this.displayValue = "You better work";
+    // console.log("we are here");
+    // this.cartItems = this.cartItems.filter(p => p !== product);
     this.cartService.removeFromCart(product);
   }
 }

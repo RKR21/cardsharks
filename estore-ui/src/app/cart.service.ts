@@ -35,7 +35,7 @@ export class CartService {
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
       tap(_ => this.log(`deleted hero id=${product.id}`)),
-      catchError(this.handleError<Product>('deletePItem'))
+      catchError(this.handleError<Product>('deletedItem'))
     );
   }
 

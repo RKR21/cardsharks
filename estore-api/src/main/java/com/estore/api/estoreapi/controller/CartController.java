@@ -156,7 +156,8 @@ public class CartController {
     {
         LOG.info("DELETE /cart/" + token + "/" + index);
         try {
-            if(cartDAO.removeFromCart(token, index))
+            boolean temp = cartDAO.removeFromCart(token, index);
+            if(temp)
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
