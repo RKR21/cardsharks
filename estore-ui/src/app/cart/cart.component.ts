@@ -35,8 +35,8 @@ export class CartComponent implements OnInit {
 
   remove (product: Product) : void {
     this.displayValue = "You better work";
-    // console.log("we are here");
-    // this.cartItems = this.cartItems.filter(p => p !== product);
+    console.log("we are here");
+    this.cartItems = this.cartItems.filter(p => p !== product);
     this.cartService.removeFromCart(product);
   }
 }

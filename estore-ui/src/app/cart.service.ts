@@ -33,10 +33,7 @@ export class CartService {
   removeFromCart (product: Product) {
     const url = `${this.cartUrl}/${product.id}`;
 
-    return this.http.delete<Product>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${product.id}`)),
-      catchError(this.handleError<Product>('deletedItem'))
-    );
+    return this.http.delete<Product>(url, this.httpOptions).subscribe();
   }
 
   /** Log a CartService message with the MessageService */
