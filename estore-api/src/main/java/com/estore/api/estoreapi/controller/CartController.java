@@ -53,9 +53,9 @@ public class CartController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Cart cart} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Cart> createCart(@RequestParam String userName) {
-        LOG.info("POST /?userName=" + userName);
+        LOG.info("POST /cart/?userName=" + userName);
         try {
             Cart newCart = cartDAO.createCart(userName);
             if(newCart != null)
@@ -78,7 +78,7 @@ public class CartController {
      */
     @DeleteMapping("/{token}")
     public ResponseEntity<Cart> deleteCart(@PathVariable int token) {
-        LOG.info("DELETE /{" + token + "}");
+        LOG.info("DELETE /cart/{" + token + "}");
         try {
             if(cartDAO.deleteCart(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -100,7 +100,7 @@ public class CartController {
      */
     @GetMapping("/{token}")
     public ResponseEntity<Product[]> getCart(@PathVariable int token) {
-        LOG.info("GET cart/" + token );
+        LOG.info("GET /cart/" + token );
         try {
             Product[] cart = cartDAO.getCart(token);
             if(cart == null)
@@ -150,7 +150,7 @@ public class CartController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{token}/{index}")
+    @DeleteMapping("/{token}/{id}")
     public ResponseEntity<Product> removeFromCart
         (@PathVariable int token, @PathVariable int id)
     {

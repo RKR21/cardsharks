@@ -1,4 +1,4 @@
-import { TokenType } from '@angular/compiler';
+
 import { Component } from '@angular/core';
 import { AccountService } from '../account.service';
 import { Token } from '../token';

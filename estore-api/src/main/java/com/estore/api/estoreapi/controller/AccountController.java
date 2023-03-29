@@ -55,7 +55,7 @@ public class AccountController {
      */
     @GetMapping("")
     public ResponseEntity<Token> logIn(@RequestParam String userName) {
-        LOG.info("GET /account/?userName=" + userName);
+        LOG.info("GET /account?userName=" + userName);
         try {
             Token token = accountDAO.logIn(userName);
             if (token.getToken() == 0)
@@ -77,7 +77,7 @@ public class AccountController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Account> createAccount(@RequestParam String userName) {
         LOG.info("POST /account/?userName=" + userName);
         try {

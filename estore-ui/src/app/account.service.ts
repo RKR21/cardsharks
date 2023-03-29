@@ -25,7 +25,7 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   logIn(user:string){
-    const url = `${this.accountUrl}/?userName=${user}`;
+    const url = `${this.accountUrl}?userName=${user}`;
     return this.http.get<Token>(url);
   }
 
@@ -33,19 +33,20 @@ export class AccountService {
     const urlA = `${this.accountUrl}/?userName=${user}`;
     const urlB = `${this.cartUrl}/?userName=${user}`;
     const urlC = `${this.collectionUrl}/?userName=${user}`;
-    this.http.post(urlA, null);
-    this.http.post(urlB, null);
-    this.http.post(urlC, null);
+    this.http.post(urlA, null).subscribe();
+    this.http.post(urlB, null).subscribe();
+    this.http.post(urlC, null).subscribe();
     return true;
   }
 
   deleteAccount() : boolean {
-    const urlA = `${this.accountUrl}/{${AccountService.getToken}}?userName=${AccountService.getUser}`;
-    const urlB = `${this.cartUrl}/{${AccountService.getToken}}`;
-    const urlC = `${this.collectionUrl}/{${AccountService.getToken}}`;
-    this.http.delete(urlA);
-    this.http.delete(urlB);
-    this.http.delete(urlC);
+
+    const urlA = `${this.accountUrl}/${AccountService.getToken()}?userName=${AccountService.getUser()}`;
+    const urlB = `${this.cartUrl}/${AccountService.getToken()}`;
+    const urlC = `${this.collectionUrl}/${AccountService.getToken()}`;
+    this.http.delete(urlA).subscribe();
+    this.http.delete(urlB).subscribe();
+    this.http.delete(urlC).subscribe();
     return true;
   }
 

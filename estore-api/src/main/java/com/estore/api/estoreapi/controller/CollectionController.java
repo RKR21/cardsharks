@@ -53,9 +53,9 @@ public class CollectionController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Collection collection} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Collection> createCollection(@RequestParam String userName) {
-        LOG.info("POST /?userName=" + userName);
+        LOG.info("POST /collection/?userName=" + userName);
         try {
             Collection newCollection = collectionDAO.createCollection(userName);
             if(newCollection != null)
@@ -78,7 +78,7 @@ public class CollectionController {
      */
     @DeleteMapping("/{token}")
     public ResponseEntity<Collection> deleteCollection(@PathVariable int token) {
-        LOG.info("DELETE /{" + token + "}");
+        LOG.info("DELETE /collection/{" + token + "}");
         try {
             if(collectionDAO.deleteCollection(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -100,7 +100,7 @@ public class CollectionController {
      */
     @GetMapping("/{token}")
     public ResponseEntity<Product[]> getCollection(@PathVariable int token) {
-        LOG.info("GET collection/" + token );
+        LOG.info("GET /collection/" + token );
         try {
             Product[] collection = collectionDAO.getCollection(token);
             if(collection == null)
@@ -150,13 +150,13 @@ public class CollectionController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{token}/{index}")
+    @DeleteMapping("/{token}/{id}")
     public ResponseEntity<Product> removeFromCollection
-        (@PathVariable int token, @PathVariable int index)
+        (@PathVariable int token, @PathVariable int id)
     {
-        LOG.info("DELETE /collection/" + token + "/" + index);
+        LOG.info("DELETE /collection/" + token + "/" + id);
         try {
-            if(collectionDAO.removeFromCollection(token, index))
+            if(collectionDAO.removeFromCollection(token, id))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
