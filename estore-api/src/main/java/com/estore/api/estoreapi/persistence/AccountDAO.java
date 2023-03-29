@@ -26,24 +26,61 @@ public interface AccountDAO {
     /**
      * Adds a new {@link Account account} to the database
      * 
-     * @param account {@link Account account} object to be added 
-     * id is ignored and handled seperatly to maintain consistincy.
+     * @param userName user name to create an account with 
      * 
      * @return new {@link Account account} object or null if unsuccessful
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    Account createAccount(Account account) throws IOException;
+    Account createAccount(String userName) throws IOException;
 
     /**
      * Deletes a {@linkplain Account account} with the given username
      * 
-     * @param username The username of the {@link Account account}
+     * @param token account token
+     * @param userName user name to create an account with 
      * 
      * @return true if the {@link Account account} was deleted
      * false if account with the given id does not exist
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean deleteAccount(String userName) throws IOException;
+    boolean deleteAccount(int token, String userName) throws IOException;
+
+    /**
+     * Adds a {@linkplain Payment payment} to {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @param payment {@linkplain Payment payment} to add
+     * 
+     * @return the {@linkplain Payment payment} that was added
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    Payment addToPayments(String userName, Payment payment) throws IOException;
+
+    /**
+     * Removes a {@linkplain Payment payment} to {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @param payment {@linkplain Payment payment} to add
+     * 
+     * @return the true is successfully removed, false otherwise
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    boolean removeFromPayments(String userName, Payment payment) throws IOException;
+
+    /**
+     * Gets the {@linkplain Payment payment} array from the {@link Account account} 
+     * 
+     * @param userName string value used to authenticate request and locate account
+     * 
+     * @return {@linkplain Payment payment} array
+     * 
+     * @throws IOException if underlying storage cannot be accessed
+     */
+    Payment[] getPayments(String userName) throws IOException;
 }

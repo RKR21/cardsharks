@@ -9,8 +9,10 @@ import { Token } from './token';
 @Injectable({ providedIn: 'root' })
 export class AccountService {
 
-  private accountUrl = 'http://localhost:8080/account';  // URL to web api
-  private cartUrl = 'http://localhost:8080/cart'
+  private rooturl = 'http://localhost:8080/';
+  private accountUrl = this.rooturl + 'account';
+  private cartUrl = this.rooturl + 'cart';
+  private collectionUrl = this.rooturl + 'collection';
 
   private static token = 0;
   private static userName = '';
@@ -23,11 +25,32 @@ export class AccountService {
   constructor(private http: HttpClient) { }
 
   logIn(user:string){
-    const url = `${this.accountUrl}/?userName=${user}`;
+    const url = `${this.accountUrl}?userName=${user}`;
     return this.http.get<Token>(url);
   }
 
-  static setToken(value : number){
+  createAccount(user: string) {
+    const urlA = `${this.accountUrl}/?userName=${user}`;
+    const urlB = `${this.cartUrl}/?userName=${user}`;
+    const urlC = `${this.collectionUrl}/?userName=${user}`;
+    this.http.post(urlA, null).subscribe();
+    this.http.post(urlB, null).subscribe();
+    this.http.post(urlC, null).subscribe();
+    return true;
+  }
+
+  deleteAccount() : boolean {
+
+    const urlA = `${this.accountUrl}/${AccountService.getToken()}?userName=${AccountService.getUser()}`;
+    const urlB = `${this.cartUrl}/${AccountService.getToken()}`;
+    const urlC = `${this.collectionUrl}/${AccountService.getToken()}`;
+    this.http.delete(urlA).subscribe();
+    this.http.delete(urlB).subscribe();
+    this.http.delete(urlC).subscribe();
+    return true;
+  }
+
+  static setToken(value : number) {
     this.token = value;
   }
   
@@ -50,5 +73,4 @@ export class AccountService {
   static isLoggedIn() {
     return this.logStatus;
   }
-
 }

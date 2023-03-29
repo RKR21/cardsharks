@@ -58,7 +58,8 @@ public class AccountFileDAOTest {
     @Test
     public void testDeleteAccount() throws IOException {
         String user = "Angular";
-        boolean result = assertDoesNotThrow(() -> accountFileDAO.deleteAccount(user),
+        int token = Account.getToken(user);
+        boolean result = assertDoesNotThrow(() -> accountFileDAO.deleteAccount(token, user),
                             "Unexpected exception thrown");
         assertEquals(result,true);
     }
@@ -66,11 +67,10 @@ public class AccountFileDAOTest {
     @Test
     public void testCreateAccount() {
         String user = "Testing";
-        Account account = new Account(user);
-        Account result = assertDoesNotThrow(() -> accountFileDAO.createAccount(account),
+        Account result = assertDoesNotThrow(() -> accountFileDAO.createAccount(user),
                             "Unexpected exception thrown");
         assertNotNull(result);
-        assertEquals(result.getUserName(), account.getUserName());
+        assertEquals(result.getUserName(), user);
     }
 }
 

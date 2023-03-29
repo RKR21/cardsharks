@@ -88,10 +88,10 @@ public class AccountControllerTest {
     public void testCreateAccount() throws IOException {
         // Invoke
         Account account = new Account("user");
-        when(accountDAO.createAccount(account)).thenReturn(account);
+        when(accountDAO.createAccount(account.getUserName())).thenReturn(account);
 
         // Invoke
-        ResponseEntity<Account> response = accountController.createAccount(account);
+        ResponseEntity<Account> response = accountController.createAccount(account.getUserName());
 
         // Analysis
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
@@ -104,10 +104,10 @@ public class AccountControllerTest {
     public void testCreateAccountFailed() throws IOException {
         // Setup
         Account account = new Account("user");
-        when(accountDAO.createAccount(account)).thenReturn(null);
+        when(accountDAO.createAccount(account.getUserName())).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Account> response = accountController.createAccount(account);
+        ResponseEntity<Account> response = accountController.createAccount(account.getUserName());
 
         // Analysis
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
@@ -118,11 +118,11 @@ public class AccountControllerTest {
     @Test
     public void testCreateAccountHandleException() throws IOException {
         // Setup
-        Account Account = new Account("user");
-        doThrow(new IOException()).when(accountDAO).createAccount(Account);
+        Account account = new Account("user");
+        doThrow(new IOException()).when(accountDAO).createAccount(account.getUserName());
 
         // Invoke
-        ResponseEntity<Account> response = accountController.createAccount(Account);
+        ResponseEntity<Account> response = accountController.createAccount(account.getUserName());
 
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
@@ -134,10 +134,11 @@ public class AccountControllerTest {
     public void testDeleteAccount() throws IOException {
         // Setup
         String user = "user";
-        when(accountDAO.deleteAccount(user)).thenReturn(true);
+        int token = Account.getToken(user);
+        when(accountDAO.deleteAccount(token, user)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Account> response = accountController.deleteAccount(user);
+        ResponseEntity<Account> response = accountController.deleteAccount(token, user);
 
         // Analysis
         assertEquals(HttpStatus.OK,response.getStatusCode());
@@ -149,10 +150,11 @@ public class AccountControllerTest {
     public void testDeleteAccountNotFound() throws IOException {
         // Setup
         String user = "user";
-        when(accountDAO.deleteAccount(user)).thenReturn(false);
+        int token = Account.getToken(user);
+        when(accountDAO.deleteAccount(token, user)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Account> response = accountController.deleteAccount(user);
+        ResponseEntity<Account> response = accountController.deleteAccount(token, user);
 
         //Analysis
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -164,10 +166,11 @@ public class AccountControllerTest {
     public void testDeleteAccountHandleException() throws IOException {
         // Setup
         String user = "user";
-        doThrow(new IOException()).when(accountDAO).deleteAccount(user);
+        int token = Account.getToken(user);
+        doThrow(new IOException()).when(accountDAO).deleteAccount(token, user);
 
         // Invoke
-        ResponseEntity<Account> response = accountController.deleteAccount(user);
+        ResponseEntity<Account> response = accountController.deleteAccount(token, user);
 
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
