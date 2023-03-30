@@ -122,11 +122,11 @@ public class CartFileDAO implements CartDAO{
      * CartDAO Override: removes from cart.
      */
     @Override
-    public boolean removeFromCart(int token, int index) throws IOException{
+    public boolean removeFromCart(int token, int id) throws IOException{
         synchronized(carts){
             if(!carts.containsKey(token))
                 return false;
-            return carts.get(token).removeFromCart(index) && save();
+            return carts.get(token).removeFromCart(id) && save();
         }
     }
 

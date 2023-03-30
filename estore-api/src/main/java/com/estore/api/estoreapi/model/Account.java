@@ -1,5 +1,7 @@
 package com.estore.api.estoreapi.model;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -11,6 +13,9 @@ public class Account {
     static final String STRING_FORMAT = "Account [userName=%s]";
 
     @JsonProperty("userName") private String userName;
+    @JsonProperty("payments") private ArrayList<Payment> payments;
+
+    final static int MAX_PAYMENTS = 3;
     // TODO: Payment profile, owned inventory, password?
 
     /**
@@ -20,6 +25,7 @@ public class Account {
      */
     public Account(@JsonProperty("userName") String userName){
         this.userName = userName;
+        this.payments = new ArrayList<Payment>();
     }
 
     /**
@@ -50,6 +56,43 @@ public class Account {
      */
     public static int getToken(String userName){
         return userName.hashCode();
+    }
+
+    /**
+     * Gets the payment array of max payment size
+     * 
+     * @return payment object array
+     */
+    public Payment[] getPayments(){
+        return payments.toArray(new Payment[payments.size()]);
+    }
+
+    /**
+     * Adds a payment method to an account.
+     * 
+     * @param payment Payment object toa dd
+     * 
+     * @return the added payment
+     */
+    public Payment addPayment(Payment payment){
+        if(payments.size() <= MAX_PAYMENTS && !payments.contains(payment)){
+            return null;
+        }
+        payments.add(payment);
+        return payment;
+    }
+
+    /**
+     * Removes a payment method from an account.
+     * 
+     * @param payment Payment object to remove
+     * 
+     * @return true if removed, false if not
+     */
+    public boolean removePayment(Payment payment){
+        if(payments.remove(payment))
+            return true;
+        return false;
     }
 
 }

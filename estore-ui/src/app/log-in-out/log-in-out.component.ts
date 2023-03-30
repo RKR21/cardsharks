@@ -1,4 +1,4 @@
-import { TokenType } from '@angular/compiler';
+
 import { Component } from '@angular/core';
 import { AccountService } from '../account.service';
 import { Token } from '../token';
@@ -51,14 +51,25 @@ export class LogInOutComponent {
 
   createAccount(){
     if(!this.isLoggedIn && this.userName != ''){
-      this.displayValue = "TODO"
+      if(this.accountService.createAccount(this.userName))
+        this.displayValue = "login";
+        //this.logIn();
+      else
+        this.displayValue = "failed to create account";
     }
+    else
+      this.displayValue = "log out to create account";
   }
 
   deleteAccount(){
     if(this.isLoggedIn){
-      this.displayValue = "TODO"
+      if(this.accountService.deleteAccount())
+        this.logOut();
+      else
+        this.displayValue = "failed to create account";
     }
+    else
+      this.displayValue = "log in to create account";
   }
 
   loggedInAsCustomer(){
