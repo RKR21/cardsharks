@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,7 @@ import com.estore.api.estoreapi.persistence.*;
 
 /**
  * Handles the REST API requests for the Account resource
- * <p>
+ * 
  * {@literal @}RestController Spring annotation identifies this class as a REST API
  * method handler to the Spring framework
  *
@@ -58,9 +57,9 @@ public class AccountController {
         LOG.info("GET /account?userName=" + userName);
         try {
             Token token = accountDAO.logIn(userName);
-            if (token.getToken() == 0)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(token, HttpStatus.OK);
+            if (token.getToken() != 0)
+                return new ResponseEntity<>(token, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -71,7 +70,7 @@ public class AccountController {
     /**
      * Creates a {@linkplain Account account} with the provided account object
      *
-     * @param account - The {@link Account account} to create
+     * @param userName The user name used create a {@link Account account}
      *
      * @return ResponseEntity with created {@link Account account} object and HTTP status of CREATED
      * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
@@ -91,10 +90,10 @@ public class AccountController {
     }
 
     /**
-     * Deletes a {@linkplain Account account} with the given id
+     * Deletes a {@linkplain Account account} with the given token
      *
      * @param token token to authenticate
-     * @param userName The userName of the {@link Account account} to deleted
+     * @param userName The userName of the {@link Account account} to delete
      *
      * @return ResponseEntity HTTP status of OK if deleted
      * ResponseEntity with HTTP status of NOT_FOUND if not found
@@ -125,7 +124,7 @@ public class AccountController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/payment")
+    @PostMapping("/payment")
     public ResponseEntity<Payment> addPayment
         (@RequestParam String userName, @RequestBody Payment payment) 
     {
@@ -141,7 +140,7 @@ public class AccountController {
     }
 
     /**
-     * Deletes a {@linkplain Account account} with the given id
+     * Deletes a {@linkplain Payment payment} with the given userName and payment
      *
      * @param userName The string userName used to locate the {@linkplain Account account} 
      * @param payment - The {@link Payment payment} to create
@@ -179,9 +178,9 @@ public class AccountController {
         LOG.info("GET /account/payment/?userName=" + userName);
         try {
             Payment[] payments = accountDAO.getPayments(userName);
-            if(payments == null)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(payments, HttpStatus.OK);
+            if(payments != null)
+                return new ResponseEntity<>(payments, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

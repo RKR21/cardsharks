@@ -92,6 +92,13 @@ public class Collection {
         return String.format(STRING_FORMAT, userName);
     }
 
+    /**
+     * Checks if a collection contains a product
+     * 
+     * @param product product to check collection for
+     * 
+     * @return true if exists false otherwise
+     */
     public boolean contains(Product product){
         return this.collection.contains(product);
     }
