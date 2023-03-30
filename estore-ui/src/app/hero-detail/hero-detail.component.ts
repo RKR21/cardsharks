@@ -43,6 +43,7 @@ export class HeroDetailComponent implements OnInit {
 
   addToCart(): void {
     if (this.product) {
+      this.product.quantity -= 1;
       this.cartService.addToCart(this.product).subscribe();
     }
   }
