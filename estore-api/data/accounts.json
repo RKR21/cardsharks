@@ -3,15 +3,19 @@
         "userName" : "admin"
     },
     {
-        "userName" : "testUser"
+        "userName" : "testUser",
+        "payments" : []
     },
     {
-        "userName" : "stan"
+        "userName" : "stan",
+        "payments" : []
     },
     {
-        "userName" : "elijah"
+        "userName" : "elijah",
+        "payments" : []
     },
     {
-        "userName" : "angularMan"
+        "userName" : "angularMan",
+        "payments" : []
     }
 ]

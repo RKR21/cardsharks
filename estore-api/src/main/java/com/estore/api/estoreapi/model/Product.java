@@ -95,6 +95,13 @@ public class Product {
         this.quantity = quantity;
     }
 
+    @Override
+    public boolean equals(Object object){
+        if(object != null && object instanceof Product)
+            return this.getId() == (((Product) object).getId());
+        return false;
+    }
+
     /**
      * To String Object Override
      * 
