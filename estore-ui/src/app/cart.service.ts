@@ -27,7 +27,11 @@ export class CartService {
   }
 
   addToCart(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.cartUrl + "/" + AccountService.getToken(), product, this.httpOptions);
+    const url = `${this.cartUrl}/${AccountService.getToken()}`;
+    return this.http.put<Product>(url, product, this.httpOptions).pipe(
+      tap((newProd: Product) => this.log(`added product w/ id=${newProd.id}`)),
+      catchError(this.handleError<Product>('addProd'))
+    );
   }
 
   removeFromCart (product: Product) {

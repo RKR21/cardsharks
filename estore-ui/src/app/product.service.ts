@@ -12,7 +12,6 @@ import { MessageService } from './message.service';
 })
 export class ProductService {
   private productsUrl = 'http://localhost:8080/products'
-  private cartUrl = 'http://localhost:8080/cart'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -62,10 +61,10 @@ export class ProductService {
     
     
   }
-  addProduct(hero: Product): Observable<Product> {
-    return this.http.post<Product>(this.productsUrl, hero, this.httpOptions).pipe(
-      tap((newHero: Product) => this.log(`added hero w/ id=${newHero.id}`)),
-      catchError(this.handleError<Product>('addHero'))
+  addProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
+      tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
+      catchError(this.handleError<Product>('addProduct'))
     );
   }
 
@@ -73,15 +72,15 @@ export class ProductService {
     const url = `${this.productsUrl}/${id}`;
 
     return this.http.delete<Product>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
-      catchError(this.handleError<Product>('deleteHero'))
+      tap(_ => this.log(`deleted product id=${id}`)),
+      catchError(this.handleError<Product>('deleteProduct'))
     );
   }
 
-  updateProduct(hero: Product): Observable<any> {
-    return this.http.put(this.productsUrl, hero, this.httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero'))
+  updateProduct(product: Product): Observable<any> {
+    return this.http.put(this.productsUrl, product, this.httpOptions).pipe(
+      tap(_ => this.log(`updated product id=${product.id}`)),
+      catchError(this.handleError<any>('updateProduct'))
     );
   }
 
@@ -101,15 +100,8 @@ export class ProductService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a ProductService message with the MessageService */
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`ProductService: ${message}`);
   }
-
-  addToCart (product: Product) : Observable<Product> {
-    const url = `${this.productsUrl}/${product.id}`;
-
-    return this.http.post<Product>(this.cartUrl, product, this.httpOptions);
-  }
-
 }
