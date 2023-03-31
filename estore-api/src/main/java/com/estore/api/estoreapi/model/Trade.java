@@ -3,7 +3,7 @@ package com.estore.api.estoreapi.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Represents an incoming trade offer.
+ * Represents a  trade offer.
  *
  * @author Adrian Marcellus
  */
@@ -29,9 +29,32 @@ public class Trade {
         this.request = request;
     }
 
+    /**
+     * string name of user offering trade
+     * 
+     * @return fromUser String
+     */
     public String getFromUser(){ return fromUser;}
+
+    /**
+     * string name of user being offered trade
+     * 
+     * @return toUser String
+     */
     public String getToUser(){ return toUser;}
+
+    /**
+     * product bring offered
+     * 
+     * @return offer Product
+     */
     public Product getOffer(){ return offer;}
+
+    /**
+     * product being requested
+     * 
+     * @return request Product
+     */
     public Product getRequest(){ return request;}
 
     /**

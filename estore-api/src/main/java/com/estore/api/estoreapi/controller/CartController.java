@@ -78,7 +78,7 @@ public class CartController {
      */
     @DeleteMapping("/{token}")
     public ResponseEntity<Cart> deleteCart(@PathVariable int token) {
-        LOG.info("DELETE /cart/{" + token + "}");
+        LOG.info("DELETE /cart/" + token);
         try {
             if(cartDAO.deleteCart(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -90,9 +90,9 @@ public class CartController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Cart cart}  for the given id
+     * Responds to the GET request for a {@linkplain Cart cart} for the given token
      *
-     * @param token The id used to locate the {@link Cart cart}
+     * @param token The token used to locate the {@link Cart cart}
      *
      * @return ResponseEntity with {@link Product product} object array and HTTP status of OK if found
      * ResponseEntity with HTTP status of NOT_FOUND if not found
@@ -103,9 +103,9 @@ public class CartController {
         LOG.info("GET /cart/" + token );
         try {
             Product[] cart = cartDAO.getCart(token);
-            if(cart == null)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(cart, HttpStatus.OK);
+            if(cart != null)
+                return new ResponseEntity<>(cart, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -141,7 +141,7 @@ public class CartController {
     }
 
     /**
-     * Deletes a {@linkplain Cart cart} array field with the given 
+     * Deletes a {@linkplain Cart cart} array field with the given id 
      *
      * @param token The id used to locate the {@link Cart cart}
      * @param id product id to remove

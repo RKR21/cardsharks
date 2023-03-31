@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.persistence;
 import java.io.IOException;
 
 import com.estore.api.estoreapi.model.*;
+
 /**
  * Defines methods for the CartDAO api
  * 
@@ -12,8 +13,7 @@ public interface CartDAO {
     /**
      * Adds a new {@link Cart cart} to the database
      * 
-     * @param cart {@link Cart cart} object to be added 
-     * id is ignored and handled seperatly to maintain consistincy.
+     * @param userName string user name to create cart for
      * 
      * @return new {@link Cart cart} object or null if unsuccessful
      * 
@@ -24,7 +24,7 @@ public interface CartDAO {
     /**
      * Deletes a {@linkplain Cart cart} with the given username
      * 
-     * @param username The username of the {@link Cart cart}
+     * @param token The token to find and authenticate for the {@link Cart cart}
      * 
      * @return true if the {@link Cart cart} was deleted
      * false if cart with the given id does not exist
@@ -51,7 +51,7 @@ public interface CartDAO {
      * 
      * @param token int token value used to authenticate request and locate cart
      * 
-     * @param id remove a {@linkplain Product product}
+     * @param id remove a {@linkplain Product product} by its id
      * 
      * @return the true is successfully removed, false otherwise
      * 

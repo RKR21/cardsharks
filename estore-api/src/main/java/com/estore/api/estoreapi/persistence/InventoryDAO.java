@@ -36,7 +36,7 @@ public interface InventoryDAO {
     /**
      * Retrives an array of all {@link Product products} that contain a substring
      * 
-     * @param String substring to search for
+     * @param subString substring to search for
      * 
      * @return an array of {@link Product product} objects that contain the substring in their display name
      * 

@@ -78,7 +78,7 @@ public class CollectionController {
      */
     @DeleteMapping("/{token}")
     public ResponseEntity<Collection> deleteCollection(@PathVariable int token) {
-        LOG.info("DELETE /collection/{" + token + "}");
+        LOG.info("DELETE /collection/" + token);
         try {
             if(collectionDAO.deleteCollection(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -90,9 +90,9 @@ public class CollectionController {
     }
 
     /**
-     * Responds to the GET request for a {@linkplain Collection collection}  for the given id
+     * Responds to the GET request for a {@linkplain Collection collection} for the given token
      *
-     * @param token The id used to locate the {@link Collection collection}
+     * @param token The token used to locate the {@link Collection collection}
      *
      * @return ResponseEntity with {@link Product product} object array and HTTP status of OK if found
      * ResponseEntity with HTTP status of NOT_FOUND if not found
@@ -103,9 +103,9 @@ public class CollectionController {
         LOG.info("GET /collection/" + token );
         try {
             Product[] collection = collectionDAO.getCollection(token);
-            if(collection == null)
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            return new ResponseEntity<>(collection, HttpStatus.OK);
+            if(collection != null)
+                return new ResponseEntity<>(collection, HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -117,7 +117,7 @@ public class CollectionController {
     /**
      * Updates the {@linkplain Collection collection} with the provided {@linkplain Product product} object, if it exists
      *
-     * @param token The id used to locate the {@link Collection collection}
+     * @param token The token used to locate the {@link Collection collection}
      * @param product The {@link Product product} to update
      *
      * @return ResponseEntity with updated {@link Product product} object and HTTP status of OK if updated
@@ -144,7 +144,7 @@ public class CollectionController {
      * Deletes a {@linkplain Collection collection} array field with the given 
      *
      * @param token The id used to locate the {@link Collection collection}
-     * @param index The index in the {@link Collection collection} array to delete
+     * @param id The product id in the {@link Collection collection} array to delete
      *
      * @return ResponseEntity HTTP status of OK if deleted<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
@@ -175,7 +175,9 @@ public class CollectionController {
      * @param request
      * @param offer
      * 
-     * @return
+     * @return ResponseEntity with updated {@link Trade trade} object and HTTP status of CREATED if updated
+     * ResponseEntity with HTTP status of CONFLICT if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("/offer/{token}")
     public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
@@ -198,14 +200,17 @@ public class CollectionController {
     }
 
     /**
+     * Accepts a pending trade offer if one exists under a token
      * 
-     * @param token
+     * @param token token used to find a pending offer
      * 
-     * @return
+     * @return ResponseEntity HTTP status of OK if updated
+     * ResponseEntity with HTTP status of  NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/offer-accept/{token}")
     public ResponseEntity<Product> acceptOffer(@PathVariable int token){
-        LOG.info("PUT /collection/offer-accept/{" + token + "}");
+        LOG.info("PUT /collection/offer-accept/" + token);
         try {
             if(collectionDAO.acceptOffer(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -217,10 +222,13 @@ public class CollectionController {
     }
 
     /**
+     * Rejects a pending trade offer if one exists under a token
      * 
-     * @param token
+     * @param token token used to find a pending offer
      * 
-     * @return
+     * @return ResponseEntity HTTP status of OK if updated
+     * ResponseEntity with HTTP status of  NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("/offer-reject/{token}")
     public ResponseEntity<Product> rejectOffer(@PathVariable int token){
@@ -236,10 +244,13 @@ public class CollectionController {
     }
     
     /**
+     * Gets a pending trade offer if one exists under a token
      * 
-     * @param token
+     * @param token token used to find a pending offer
      * 
-     * @return
+     * @return ResponseEntity with {@link Trade trade} object and HTTP status of OK if updated
+     * ResponseEntity with HTTP status of NOT_FOUND if not found
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/offer/{token}")
     public ResponseEntity<Trade> getOffer(@PathVariable int token)

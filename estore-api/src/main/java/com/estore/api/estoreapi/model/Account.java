@@ -16,7 +16,6 @@ public class Account {
     @JsonProperty("payments") private ArrayList<Payment> payments;
 
     final static int MAX_PAYMENTS = 3;
-    // TODO: Payment profile, owned inventory, password?
 
     /**
      * Constructor for Account

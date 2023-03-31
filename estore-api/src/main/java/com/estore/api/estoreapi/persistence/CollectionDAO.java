@@ -12,8 +12,7 @@ public interface CollectionDAO {
     /**
      * Adds a new {@link Collection collection} to the database
      * 
-     * @param collection {@link Collection collection} object to be added 
-     * id is ignored and handled seperatly to maintain consistincy.
+     * @param userName userName string user name to create cart for
      * 
      * @return new {@link Collection collection} object or null if unsuccessful
      * 
@@ -24,7 +23,7 @@ public interface CollectionDAO {
     /**
      * Deletes a {@linkplain Collection collection} with the given username
      * 
-     * @param username The username of the {@link Collection collection}
+     * @param token The token to find and authenticate for the {@link Collection collection}
      * 
      * @return true if the {@link Collection collection} was deleted
      * false if collection with the given id does not exist
@@ -49,15 +48,15 @@ public interface CollectionDAO {
     /**
      * Removes a {@linkplain Product product} to {@link Collection collection} 
      * 
-     * @param token int token value used to authenticate request and locate collection
+     * @param token int token value used to authenticate request and locate cart
      * 
-     * @param index array location to remove a {@linkplain Product product}
+     * @param id remove a {@linkplain Product product} by its id
      * 
      * @return the true is successfully removed, false otherwise
      * 
      * @throws IOException if underlying storage cannot be accessed
      */
-    boolean removeFromCollection(int token, int index) throws IOException;
+    boolean removeFromCollection(int token, int id) throws IOException;
 
     /**
      * Gets the {@linkplain Product product} array from the {@link Collection collection} 
@@ -74,48 +73,52 @@ public interface CollectionDAO {
 
     /**<---------TRADE FUNCTIONALITY-------------------------->*/
     /**
+     * Makes a outgoing trade offer
      * 
-     * @param token
+     * @param token used to  authenticate offer
      * @param userName
      * @param otherName
      * @param request
      * @param offer
      * 
-     * @return
+     * @return outgoing {@linkplain Trade trade} object
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     Trade makeOffer(int token, 
         String userName, String otherName, 
         Product request, Product offer)throws IOException;
 
     /**
+     * Accepts a pending offer if it exists under a token
      * 
-     * @param token
+     * @param token token used to find and authenticate offer
      * 
-     * @return
+     * @return true if accepted successfully false otherwise
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     boolean acceptOffer(int token)throws IOException;
 
     /**
+     * Rejects a pending offer if it exists under a token
      * 
-     * @param token
+     * @param token token used to find and authenticate offer
      * 
-     * @return
+     * @return true if rejected successfully false otherwise
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     boolean rejectOffer(int token)throws IOException;
 
     /**
+     * Gets a pending offer if it exists under a token
      * 
-     * @param token
+     * @param token token used to find and authenticate offer
      * 
-     * @return
+     * @return pending {@linkplain Trade trade} object or null if non-existant
      * 
-     * @throws IOException
+     * @throws IOException if underlying storage cannot be accessed
      */
     Trade getOffer(int token)throws IOException;
 }

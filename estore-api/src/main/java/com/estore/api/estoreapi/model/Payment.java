@@ -2,6 +2,11 @@ package com.estore.api.estoreapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents a payment.
+ *
+ * @author Adrian Marcellus
+ */
 public class Payment {
     static final String STRING_FORMAT = "Payment [type=%s]";
 
