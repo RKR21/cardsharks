@@ -10,7 +10,6 @@ import { MessageService } from '../message.service';
 })
 export class CartComponent implements OnInit {
   cartItems: Product[] = [];
-  displayValue = "Please work";
 
   constructor (private cartService: CartService,
     private messageService: MessageService) {}
