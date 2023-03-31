@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-payment-info',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./payment-info.component.css']
 })
 export class PaymentInfoComponent {
+
+  payments: string[] = []
+
+
+  addPayment(payment:string){
+
+    AccountService.addPayment(payment);
+    
+
+
+  }
 
 }

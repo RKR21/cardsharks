@@ -73,4 +73,10 @@ export class AccountService {
   static isLoggedIn() {
     return this.logStatus;
   }
+
+  static addPayment(payment:string){
+
+    
+  }
+
 }
