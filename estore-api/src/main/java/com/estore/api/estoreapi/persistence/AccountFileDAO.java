@@ -129,7 +129,12 @@ public class AccountFileDAO implements AccountDAO {
         synchronized(accounts) {
             if(!accounts.containsKey(userName))
                 return null;
-            return accounts.get(userName).addPayment(payment);
+
+            
+            accounts.get(userName).addPayment(payment); //TODO check this
+            save();
+            return payment;
+            //return accounts.get(userName).addPayment(payment);
         }
     }
 

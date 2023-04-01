@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Token } from './token';
+import { Payment } from './payment';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -44,6 +45,7 @@ export class AccountService {
     const urlA = `${this.accountUrl}/${AccountService.getToken()}?userName=${AccountService.getUser()}`;
     const urlB = `${this.cartUrl}/${AccountService.getToken()}`;
     const urlC = `${this.collectionUrl}/${AccountService.getToken()}`;
+    console.log(urlA);
     this.http.delete(urlA).subscribe();
     this.http.delete(urlB).subscribe();
     this.http.delete(urlC).subscribe();
@@ -74,9 +76,24 @@ export class AccountService {
     return this.logStatus;
   }
 
-  static addPayment(payment:string){
+  addPayment(payment:Payment){
+    const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
+    console.log(urlA);
+    this.http.post<Payment>(urlA, payment).subscribe();
+  }
 
-    
+  getPayments(){
+    const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
+    console.log(urlA);
+    return this.http.get<Payment[]>(urlA)
+    .pipe(
+      )
+    ;
+  }
+  deletePayment(payment:Payment){
+    const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
+    console.log(urlA);
+    this.http.delete(urlA).subscribe();
   }
 
 }

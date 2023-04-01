@@ -130,7 +130,7 @@ public class AccountController {
     {
         LOG.info("PUT /account/" + token + "/payment?userName=" + userName);
         try {
-            if(!authenticated(token, userName) && 
+            if(authenticated(token, userName) && //removed ! from authenticated
                 accountDAO.addToPayments(userName, payment) != null)
                 return new ResponseEntity<>(payment,HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -156,7 +156,7 @@ public class AccountController {
     {
         LOG.info("DELETE /account/" + token + "/payment?userName=" + userName + payment);
         try {
-            if(!authenticated(token, userName) && 
+            if(authenticated(token, userName) && //removed ! from authenticated
                 accountDAO.removeFromPayments(userName, payment))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -182,7 +182,7 @@ public class AccountController {
         LOG.info("GET /account/" + token + "/payment?userName=" + userName);
         try {
             Payment[] payments = accountDAO.getPayments(userName);
-            if(!authenticated(token, userName) && payments != null)
+            if(authenticated(token, userName) && payments != null)//removed ! from authenticated
                 return new ResponseEntity<>(payments, HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

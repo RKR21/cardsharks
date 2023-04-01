@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AccountService } from '../account.service';
+import { Payment } from '../payment';
 
 @Component({
   selector: 'app-payment-info',
@@ -7,15 +8,26 @@ import { AccountService } from '../account.service';
   styleUrls: ['./payment-info.component.css']
 })
 export class PaymentInfoComponent {
+  constructor(private accountService: AccountService){}
+  payments: Payment[] = []
 
-  payments: string[] = []
+  ngOnInit(): void {
+    this.getPayments();
+  }
 
-
-  addPayment(payment:string){
-
-    AccountService.addPayment(payment);
+  addPayment(type:string){
     
+    this.accountService.addPayment({type} as Payment);
+    
+  }
 
+  getPayments(){
+    this.accountService.getPayments()
+    .subscribe(payments => this.payments = payments);
+  }
+
+  delete(payment:Payment):void{
+      this.accountService.deletePayment(payment);
 
   }
 
