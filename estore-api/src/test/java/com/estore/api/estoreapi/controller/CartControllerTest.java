@@ -211,4 +211,58 @@ public class CartControllerTest {
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
     }
+
+    // Tests removeFromCart() method to ensure correct status codes are
+    // produced when removing from a cart
+    @Test
+    public void testRemoveFromCart() throws IOException {
+        // Setup
+        String user = "user";
+        int token = Account.getToken(user);
+        int id = 11;
+
+        when(cartDAO.removeFromCart(token, 11)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Product> response = cartController.removeFromCart(token, id);
+
+        // Analysis
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    // Tests removeFromCart() method to ensure correct status codes are
+    // produced when removing from a cart
+    @Test
+    public void testRemoveFromCartNotFound() throws IOException {
+        // Setup
+        String user = "user";
+        int token = Account.getToken(user);
+        int id = 11;
+
+        when(cartDAO.removeFromCart(token, 11)).thenReturn(true);
+
+        // Invoke
+        ResponseEntity<Product> response = cartController.removeFromCart(token, id);
+
+        // Analysis
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    // Tests removeFromCart() method to ensure correct status codes are
+    // produced when removing from a cart
+    @Test
+    public void testRemoveFromCartHandleException() throws IOException {
+        // Setup
+        String user = "user";
+        int token = Account.getToken(user);
+        int id = 11;
+
+        doThrow(new IOException()).when(cartDAO).removeFromCart(token, id);
+
+        // Invoke
+        ResponseEntity<Product> response = cartController.removeFromCart(token, id);
+
+        // Analysis
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
 }

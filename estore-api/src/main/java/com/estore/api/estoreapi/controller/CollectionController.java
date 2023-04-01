@@ -232,7 +232,7 @@ public class CollectionController {
      */
     @PutMapping("/offer-reject/{token}")
     public ResponseEntity<Product> rejectOffer(@PathVariable int token){
-        LOG.info("PUT /collection/offer-reject/{" + token + "}");
+        LOG.info("PUT /collection/offer-reject/" + token);
         try {
             if(collectionDAO.rejectOffer(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -255,7 +255,7 @@ public class CollectionController {
     @GetMapping("/offer/{token}")
     public ResponseEntity<Trade> getOffer(@PathVariable int token)
     {
-        LOG.info("GET /collection/offer/{" + token + "}");
+        LOG.info("GET /collection/offer/" + token);
         try {
             Trade tradeOffer = collectionDAO.getOffer(token);
             if(tradeOffer != null)
