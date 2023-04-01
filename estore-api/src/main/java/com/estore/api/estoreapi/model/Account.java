@@ -74,7 +74,7 @@ public class Account {
      * @return the added payment
      */
     public Payment addPayment(Payment payment){
-        if(payments.size() <= MAX_PAYMENTS && !payments.contains(payment)){
+        if(payments.size() <= MAX_PAYMENTS && payments.contains(payment)){
             return null;
         }
         payments.add(payment);
@@ -89,9 +89,7 @@ public class Account {
      * @return true if removed, false if not
      */
     public boolean removePayment(Payment payment){
-        if(payments.remove(payment))
-            return true;
-        return false;
+        return payments.remove(payment);
     }
 
 }
