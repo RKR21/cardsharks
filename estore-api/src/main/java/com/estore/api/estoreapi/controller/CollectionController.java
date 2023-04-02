@@ -2,6 +2,7 @@ package com.estore.api.estoreapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -179,6 +180,7 @@ public class CollectionController {
      * ResponseEntity with HTTP status of CONFLICT if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+    
     @PostMapping("/offer/{token}")
     public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
     @RequestParam String userName, @RequestParam String otherName, 

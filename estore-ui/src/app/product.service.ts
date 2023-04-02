@@ -36,6 +36,8 @@ export class ProductService {
     return this.http.get<Product>(url);
   }
 
+  
+
   searchProducts(term: string): Observable<Product[]> {
     
     if (!term.trim()) {
