@@ -17,6 +17,7 @@ import com.estore.api.estoreapi.persistence.AccountFileDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.TestPropertySource;
 
 /**
  * Test the Account File DAO class
@@ -41,6 +42,8 @@ public class AccountFileDAOTest {
         testAccounts[0] = new Account("I");
         testAccounts[1] = new Account("Dislike");
         testAccounts[2] = new Account("Angular");
+        testAccounts[2].addPayment(new Payment("PayPal"));
+        testAccounts[2].addPayment(new Payment("PayPal3"));
         when(mockObjectMapper
             .readValue(new File("doesnt_matter.txt"), Account[].class))
                 .thenReturn(testAccounts);
@@ -71,6 +74,51 @@ public class AccountFileDAOTest {
                             "Unexpected exception thrown");
         assertNotNull(result);
         assertEquals(result.getUserName(), user);
+    }
+
+    @Test
+    public void testAddToPayments() {
+        String user = "Angular";
+        String type = "PayPal2";
+        Payment payment = new Payment(type);
+        Payment result = assertDoesNotThrow(()-> accountFileDAO.addToPayments(user, payment), "Unexpected exception thrown");
+        assertNotNull(result);
+        assertEquals(result.getType(), type);
+
+    }
+    @Test
+    public void testRemoveFromPayments() throws IOException{
+        String user = "Angular";
+        String type = "PayPal";
+        Payment payment = new Payment(type);
+        
+        boolean result = assertDoesNotThrow(()-> accountFileDAO.removeFromPayments(user, payment), "Unexpected exception thrown");
+        
+        assert(result);
+        Payment[] actual = accountFileDAO.getPayments(user);
+        
+        boolean contains = false;
+        for(Payment p:actual){
+            if(p.equals(payment)){
+                contains = true;
+            }
+        }
+        assertEquals(contains, false);
+    }
+
+    @Test
+    public void testGetPayments() throws IOException{
+        String user = "Angular";
+        String type1 = "PayPal";
+        String type2 = "PayPal3";
+        Payment[] payments = {new Payment(type1), new Payment(type2)};
+
+        Payment[] actual = assertDoesNotThrow(()-> accountFileDAO.getPayments(user), "Unexpected exception thrown");
+        assertNotNull(actual);
+        
+        assertEquals(payments[0], actual[0]);
+        assertEquals(payments[1], actual[1]);
+
     }
 }
 
