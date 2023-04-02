@@ -10,21 +10,27 @@ import { Token } from '../token';
 })
 export class LogInOutComponent {
   constructor(private accountService: AccountService){}
-  private userName = AccountService.getUser();
+
   private token!: Token;
+  displayValue = "User Name: " + AccountService.getUser();
+
+  private userName = AccountService.getUser();
   private tokenValue = AccountService.getToken();
-  displayValue = "User: " + AccountService.getUser();
   private isLoggedIn = AccountService.isLoggedIn();
+
+  private MIN = 4;
+
   getUser(user:string){
-    if(user != ''){
+    if(!this.isLoggedIn){
       this.userName = user;
       this.updateDisplay("User Name: " + this.userName);
-      this.accountService.logIn(this.userName).subscribe(value => {this.token = value as Token});
+      if(user.length > this.MIN && user != AccountService.getUser())
+        this.accountService.logIn(this.userName).subscribe(value => {this.token = value as Token});
     }
   }
 
   logIn(){
-    if(!this.isLoggedIn && this.userName != ''){
+    if(!this.isLoggedIn){
       if(this.token != null)
         this.tokenValue = this.token.token;
       if(this.tokenValue != 0){
@@ -33,11 +39,12 @@ export class LogInOutComponent {
         this.update();
       }
       else
-      this.updateDisplay("No user: " + this.userName);
+        this.updateDisplay("No user: " + this.userName);
     }
     else
-    this.updateDisplay("Already logged in");
+      this.updateDisplay("Already logged in");
   }
+
   logOut(){
     if(this.isLoggedIn){
       this.updateDisplay("You are no longer logged in");
@@ -50,13 +57,17 @@ export class LogInOutComponent {
   }
 
   createAccount(){
-    if(!this.isLoggedIn && this.userName != ''){
-      if(this.accountService.createAccount(this.userName)){
-        this.logIn();
-        this.updateDisplay("Account created!");
+    if(!this.isLoggedIn){
+      if(this.userName.length > this.MIN){
+        if(this.accountService.createAccount(this.userName)){
+          this.logIn();
+          this.updateDisplay("Account created!");
+        }
+        else
+          this.updateDisplay("failed to create account");
       }
       else
-        this.updateDisplay("failed to create account");
+        this.updateDisplay("user names need to be longer than " + this.MIN + " characters");
     }
     else
     this.updateDisplay("log out to create account");
