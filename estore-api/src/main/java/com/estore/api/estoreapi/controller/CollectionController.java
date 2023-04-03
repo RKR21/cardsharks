@@ -168,28 +168,22 @@ public class CollectionController {
     /**<---------TRADE FUNCTIONALITY-------------------------->*/
 
     /**
+     * If valid sends a trade offer to another user.
      * 
-     * @param token
-     * @param userName
-     * @param otherName
-     * @param request
-     * @param offer
+     * @param trade trade object to use
      * 
      * @return ResponseEntity with updated {@link Trade trade} object and HTTP status of CREATED if updated
      * ResponseEntity with HTTP status of CONFLICT if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PostMapping("/offer/{token}")
-    public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
-    @RequestParam String userName, @RequestParam String otherName, 
-    @RequestBody Product request, @RequestBody Product offer)
-    {
+    public ResponseEntity<Trade> makeOffer(@PathVariable int token, @RequestBody Trade trade) {
         LOG.info("PUT /collection/offer/{" + token
-        + "}?userName=" + userName + "?otherName=" + otherName
-        + " RO:" +  request + offer);
+        + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
+        + " RO:" +  trade.getRequest() + trade.getOffer());
         try {
-            Trade tradeOffer = 
-            collectionDAO.makeOffer(token, userName, otherName, request, offer);
+            Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
+                trade.getToUser(), trade.getRequest(), trade.getOffer());
             if(tradeOffer != null)
                 return new ResponseEntity<Trade>(tradeOffer, HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -232,7 +226,7 @@ public class CollectionController {
      */
     @PutMapping("/offer-reject/{token}")
     public ResponseEntity<Product> rejectOffer(@PathVariable int token){
-        LOG.info("PUT /collection/offer-reject/{" + token + "}");
+        LOG.info("PUT /collection/offer-reject/" + token);
         try {
             if(collectionDAO.rejectOffer(token))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -255,7 +249,7 @@ public class CollectionController {
     @GetMapping("/offer/{token}")
     public ResponseEntity<Trade> getOffer(@PathVariable int token)
     {
-        LOG.info("GET /collection/offer/{" + token + "}");
+        LOG.info("GET /collection/offer/" + token);
         try {
             Trade tradeOffer = collectionDAO.getOffer(token);
             if(tradeOffer != null)

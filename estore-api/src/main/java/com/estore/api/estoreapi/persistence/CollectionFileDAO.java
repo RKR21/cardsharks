@@ -80,7 +80,7 @@ public class CollectionFileDAO implements CollectionDAO{
         collections = new HashMap<>();
         Collection[] collectionArray = objectMapper.readValue(new File(filename), Collection[].class);
         for (Collection collection : collectionArray)
-        collections.put(collection.getToken(), collection);
+            collections.put(collection.getToken(), collection);
         return true;
     }
 

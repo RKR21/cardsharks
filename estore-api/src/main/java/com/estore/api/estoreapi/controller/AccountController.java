@@ -103,7 +103,7 @@ public class AccountController {
     public ResponseEntity<Account> deleteAccount
         (@PathVariable int token, @RequestParam String userName) 
     {
-        LOG.info("DELETE /account/{" + token + "}?userName=" + userName);
+        LOG.info("DELETE /account/" + token + "?userName=" + userName);
         try {
             if(accountDAO.deleteAccount(token, userName))
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -124,13 +124,14 @@ public class AccountController {
      * ResponseEntity with HTTP status of CONFLICT if {@link Account account} object already exists
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PostMapping("/payment")
-    public ResponseEntity<Payment> addPayment
-        (@RequestParam String userName, @RequestBody Payment payment) 
+    @PostMapping("/{token}/payment")
+    public ResponseEntity<Payment> addPayment(@PathVariable int token,
+        @RequestParam String userName, @RequestBody Payment payment) 
     {
-        LOG.info("PUT /account/payment/" + userName);
+        LOG.info("PUT /account/" + token + "/payment?userName=" + userName);
         try {
-            if(accountDAO.addToPayments(userName, payment) != null)
+            if(!authenticated(token, userName) && 
+                accountDAO.addToPayments(userName, payment) != null)
                 return new ResponseEntity<>(payment,HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (IOException e) {
@@ -149,13 +150,14 @@ public class AccountController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/payment")
-    public ResponseEntity<Account> removePayment
-        (@RequestParam String userName, @RequestBody Payment payment) 
+    @DeleteMapping("/{token}/payment")
+    public ResponseEntity<Payment> removePayment(@PathVariable int token,
+        @RequestParam String userName, @RequestBody Payment payment) 
     {
-        LOG.info("DELETE /account/payment/?userName=" + userName);
+        LOG.info("DELETE /account/" + token + "/payment?userName=" + userName + payment);
         try {
-            if(accountDAO.removeFromPayments(userName, payment))
+            if(!authenticated(token, userName) && 
+                accountDAO.removeFromPayments(userName, payment))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
@@ -173,12 +175,14 @@ public class AccountController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @GetMapping("/payment")
-    public ResponseEntity<Payment[]> getPayments(@RequestParam String userName) {
-        LOG.info("GET /account/payment/?userName=" + userName);
+    @GetMapping("/{token}/payment")
+    public ResponseEntity<Payment[]> getPayments
+        (@PathVariable int token, @RequestParam String userName) 
+    {
+        LOG.info("GET /account/" + token + "/payment?userName=" + userName);
         try {
             Payment[] payments = accountDAO.getPayments(userName);
-            if(payments != null)
+            if(!authenticated(token, userName) && payments != null)
                 return new ResponseEntity<>(payments, HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -186,5 +190,17 @@ public class AccountController {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    /**
+     * Checks if a payment request is authenticated/
+     * 
+     * @param token token for authentication
+     * @param userName string username
+     * 
+     * @return true if authenticated, false if not
+     */
+    private boolean authenticated(int token, String userName){
+        return token == Account.getToken(userName);
     }
 }

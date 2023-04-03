@@ -95,6 +95,12 @@ public class Product {
         this.quantity = quantity;
     }
 
+    /**
+     * Checks if a product is equal to another,
+     * object equals override.
+     * 
+     * @return true if equal false otherwise
+     */
     @Override
     public boolean equals(Object object){
         if(object != null && object instanceof Product)
