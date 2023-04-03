@@ -9,15 +9,16 @@ import { Product } from './product';
   providedIn: 'root'
 })
 export class TradeService {
-  private baseUrl = 'http://localhost:8080/trades';
+  private baseUrl = 'http://localhost:8080/collection';
   constructor(private http: HttpClient) { }
 
 
-  makeOffer(token: Token, userName: string, otherName: string, request: Product, offer: Product): 
+  makeOffer(token: Token, trade:Trade): 
   Observable<Trade>{
-    const url = `${this.baseUrl}/offer/${token.token}?userName=${userName}&otherName=${otherName}`;
-    const info = {request: request, offer: offer};
-    return this.http.post<Trade>(url, info);
+    const url = `${this.baseUrl}/offer/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
+
+    
+    return this.http.post<Trade>(url, trade);
   }
 
 

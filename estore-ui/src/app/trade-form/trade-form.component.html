@@ -1,7 +1,7 @@
 <h1>Trades:</h1>
 
 <article id="trade-form">
-    <form (ngSubmit)="onSubmit(userName, otherName, request, offer)" #tradeForm="ngForm">
+    <form (ngSubmit)="onSubmit(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
       
         <label for="userName">User Name:</label>
         <input type="text" id="userName" name="userName" [(ngModel)]="userName" required>
@@ -9,11 +9,11 @@
         <label for="otherName">Other Name:</label>
         <input type="text" id="otherName" name="otherName" [(ngModel)]="otherName" required>
 
-        <label for="request">Request:</label>
-        <input type="number" id="request" name="request" [(ngModel)]="request" required>
+        <label for="requestId">Request:</label>
+        <input type="number" id="requestId" name="requestId" [(ngModel)]="requestId" required>
 
-        <label for="offer">Offer:</label>
-        <input type="number" id="offer" name="offer" [(ngModel)]="offer" required>
+        <label for="offerId">Offer:</label>
+        <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
       
         
       

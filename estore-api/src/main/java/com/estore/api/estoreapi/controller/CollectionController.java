@@ -177,9 +177,11 @@ public class CollectionController {
      * ResponseEntity with HTTP status of CONFLICT if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
+
     
     @PostMapping("/offer/{token}")
-    public ResponseEntity<Trade> makeOffer(@PathVariable int token, @RequestBody Trade trade) {
+    public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
+    @RequestParam String userName, @RequestBody Trade trade) {
         LOG.info("PUT /collection/offer/{" + token
         + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
         + " RO:" +  trade.getRequest() + trade.getOffer());
@@ -187,6 +189,7 @@ public class CollectionController {
             Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
                 trade.getToUser(), trade.getRequest(), trade.getOffer());
             if(tradeOffer != null)
+                
                 return new ResponseEntity<Trade>(tradeOffer, HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (IOException e) {

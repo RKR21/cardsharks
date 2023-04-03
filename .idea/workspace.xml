@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0889131f-a602-4a1f-a0a6-7ca39ed0ae5b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/DesignDoc.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-api/data/collections.json" beforeDir="false" afterPath="$PROJECT_DIR$/estore-api/data/collections.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-api/src/main/java/com/estore/api/estoreapi/controller/CollectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/estore-api/src/main/java/com/estore/api/estoreapi/controller/CollectionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-ui/src/app/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/estore-ui/src/app/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-ui/src/app/trade-form/trade-form.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/estore-ui/src/app/trade-form/trade-form.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-ui/src/app/trade-form/trade-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/estore-ui/src/app/trade-form/trade-form.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-ui/src/app/trade.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/estore-ui/src/app/trade.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/estore-ui/src/app/trade.ts" beforeDir="false" afterPath="$PROJECT_DIR$/estore-ui/src/app/trade.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NIUGnZEvXHwitjznl5RqZYtMq8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rohan/OneDrive/Programming/team-project-2225-swen-261-06-f-cardsharks&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="team-project-2225-swen-261-06-f-cardsharks" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="team-project-2225-swen-261-06-f-cardsharks" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0889131f-a602-4a1f-a0a6-7ca39ed0ae5b" name="Changes" comment="" />
+      <created>1679350996343</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679350996343</updated>
+      <workItem from="1679350997452" duration="937000" />
+      <workItem from="1679352088594" duration="790000" />
+      <workItem from="1679352910603" duration="9000" />
+      <workItem from="1680500703981" duration="20000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
