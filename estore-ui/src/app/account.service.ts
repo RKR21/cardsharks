@@ -27,7 +27,7 @@ export class AccountService {
 
   logIn(user:string){
     const url = `${this.accountUrl}?userName=${user}`;
-    return this.http.get<Token>(url);
+    return this.http.get<Token>(url).pipe();
   }
 
   createAccount(user: string) {
@@ -41,7 +41,6 @@ export class AccountService {
   }
 
   deleteAccount() : boolean {
-
     const urlA = `${this.accountUrl}/${AccountService.getToken()}?userName=${AccountService.getUser()}`;
     const urlB = `${this.cartUrl}/${AccountService.getToken()}`;
     const urlC = `${this.collectionUrl}/${AccountService.getToken()}`;
