@@ -77,18 +77,15 @@ export class AccountService {
 
   addPayment(payment:Payment){
     const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
-    console.log(urlA);
     this.http.post<Payment>(urlA, payment, this.httpOptions).subscribe();
   }
 
   getPayments(){
     const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
-    console.log(urlA);
     return this.http.get<Payment[]>(urlA, this.httpOptions).pipe();
   }
   deletePayment(payment:Payment){
     const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
-    console.log(urlA);
     this.http.put<Payment>(urlA, payment, this.httpOptions).subscribe();
   }
 }
