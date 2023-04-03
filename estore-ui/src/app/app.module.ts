@@ -7,9 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './Hero-detail/hero-detail.component';
-import { HeroesComponent } from './heroes/heroes.component';
-import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 
 import { ProductSearchComponent } from './product-search/product-search.component';
@@ -29,9 +27,7 @@ import { CartComponent } from './cart/cart.component';
     AppComponent,
     DashboardComponent,
     MessagesComponent,
-    HeroesComponent,
-    HeroDetailComponent,
-    HeroSearchComponent,
+    ProductDetailComponent,
     ProductSearchComponent,
     AdminInventoryControlsComponent,
     AdminViewDetailsComponent,
