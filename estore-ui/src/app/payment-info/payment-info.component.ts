@@ -15,20 +15,23 @@ export class PaymentInfoComponent {
     this.getPayments();
   }
 
-  addPayment(type:string){
-    
+  async addPayment(type:string){
     this.accountService.addPayment({type} as Payment);
+    console.log("addpayment");
+    await(50);//waits for the backend to update before getting list again.
     this.getPayments();
-    
   }
 
   getPayments(){
+    console.log("gt pre");
     this.accountService.getPayments()
     .subscribe(payments => this.payments = payments);
+    console.log("gt post");
   }
 
   delete(payment:Payment):void{
       this.accountService.deletePayment(payment);
+      console.log("dleet");
       this.getPayments();
   }
 

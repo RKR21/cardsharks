@@ -12,9 +12,9 @@ name="userName"/>
 
 <ul class="payments">
     <li *ngFor="let payment of payments">
-        <p>{{payment.type}}</p>
-
+        <p>{{payment.type}}
     <button type="button" class="delete" title="delete Payment"
       (click)="delete(payment)">x</button>
+      </p>
   </li>
   </ul>
