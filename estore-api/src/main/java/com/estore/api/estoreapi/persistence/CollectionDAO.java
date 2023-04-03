@@ -78,8 +78,8 @@ public interface CollectionDAO {
      * @param token used to  authenticate offer
      * @param userName
      * @param otherName
-     * @param request
      * @param offer
+     * @param request
      * 
      * @return outgoing {@linkplain Trade trade} object
      * 
@@ -87,7 +87,7 @@ public interface CollectionDAO {
      */
     Trade makeOffer(int token, 
         String userName, String otherName, 
-        Product request, Product offer)throws IOException;
+        Product offer, Product request) throws IOException;
 
     /**
      * Accepts a pending offer if it exists under a token

@@ -40,7 +40,7 @@ export class TradeFormComponent implements OnInit{
 
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
-        const trade: Trade = { fromUser, toUser, request, offer };
+        const trade: Trade = { fromUser, toUser, offer, request };
         console.log("Trade offer made: ", trade);
         this.tradeService.makeOffer(token, trade)
           .subscribe((trade: Trade) => {

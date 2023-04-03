@@ -26,8 +26,6 @@ public class CollectionFileDAO implements CollectionDAO{
     private static final Logger LOG = Logger.getLogger(CollectionFileDAO.class.getName());
     Map<Integer, Collection> collections;
     Map<Integer, Trade> trades;
-    final int REQUEST_INDEX = 0;
-    final int OFFER_INDEX = 1;
     private ObjectMapper objectMapper;
     private String filename;
 
@@ -154,12 +152,21 @@ public class CollectionFileDAO implements CollectionDAO{
     @Override
     public Trade makeOffer(int token, 
         String userName, String otherName, 
-        Product request, Product offer) throws IOException 
+        Product offer, Product request) throws IOException 
     {
         synchronized(collections){
             Collection owner = collections.get(token);
             int offerToken = Account.getToken(otherName);
             Collection other = collections.get(offerToken);
+            if(other == null){
+                LOG.info("other null");
+            }
+            if(!owner.contains(offer)){
+                LOG.info(userName + "does not contain product: " + offer);
+            }
+            if(!other.contains(request)){
+                LOG.info(otherName + " owner does not contain product: " + request);
+            }
             if(other == null || !owner.contains(offer) || !other.contains(request))
                 return null;
             Trade trade = new Trade(userName, otherName, offer, request);
@@ -182,11 +189,12 @@ public class CollectionFileDAO implements CollectionDAO{
             Collection fromUser = collections.get(fromUserToken);
             Collection toUser = collections.get(toUserToken);
             if(fromUser == null || toUser ==  null)
-                return false; 
+                return false;
             fromUser.addToCollection(trade.getRequest());
             fromUser.removeFromCollection(trade.getOffer().getId());
             toUser.addToCollection(trade.getOffer());
             toUser.removeFromCollection(trade.getRequest().getId());
+            save();
             return true;
         }
     }

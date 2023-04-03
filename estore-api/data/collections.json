@@ -1,7 +1,7 @@
 [
     {
         "userName" :  "testUser", 
-        "cart" : [
+        "collection" : [
             {
                 "id":1,
                 "name":"Pikachu",
@@ -18,7 +18,7 @@
     },
     {
         "userName" :  "stan", 
-        "cart" : [
+        "collection" : [
             {
                 "id":1,
                 "name":"Pikachu",
@@ -35,10 +35,10 @@
     },
     {
         "userName" :  "elijah", 
-        "cart" : []
+        "collection" : []
     },
     {
         "userName" :  "angularMan", 
-        "cart" : []
+        "collection" : []
     }
 ]

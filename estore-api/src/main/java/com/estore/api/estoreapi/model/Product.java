@@ -103,7 +103,7 @@ public class Product {
      */
     @Override
     public boolean equals(Object object){
-        if(object != null && object instanceof Product)
+        if(object instanceof Product)
             return this.getId() == (((Product) object).getId());
         return false;
     }
@@ -117,5 +117,4 @@ public class Product {
     public String toString() {
         return String.format(STRING_FORMAT,id,name,price,quantity,price);
     }
-    
 }

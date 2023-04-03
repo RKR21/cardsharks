@@ -2,7 +2,6 @@ package com.estore.api.estoreapi.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -184,12 +183,12 @@ public class CollectionController {
     @RequestParam String userName, @RequestBody Trade trade) {
         LOG.info("PUT /collection/offer/{" + token
         + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
-        + " RO:" +  trade.getRequest() + trade.getOffer());
+        + " OR:" + trade.getOffer() + trade.getRequest());
         try {
             Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
-                trade.getToUser(), trade.getRequest(), trade.getOffer());
+                trade.getToUser(), trade.getOffer(), trade.getRequest());
+            LOG.info("Trade Status: " + (tradeOffer != null));
             if(tradeOffer != null)
-                
                 return new ResponseEntity<Trade>(tradeOffer, HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         } catch (IOException e) {
