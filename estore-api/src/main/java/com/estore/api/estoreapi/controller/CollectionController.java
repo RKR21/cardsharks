@@ -183,7 +183,7 @@ public class CollectionController {
     @RequestParam String userName, @RequestBody Trade trade) {
         LOG.info("PUT /collection/offer/{" + token
         + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
-        + " OR:" + trade.getOffer() + trade.getRequest());
+        + " Offer: " + trade.getOffer() + " Request: " + trade.getRequest());
         try {
             Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
                 trade.getToUser(), trade.getOffer(), trade.getRequest());

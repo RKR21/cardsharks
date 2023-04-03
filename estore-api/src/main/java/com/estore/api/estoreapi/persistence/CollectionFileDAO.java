@@ -151,25 +151,25 @@ public class CollectionFileDAO implements CollectionDAO{
      */
     @Override
     public Trade makeOffer(int token, 
-        String userName, String otherName, 
+        String fromUser, String toUser, 
         Product offer, Product request) throws IOException 
     {
         synchronized(collections){
-            Collection owner = collections.get(token);
-            int offerToken = Account.getToken(otherName);
-            Collection other = collections.get(offerToken);
-            if(other == null){
+            Collection fromCollec = collections.get(token);
+            int offerToken = Account.getToken(toUser);
+            Collection toCollec = collections.get(offerToken);
+            if(toCollec == null){
                 LOG.info("other null");
             }
-            if(!owner.contains(offer)){
-                LOG.info(userName + "does not contain product: " + offer);
+            if(!fromCollec.contains(offer)){
+                LOG.info(fromUser + "does not contain product: " + offer);
             }
-            if(!other.contains(request)){
-                LOG.info(otherName + " owner does not contain product: " + request);
+            if(!toCollec.contains(request)){
+                LOG.info(toUser + " owner does not contain product: " + request);
             }
-            if(other == null || !owner.contains(offer) || !other.contains(request))
+            if(toCollec == null || !fromCollec.contains(offer) || !toCollec.contains(request))
                 return null;
-            Trade trade = new Trade(userName, otherName, offer, request);
+            Trade trade = new Trade(fromUser, toUser, offer, request);
             trades.put(offerToken, trade);
             return trade;
         } 
@@ -194,8 +194,7 @@ public class CollectionFileDAO implements CollectionDAO{
             fromUser.removeFromCollection(trade.getOffer().getId());
             toUser.addToCollection(trade.getOffer());
             toUser.removeFromCollection(trade.getRequest().getId());
-            save();
-            return true;
+            return save();
         }
     }
 
