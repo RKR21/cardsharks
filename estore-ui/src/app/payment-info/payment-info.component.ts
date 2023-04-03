@@ -18,6 +18,7 @@ export class PaymentInfoComponent {
   addPayment(type:string){
     
     this.accountService.addPayment({type} as Payment);
+    this.getPayments();
     
   }
 
@@ -28,7 +29,7 @@ export class PaymentInfoComponent {
 
   delete(payment:Payment):void{
       this.accountService.deletePayment(payment);
-
+      this.getPayments();
   }
 
 }
