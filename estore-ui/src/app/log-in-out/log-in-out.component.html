@@ -3,11 +3,9 @@
 <input type="text"
 #box
 placeholder="Enter User Name:" 
-name="userName"/>
-
-<button type="button" class="in-button" (click)=getUser(box.value)>
-    Confirm User Name
-</button>
+name="userName"
+(keyup)=getUser(box.value)
+(keyup.enter)=logIn()/>
 
 <button type="button" class="in-button" (click)=logIn()>
     Log In

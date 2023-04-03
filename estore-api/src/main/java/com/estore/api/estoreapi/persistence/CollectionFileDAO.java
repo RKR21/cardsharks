@@ -80,7 +80,7 @@ public class CollectionFileDAO implements CollectionDAO{
         collections = new HashMap<>();
         Collection[] collectionArray = objectMapper.readValue(new File(filename), Collection[].class);
         for (Collection collection : collectionArray)
-        collections.put(collection.getToken(), collection);
+            collections.put(collection.getToken(), collection);
         return true;
     }
 
@@ -148,6 +148,9 @@ public class CollectionFileDAO implements CollectionDAO{
 
     /**<---------TRADE FUNCTIONALITY-------------------------->*/
 
+    /**
+     * CollectionDAO Override: Makes a outgoing trade offer
+     */
     @Override
     public Trade makeOffer(int token, 
         String userName, String otherName, 
@@ -165,6 +168,9 @@ public class CollectionFileDAO implements CollectionDAO{
         } 
     }
 
+    /**
+     * CollectionDAO Override: Accepts a pending offer if it exists under a token
+     */
     @Override
     public boolean acceptOffer(int token) throws IOException {
         synchronized(collections){
@@ -185,11 +191,17 @@ public class CollectionFileDAO implements CollectionDAO{
         }
     }
 
+    /**
+     * CollectionDAO Override: Rejects a pending offer if it exists under a token
+     */
     @Override
     public boolean rejectOffer(int token) throws IOException {
         return trades.remove(token) != null;
     }
 
+    /**
+     * CollectionDAO Override: Gets a pending offer if it exists under a token
+     */
     @Override
     public Trade getOffer(int token) throws IOException {
         return trades.get(token);

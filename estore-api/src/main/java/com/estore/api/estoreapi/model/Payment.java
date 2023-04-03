@@ -2,6 +2,11 @@ package com.estore.api.estoreapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Represents a payment.
+ *
+ * @author Adrian Marcellus
+ */
 public class Payment {
     static final String STRING_FORMAT = "Payment [type=%s]";
 
@@ -26,9 +31,10 @@ public class Payment {
     }
 
     /**
-     * Checks if a payment is equal to each another.
+     * Checks if a payment is equal to another,
+     * object equals override.
      * 
-     * @return boolean object equals override
+     * @return true if equal false otherwise
      */
     @Override
     public boolean equals(Object object){

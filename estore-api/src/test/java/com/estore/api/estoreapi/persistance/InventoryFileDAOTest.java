@@ -95,9 +95,10 @@ public class InventoryFileDAOTest {
 
     @Test
     public void testUpdateProduct(){
-        Product product = new Product(14, "Squirtle", 2.50, 15);
+        Product product = new Product(11, "Squirtle", 2.50, 15);
         
-        Product updated = assertDoesNotThrow(()-> inventoryFileDAO.updateProduct(product), "Unexpected exception thrown");
+        Product updated = assertDoesNotThrow(()-> inventoryFileDAO.updateProduct(product),
+                "Unexpected exception thrown");
         
         assertNotNull(updated);
         Product actual = inventoryFileDAO.getProduct(product.getId());
@@ -122,7 +123,7 @@ public class InventoryFileDAOTest {
     @Test
     public void testDeleteProductNotFound(){
         boolean result = assertDoesNotThrow(() -> inventoryFileDAO.deleteProduct(234),
-                                     "Unexpected Exception thrown");
+                "Unexpected Exception thrown");
 
         assertEquals(result, false);
        
