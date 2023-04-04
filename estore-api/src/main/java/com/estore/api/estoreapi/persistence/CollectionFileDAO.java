@@ -155,23 +155,26 @@ public class CollectionFileDAO implements CollectionDAO{
         Product offer, Product request) throws IOException 
     {
         synchronized(collections){
-            Collection fromCollec = collections.get(token);
-            int offerToken = Account.getToken(toUser);
-            Collection toCollec = collections.get(offerToken);
-            if(toCollec == null){
-                LOG.info("other null");
+            try{
+                Collection fromCollec = collections.get(token);
+                int offerToken = Account.getToken(toUser);
+                Collection toCollec = collections.get(offerToken);
+                if(!fromCollec.contains(offer)){
+                    LOG.info(fromUser + "does not contain product: " + offer);
+                }
+                if(!toCollec.contains(request)){
+                    LOG.info(toUser + " owner does not contain product: " + request);
+                }
+                if(!fromCollec.contains(offer) || !toCollec.contains(request))
+                    return null;
+                Trade trade = new Trade(fromUser, toUser, offer, request);
+                trades.put(offerToken, trade);
+                return trade;
             }
-            if(!fromCollec.contains(offer)){
-                LOG.info(fromUser + "does not contain product: " + offer);
-            }
-            if(!toCollec.contains(request)){
-                LOG.info(toUser + " owner does not contain product: " + request);
-            }
-            if(toCollec == null || !fromCollec.contains(offer) || !toCollec.contains(request))
+            catch(NullPointerException e){
+                LOG.info("null collection");
                 return null;
-            Trade trade = new Trade(fromUser, toUser, offer, request);
-            trades.put(offerToken, trade);
-            return trade;
+            }
         } 
     }
 

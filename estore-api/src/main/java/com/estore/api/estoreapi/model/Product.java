@@ -109,12 +109,22 @@ public class Product {
     }
 
     /**
+     * Overrides hashcode to make SonarQube happy
+     * 
+     * @return int hashcode for product
+     */
+    @Override
+    public int hashCode(){
+        return (this.name + this.id).hashCode();
+    }
+
+    /**
      * To String Object Override
      * 
      * @return String
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,price,quantity,price);
+        return String.format(STRING_FORMAT,id,name,price,quantity);
     }
 }
