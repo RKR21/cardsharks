@@ -27,16 +27,16 @@ export class CartService {
   }
 
   addToCart(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.cartUrl + "/" + AccountService.getToken(), product, this.httpOptions);
+    const url = `${this.cartUrl}/${AccountService.getToken()}`;
+    return this.http.put<Product>(url, product, this.httpOptions).pipe(
+      tap((newProd: Product) => this.log(`added product w/ id=${newProd.id}`)),
+      catchError(this.handleError<Product>('addProd'))
+    );
   }
 
   removeFromCart (product: Product) {
-    const url = `${this.cartUrl}/${product.id}`;
-
-    return this.http.delete<Product>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${product.id}`)),
-      catchError(this.handleError<Product>('deletePItem'))
-    );
+    const url = `${this.cartUrl}/${AccountService.getToken()}/${product.id}`;
+    return this.http.delete<Product>(url, this.httpOptions).subscribe();
   }
 
   /** Log a CartService message with the MessageService */

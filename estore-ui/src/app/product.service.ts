@@ -6,13 +6,13 @@ import { tap } from 'rxjs/operators';
 
 import { Product } from './product';
 import { MessageService } from './message.service';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private productsUrl = 'http://localhost:8080/products'
-  private cartUrl = 'http://localhost:8080/cart'
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,14 +20,12 @@ export class ProductService {
 
 
   constructor(private http: HttpClient,
-
+    private accountService: AccountService,
     private messageService: MessageService) { }
 
   getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(this.productsUrl)
-    .pipe(
-      )
-    ;
+    .pipe();
   }
     
 
@@ -47,8 +45,6 @@ export class ProductService {
 
     const url = `${this.productsUrl}/search?name=${term}`;
     
-    
-    
     return this.http.get<Product[]>(url).pipe(
       map(products => {
         if (products.length === 0) {
@@ -61,9 +57,7 @@ export class ProductService {
         console.log("Error occurred:", error);
         return of([]);
       })
-    );
-    
-    
+    );  
   }
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
@@ -88,8 +82,6 @@ export class ProductService {
     );
   }
 
-
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -104,15 +96,8 @@ export class ProductService {
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a ProductService message with the MessageService */
   private log(message: string) {
     this.messageService.add(`ProductService: ${message}`);
   }
-
-  addToCart (product: Product) : Observable<Product> {
-    const url = `${this.productsUrl}/${product.id}`;
-
-    return this.http.post<Product>(this.cartUrl, product, this.httpOptions);
-  }
-
 }
