@@ -31,6 +31,7 @@ export class ProductDetailComponent implements OnInit {
     this.productService.getProduct(id)
       .subscribe(product => this.product = product);
   }
+  
   goBack(): void {
     this.location.back();
   }
@@ -46,7 +47,18 @@ export class ProductDetailComponent implements OnInit {
     if (this.product) {
       this.cartService.addToCart(this.product).subscribe();
       this.product.quantity -= 1;
-      this.productService.updateProduct(this.product);
+      this.productService.updateProduct(this.product).subscribe();
+      if (this.product.quantity <= 0) {
+        this.productService.deleteProduct(this.product.id);
+      }
+    }
+  }
+
+  removeFromCart(): void {
+    if (this.product) {
+      this.cartService.removeFromCart(this.product);
+      this.product.quantity += 1;
+      this.productService.updateProduct(this.product).subscribe();
       if (this.product.quantity == 0) {
         this.productService.deleteProduct(this.product.id);
       }
