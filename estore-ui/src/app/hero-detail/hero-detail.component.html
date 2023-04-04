@@ -17,5 +17,5 @@
     <span *ngIf="!isAdmin()"> {{product.quantity}} </span>
   </div>
   <button type="button" (click)="goBack()">go back</button>
-  <button type="add" (click)="addToCart()">add to cart</button>
+  <button *ngIf="!isAdmin() && isLoggedIn()" type="add" (click)="addToCart()">add to cart</button>
 </div>

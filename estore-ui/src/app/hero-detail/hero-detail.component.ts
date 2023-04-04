@@ -19,8 +19,7 @@ export class HeroDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private location: Location,
-    private accountService: AccountService
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -52,5 +51,9 @@ export class HeroDetailComponent implements OnInit {
 
   isAdmin(){
     return (AccountService.getToken()==92668751);
+  }
+
+  isLoggedIn(){
+    return (AccountService.isLoggedIn())
   }
 }
