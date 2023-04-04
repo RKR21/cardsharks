@@ -98,11 +98,8 @@ export class ProductService {
     this.messageService.add(`ProductService: ${message}`);
   }
 
-  // addToCart(product: Product): Observable<Product> {
-  //   const url = `${this.cartUrl}/${AccountService.getToken()}`;
-  //   return this.http.put<Product>(url, product, this.httpOptions).pipe(
-  //     tap((newProd: Product) => this.log(`added product w/ id=${newProd.id}`)),
-  //     catchError(this.handleError<Product>('addProd'))
-  //   );
-  // }
+  addToCart(product: Product) {
+    const url = `${this.productsUrl}/${product.id}`;
+    return this.http.put<Product>(url, product, this.httpOptions).subscribe()
+  }
 }
