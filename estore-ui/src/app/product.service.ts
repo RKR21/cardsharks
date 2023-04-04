@@ -6,6 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import { Product } from './product';
 import { MessageService } from './message.service';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,18 +20,15 @@ export class ProductService {
 
 
   constructor(private http: HttpClient,
-
+    private accountService: AccountService,
     private messageService: MessageService) { }
 
   getProducts(): Observable<Product[]>{
     return this.http.get<Product[]>(this.productsUrl)
-    .pipe(
-      )
-    ;
+    .pipe();
   }
 
   getProduct(id: number): Observable<Product>{
-    
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url);
   }
@@ -42,8 +40,6 @@ export class ProductService {
     }
 
     const url = `${this.productsUrl}/search?name=${term}`;
-    
-    
     
     return this.http.get<Product[]>(url).pipe(
       map(products => {
@@ -57,10 +53,9 @@ export class ProductService {
         console.log("Error occurred:", error);
         return of([]);
       })
-    );
-    
-    
+    );  
   }
+
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
@@ -84,8 +79,6 @@ export class ProductService {
     );
   }
 
-
-
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
@@ -104,4 +97,12 @@ export class ProductService {
   private log(message: string) {
     this.messageService.add(`ProductService: ${message}`);
   }
+
+  // addToCart(product: Product): Observable<Product> {
+  //   const url = `${this.cartUrl}/${AccountService.getToken()}`;
+  //   return this.http.put<Product>(url, product, this.httpOptions).pipe(
+  //     tap((newProd: Product) => this.log(`added product w/ id=${newProd.id}`)),
+  //     catchError(this.handleError<Product>('addProd'))
+  //   );
+  // }
 }

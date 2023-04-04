@@ -3,15 +3,18 @@
   <div><span>id: </span>{{product.id}}</div>
   <div>
     <label for="product-name">Product Name: </label>
-    <input id="product-name" [(ngModel)]="product.name" placeholder="Product name"/>
+    <input *ngIf="isAdmin()" id="product-name" [(ngModel)]="product.name" placeholder="Product name"/>
+    <span *ngIf="!isAdmin()"> {{product.name}} </span>
   </div>
   <div>
     <label for="product-price">Product Price: </label>
-    <input id="product-price" [(ngModel)]="product.price" placeholder="Product price"/>
+    <input *ngIf="isAdmin()" id="product-price" [(ngModel)]="product.price" placeholder="Product price"/>
+    <span *ngIf="!isAdmin()"> {{product.price}} </span>
   </div>
   <div>
     <label for="product-quantity">Product Quantity: </label>
-    <input id="product-quantity" [(ngModel)]="product.quantity" placeholder="Product quanity"/>
+    <input *ngIf="isAdmin()" id="product-quantity" [(ngModel)]="product.quantity" placeholder="Product quanity"/>
+    <span *ngIf="!isAdmin()"> {{product.quantity}} </span>
   </div>
   <button type="button" (click)="goBack()">go back</button>
   <button type="add" (click)="addToCart()">add to cart</button>

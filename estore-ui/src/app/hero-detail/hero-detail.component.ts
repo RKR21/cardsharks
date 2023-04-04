@@ -5,6 +5,7 @@ import { Location } from '@angular/common';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { CartService } from '../cart.service';
+import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,7 +19,8 @@ export class HeroDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductService,
     private cartService: CartService,
-    private location: Location
+    private location: Location,
+    private accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -46,5 +48,9 @@ export class HeroDetailComponent implements OnInit {
       this.product.quantity -= 1;
       this.cartService.addToCart(this.product).subscribe();
     }
+  }
+
+  isAdmin(){
+    return (AccountService.getToken()==92668751);
   }
 }
