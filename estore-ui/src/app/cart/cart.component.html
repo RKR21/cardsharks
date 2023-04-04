@@ -3,9 +3,9 @@
 <ul class="cart">
     <li *ngFor="let product of cartItems">
       <a routerLink="/detail/{{product.id}}">
-        <span class="badge">{{product.id}}</span> {{product.name}}
+        <span class="badge">{{product.id}}</span> {{product.name}} | Quantity: {{product.quantity}}
       </a>
       <button type="button" class="delete" title="remove from Cart"
-        (click)=remove(product)>x</button>
+        (click)=remove(product)> x </button>
     </li>
 </ul>

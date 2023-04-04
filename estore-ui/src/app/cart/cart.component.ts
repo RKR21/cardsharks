@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { CartService } from '../cart.service';
 import { MessageService } from '../message.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-cart',
@@ -12,6 +13,7 @@ export class CartComponent implements OnInit {
   cartItems: Product[] = [];
 
   constructor (private cartService: CartService,
+    private productService: ProductService,
     private messageService: MessageService) {}
 
   ngOnInit(): void {
@@ -29,11 +31,18 @@ export class CartComponent implements OnInit {
     this.cartService.addToCart(product)
       .subscribe(product => {
         this.cartItems.push(product)
-      })
+      });
+    product.quantity -= 1;
+    this.productService.updateProduct(product);
   }
 
   remove (product: Product) : void {
-    this.cartItems = this.cartItems.filter(p => p !== product)
-    this.cartService.removeFromCart(product);
+    if (product.quantity > 1) {
+      this.cartService.removeFromCart(product);
+      product.quantity -= 1;
+    } else {
+      this.cartItems = this.cartItems.filter(p => p !== product);
+      this.cartService.removeFromCart(product);
+    }
   }
 }

@@ -18,7 +18,7 @@ export class LogInOutComponent {
   private tokenValue = AccountService.getToken();
   private isLoggedIn = AccountService.isLoggedIn();
 
-  private MIN = 4;
+  private MIN = 3;
 
   getUser(user:string){
     if(!this.isLoggedIn){
