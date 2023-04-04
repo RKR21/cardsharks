@@ -37,6 +37,7 @@ export class TradeFormComponent implements OnInit{
   onSubmit(fromUser: string, toUser: string, requestId: number, offerId: number) {
     const tokenValue = AccountService.getToken();
     const token: Token = { token: tokenValue };
+    fromUser = AccountService.getUser();
 
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
