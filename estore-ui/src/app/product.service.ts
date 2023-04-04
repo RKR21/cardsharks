@@ -59,11 +59,10 @@ export class ProductService {
       })
     );  
   }
-
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
-      catchError(this.handleError<Product>('addProduct'))
+      catchError(this.handleError<Product>('addHero'))
     );
   }
 

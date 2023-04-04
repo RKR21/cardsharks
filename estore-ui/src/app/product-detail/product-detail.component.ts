@@ -9,10 +9,10 @@ import { AccountService } from '../account.service';
 
 @Component({
   selector: 'app-product-detail',
-  templateUrl: './hero-detail.component.html',
-  styleUrls: [ './hero-detail.component.css' ]
+  templateUrl: './product-detail.component.html',
+  styleUrls: [ './product-detail.component.css' ]
 })
-export class HeroDetailComponent implements OnInit {
+export class ProductDetailComponent implements OnInit {
   product: Product | undefined;
 
   constructor(
