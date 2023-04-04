@@ -41,6 +41,7 @@
         <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
         <button type="submit">Accept</button>
       </form>
+      
       <form (ngSubmit)="onDecline(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
         
         <label for="otherName">Trade User Name:</label>
