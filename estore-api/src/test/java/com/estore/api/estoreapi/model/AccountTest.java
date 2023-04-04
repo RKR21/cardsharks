@@ -46,16 +46,29 @@ public class AccountTest {
         assert(account.addPayment(testPayment) == null);
     }
 
-        // Tests removing payments
-        @Test
-        public void testRemovePayment() {
-            // Setup
-            String expected_pay  = "testpay";
-            Payment testPayment = new Payment(expected_pay);
-            //Invoke
-            account.addPayment(testPayment);
-            //Invoke and analysis
-            assert(account.removePayment(testPayment));
-            assert(!account.removePayment(testPayment));
-        }
+    // Tests removing payments
+    @Test
+    public void testRemovePayment() {
+        // Setup
+        String expected_pay  = "testpay";
+        Payment testPayment = new Payment(expected_pay);
+        //Invoke
+        account.addPayment(testPayment);
+        //Invoke and analysis
+        assert(account.removePayment(testPayment));
+        assert(!account.removePayment(testPayment));
+    }
+
+    // Tests toString () method
+    @Test
+    public void testToString () {
+        // Setup
+        String userName = "test";
+
+        // Invoke
+        String expected_toString = String.format(Account.STRING_FORMAT, userName);
+
+        // Analysis
+        assertEquals(expected_toString, account.toString());
+    }
 }

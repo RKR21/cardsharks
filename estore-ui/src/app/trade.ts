@@ -1,8 +1,8 @@
 import { Product } from "./product";
 
 export interface Trade {
-    userName: string;
-    otherName: string;
+    fromUser: string;
+    toUser: string;
     offer: Product;
     request: Product;
 }

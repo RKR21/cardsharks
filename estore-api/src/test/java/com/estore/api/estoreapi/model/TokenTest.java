@@ -28,4 +28,17 @@ public class TokenTest {
         // Analysis
         assertEquals(12345, token.getToken());
     }
+
+    // Tests toString () method
+    @Test
+    public void testToString () {
+        // Setup
+        int tokenNum = 12345;
+
+        // Invoke
+        String expected_toString = String.format(Token.STRING_FORMAT, tokenNum);
+
+        // Analysis
+        assertEquals(expected_toString, token.toString());
+    }
 }

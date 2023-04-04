@@ -103,9 +103,19 @@ public class Product {
      */
     @Override
     public boolean equals(Object object){
-        if(object != null && object instanceof Product)
+        if(object instanceof Product)
             return this.getId() == (((Product) object).getId());
         return false;
+    }
+
+    /**
+     * Overrides hashcode to make SonarQube happy
+     * 
+     * @return int hashcode for product
+     */
+    @Override
+    public int hashCode(){
+        return (this.name + this.id).hashCode();
     }
 
     /**
@@ -115,7 +125,6 @@ public class Product {
      */
     @Override
     public String toString() {
-        return String.format(STRING_FORMAT,id,name,price,quantity,price);
+        return String.format(STRING_FORMAT,id,name,price,quantity);
     }
-    
 }

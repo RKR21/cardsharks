@@ -129,7 +129,10 @@ public class AccountFileDAO implements AccountDAO {
         synchronized(accounts) {
             if(!accounts.containsKey(userName))
                 return null;
-            return accounts.get(userName).addPayment(payment);
+
+            Payment toReturn = accounts.get(userName).addPayment(payment);
+            save();
+            return toReturn;
         }
     }
 
@@ -140,7 +143,10 @@ public class AccountFileDAO implements AccountDAO {
         synchronized(accounts) {
             if(!accounts.containsKey(userName))
                 return false;
-            return accounts.get(userName).removePayment(payment);
+
+            boolean toReturn = accounts.get(userName).removePayment(payment);
+            save();
+            return toReturn;
         }
     }
 
@@ -151,7 +157,10 @@ public class AccountFileDAO implements AccountDAO {
         synchronized(accounts) {
             if(!accounts.containsKey(userName))
                 return null;
-            return accounts.get(userName).getPayments();
+
+            Payment[] toReturn = accounts.get(userName).getPayments();
+            save();
+            return toReturn;
         }
     }
 }

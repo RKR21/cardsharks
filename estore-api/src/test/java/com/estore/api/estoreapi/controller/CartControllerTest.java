@@ -239,7 +239,7 @@ public class CartControllerTest {
         int token = Account.getToken(user);
         int id = 11;
 
-        when(cartDAO.removeFromCart(token, 11)).thenReturn(true);
+        when(cartDAO.removeFromCart(token, 11)).thenReturn(false);
 
         // Invoke
         ResponseEntity<Product> response = cartController.removeFromCart(token, id);

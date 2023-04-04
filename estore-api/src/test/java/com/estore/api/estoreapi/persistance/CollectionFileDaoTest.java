@@ -125,7 +125,7 @@ public class CollectionFileDaoTest {
         Product offer = new Product(1, "test", 8.4, 1);
         Product request = new Product(3, "test3", 4.8, 1);
 
-        Trade result = assertDoesNotThrow(()->collectionFileDAO.makeOffer(token, user1, user2, request, offer),
+        Trade result = assertDoesNotThrow(()->collectionFileDAO.makeOffer(token, user1, user2, offer, request),
                                      "Unexpected Exception thrown");
         Trade actual = collectionFileDAO.getOffer(offerToken);
         assertNotNull(result);
@@ -141,9 +141,7 @@ public class CollectionFileDaoTest {
         int offerToken = Account.getToken(user2);
         Product offer = new Product(1, "test", 8.4, 1);
         Product request = new Product(3, "test3", 4.8, 1);
-        collectionFileDAO.makeOffer(token, user1, user2, request, offer);
-
-
+        collectionFileDAO.makeOffer(token, user1, user2, offer, request);
 
         boolean result = assertDoesNotThrow(()->collectionFileDAO.acceptOffer(offerToken), "Unexpected exception thrown");
         assertEquals(true, result);
@@ -180,7 +178,7 @@ public class CollectionFileDaoTest {
         Product offer = new Product(1, "test", 8.4, 1);
         Product request = new Product(3, "test3", 4.8, 1);
 
-        collectionFileDAO.makeOffer(token, user1, user2, request, offer);
+        collectionFileDAO.makeOffer(token, user1, user2, offer, request);
 
         
         boolean success = assertDoesNotThrow(()->collectionFileDAO.rejectOffer(offerToken), "Unexpected exception thrown");

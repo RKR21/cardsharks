@@ -58,4 +58,17 @@ public class CollectionTest {
         collection.removeFromCollection(testProduct.getId());
         assert(collection.getCollection()[0].getQuantity() == 1);
     }
+
+    // Tests toString () method
+    @Test
+    public void testToString () {
+        // Setup
+        String userName = "test";
+
+        // Invoke
+        String expected_toString = String.format(Collection.STRING_FORMAT, userName);
+
+        // Analysis
+        assertEquals(expected_toString, collection.toString());
+    }
 }

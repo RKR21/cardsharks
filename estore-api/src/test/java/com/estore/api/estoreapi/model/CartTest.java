@@ -58,4 +58,17 @@ public class CartTest {
         cart.removeFromCart(testProduct.getId());
         assert(cart.getCart()[0].getQuantity() == 1);
     }
+
+    // Tests toString () method
+    @Test
+    public void testToString () {
+        // Setup
+        String userName = "test";
+
+        // Invoke
+        String expected_toString = String.format(Cart.STRING_FORMAT, userName);
+
+        // Analysis
+        assertEquals(expected_toString, cart.toString());
+    }
 }

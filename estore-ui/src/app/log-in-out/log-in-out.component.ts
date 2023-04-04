@@ -86,6 +86,15 @@ export class LogInOutComponent {
       this.updateDisplay("log in to create account");
   }
 
+  loggedInAsCustomer(){
+    if(AccountService.getToken() != 0 && AccountService.getToken() != 92668751){
+      return true;
+    } 
+    
+    return false;
+
+  }
+
   update(){
     AccountService.setToken(this.tokenValue);
     AccountService.setUser(this.userName);
