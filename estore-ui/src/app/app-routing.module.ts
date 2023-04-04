@@ -7,6 +7,7 @@ import { LogInOutComponent } from './log-in-out/log-in-out.component';
 import { AdminInventoryControlsComponent } from './admin-inventory-controls/admin-inventory-controls.component';
 import { AdminViewDetailsComponent } from './admin-view-details/admin-view-details.component';
 import { CartComponent } from './cart/cart.component';
+import { PaymentInfoComponent } from './payment-info/payment-info.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'admin-detail/:id', component: AdminViewDetailsComponent},
   { path: 'admin-inventory-controls', component: AdminInventoryControlsComponent},
   { path: 'log-in-out', component: LogInOutComponent },
-  { path: 'cart', component: CartComponent }
+  { path: 'cart', component: CartComponent },
+  { path: 'payment-info', component: PaymentInfoComponent}
 ];
 
 @NgModule({

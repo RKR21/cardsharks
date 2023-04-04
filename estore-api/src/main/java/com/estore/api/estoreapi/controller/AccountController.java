@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -130,7 +131,7 @@ public class AccountController {
     {
         LOG.info("PUT /account/" + token + "/payment?userName=" + userName);
         try {
-            if(!authenticated(token, userName) && 
+            if(authenticated(token, userName) && //removed ! from authenticated
                 accountDAO.addToPayments(userName, payment) != null)
                 return new ResponseEntity<>(payment,HttpStatus.CREATED);
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -150,13 +151,13 @@ public class AccountController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @DeleteMapping("/{token}/payment")
+    @PutMapping("/{token}/payment")
     public ResponseEntity<Payment> removePayment(@PathVariable int token,
         @RequestParam String userName, @RequestBody Payment payment) 
     {
         LOG.info("DELETE /account/" + token + "/payment?userName=" + userName + payment);
         try {
-            if(!authenticated(token, userName) && 
+            if(authenticated(token, userName) && //removed ! from authenticated
                 accountDAO.removeFromPayments(userName, payment))
                 return new ResponseEntity<>(HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -182,7 +183,7 @@ public class AccountController {
         LOG.info("GET /account/" + token + "/payment?userName=" + userName);
         try {
             Payment[] payments = accountDAO.getPayments(userName);
-            if(!authenticated(token, userName) && payments != null)
+            if(authenticated(token, userName) && payments != null)//removed ! from authenticated
                 return new ResponseEntity<>(payments, HttpStatus.OK);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

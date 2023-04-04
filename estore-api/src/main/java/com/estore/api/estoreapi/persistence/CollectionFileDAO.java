@@ -26,8 +26,6 @@ public class CollectionFileDAO implements CollectionDAO{
     private static final Logger LOG = Logger.getLogger(CollectionFileDAO.class.getName());
     Map<Integer, Collection> collections;
     Map<Integer, Trade> trades;
-    final int REQUEST_INDEX = 0;
-    final int OFFER_INDEX = 1;
     private ObjectMapper objectMapper;
     private String filename;
 
@@ -153,18 +151,30 @@ public class CollectionFileDAO implements CollectionDAO{
      */
     @Override
     public Trade makeOffer(int token, 
-        String userName, String otherName, 
-        Product request, Product offer) throws IOException 
+        String fromUser, String toUser, 
+        Product offer, Product request) throws IOException 
     {
         synchronized(collections){
-            Collection owner = collections.get(token);
-            int offerToken = Account.getToken(otherName);
-            Collection other = collections.get(offerToken);
-            if(other == null || !owner.contains(offer) || !other.contains(request))
+            try{
+                Collection fromCollec = collections.get(token);
+                int offerToken = Account.getToken(toUser);
+                Collection toCollec = collections.get(offerToken);
+                if(!fromCollec.contains(offer)){
+                    LOG.info(fromUser + "does not contain product: " + offer);
+                }
+                if(!toCollec.contains(request)){
+                    LOG.info(toUser + " owner does not contain product: " + request);
+                }
+                if(!fromCollec.contains(offer) || !toCollec.contains(request))
+                    return null;
+                Trade trade = new Trade(fromUser, toUser, offer, request);
+                trades.put(offerToken, trade);
+                return trade;
+            }
+            catch(NullPointerException e){
+                LOG.info("null collection");
                 return null;
-            Trade trade = new Trade(userName, otherName, offer, request);
-            trades.put(offerToken, trade);
-            return trade;
+            }
         } 
     }
 
@@ -182,12 +192,12 @@ public class CollectionFileDAO implements CollectionDAO{
             Collection fromUser = collections.get(fromUserToken);
             Collection toUser = collections.get(toUserToken);
             if(fromUser == null || toUser ==  null)
-                return false; 
+                return false;
             fromUser.addToCollection(trade.getRequest());
             fromUser.removeFromCollection(trade.getOffer().getId());
             toUser.addToCollection(trade.getOffer());
             toUser.removeFromCollection(trade.getRequest().getId());
-            return true;
+            return save();
         }
     }
 

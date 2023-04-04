@@ -44,6 +44,16 @@ public class Payment {
     }
 
     /**
+     * Overrides hashcode to make SonarQube happy
+     * 
+     * @return int hashcode for product
+     */
+    @Override
+    public int hashCode(){
+        return this.type.hashCode();
+    }
+
+    /**
      * To String Object Override
      * 
      * @return String

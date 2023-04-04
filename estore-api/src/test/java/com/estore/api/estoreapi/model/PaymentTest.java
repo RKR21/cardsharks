@@ -30,4 +30,17 @@ public class PaymentTest {
         // Analysis
         assertEquals(expected_type, payment.getType());
     }
+
+    // Tests toString () method
+    @Test
+    public void testToString () {
+        // Setup
+        String userName = "test";
+
+        // Invoke
+        String expected_toString = String.format(Payment.STRING_FORMAT, userName);
+
+        // Analysis
+        assertEquals(expected_toString, payment.toString());
+    }
 }
