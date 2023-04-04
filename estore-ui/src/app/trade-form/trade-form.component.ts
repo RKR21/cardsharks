@@ -74,7 +74,7 @@ export class TradeFormComponent implements OnInit{
         this.tokens.push(token);
         this.trades.push(trade);
         console.log("Trade offer made: ", trade);
-        this.tradeService.makeOffer(token, trade)
+        this.tradeService.acceptOffer(token, trade)
           .subscribe((trade: Trade) => {
             console.log("HEY");
             this.trade = trade;
