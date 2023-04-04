@@ -101,9 +101,4 @@ export class ProductService {
   private log(message: string) {
     this.messageService.add(`ProductService: ${message}`);
   }
-
-  addToCart(product: Product) {
-    const url = `${this.productsUrl}/${product.id}`;
-    return this.http.put<Product>(url, product, this.httpOptions).subscribe()
-  }
 }

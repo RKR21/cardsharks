@@ -46,7 +46,7 @@ export class HeroDetailComponent implements OnInit {
     if (this.product) {
       this.cartService.addToCart(this.product).subscribe();
       this.product.quantity -= 1;
-      this.productService.addToCart(this.product);
+      this.productService.updateProduct(this.product);
       if (this.product.quantity == 0) {
         this.productService.deleteProduct(this.product.id);
       }
