@@ -1,7 +1,7 @@
 [
     {
         "userName" :  "testUser", 
-        "cart" : [
+        "collection" : [
             {
                 "id":1,
                 "name":"Pikachu",
@@ -18,14 +18,28 @@
     },
     {
         "userName" :  "stan", 
-        "cart" : []
+        "collection" : [
+            {
+                "id":1,
+                "name":"Pikachu",
+                "price":25.00,
+                "quantity":2
+            },
+            {
+                "id":3,
+                "name":"Wartortle",
+                "price":10.50,
+                "quantity":10
+                
+            }
+        ]
     },
     {
         "userName" :  "elijah", 
-        "cart" : []
+        "collection" : []
     },
     {
         "userName" :  "angularMan", 
-        "cart" : []
+        "collection" : []
     }
 ]
