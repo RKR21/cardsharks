@@ -6,6 +6,7 @@ import { AccountService } from '../account.service';
 import { Product } from '../product';
 import { Trade } from '../trade';
 import { Token } from '../token';
+import { CollectionService } from '../collection.service';
 
 
 @Component({
@@ -23,7 +24,6 @@ export class TradeFormComponent implements OnInit{
   trade!: Trade;
   
   trades: Trade[] = [];
-  tokens: Token[] = [];
 
   constructor(private tradeService: TradeService, private productService: ProductService, private accountService: AccountService){}
 
@@ -39,80 +39,26 @@ export class TradeFormComponent implements OnInit{
 
 
   onSubmit(fromUser: string, toUser: string, requestId: number, offerId: number) {
-    const tokenValue = AccountService.getToken();
-    const token: Token = { token: tokenValue };
     fromUser = AccountService.getUser();
-
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
         const trade: Trade = { fromUser, toUser, offer, request };
-        this.tokens.push(token);
-        this.trades.push(trade);
         console.log("Trade offer made: ", trade);
-        this.tradeService.makeOffer(token, trade)
-          .subscribe((trade: Trade) => {
-            console.log("HEY");
-            this.trade = trade;
-            console.log("THERE")
-            console.log("Trade offer made: ", trade);
-          }, (error) => {
-            console.error("Error offering trade: ", error);
-            console.log(error);
-          });
+        this.tradeService.makeOffer(trade).subscribe()
       })
-    })
+    });
   }
 
-  onAccept(fromUser: string, toUser: string, requestId: number, offerId: number) {
-    const tokenValue = AccountService.getToken();
-    const token: Token = { token: tokenValue };
-    fromUser = AccountService.getUser();
-
-    this.productService.getProduct(requestId).subscribe((request: Product) => {
-      this.productService.getProduct(offerId).subscribe((offer: Product) => {
-        const trade: Trade = { fromUser, toUser, offer, request };
-        this.tokens.push(token);
-        this.trades.push(trade);
-        console.log("Trade offer made: ", trade);
-        this.tradeService.acceptOffer(token, trade)
-          .subscribe((trade: Trade) => {
-            console.log("HEY");
-            this.trade = trade;
-            console.log("THERE")
-            console.log("Trade offer made: ", trade);
-          }, (error) => {
-            console.error("Error offering trade: ", error);
-            console.log(error);
-          });
-      })
-    })
+  onAccept() {
+    this.tradeService.acceptOffer().subscribe();
   }
 
-  onDecline(fromUser: string, toUser: string, requestId: number, offerId: number) {
-    const tokenValue = AccountService.getToken();
-    fromUser = AccountService.getUser();
-    const token: Token = { token: tokenValue };
-    this.productService.getProduct(requestId).subscribe((request: Product) => {
-      this.productService.getProduct(offerId).subscribe((offer: Product) => {
-        const trade: Trade = { fromUser, toUser, offer, request };
-        console.log("Trade offer made: ", trade);
-        this.tradeService.declineOffer(token,trade)
-          .subscribe((trade: Trade) => {
-            console.log("HEY");
-            this.trade = trade;
-            console.log("THERE")
-            console.log("Trade offer made: ", trade);
-          }, (error) => {
-            console.error("Error offering trade: ", error);
-            console.log(error);
-          });
-      })
-    })
+  onDecline() {
+    this.tradeService.declineOffer().subscribe();
   }
 
   getTrades() {
     this.tradeService.getTrades()
       .subscribe(trades => this.trades = trades.slice());
   }
-  
 }
