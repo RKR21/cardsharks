@@ -16,7 +16,7 @@ export class TradeService {
 
 
   makeOffer(trade:Trade) {
-    const url = `${this.baseUrl}/offer/${AccountService.getToken()}?userName=${trade.fromUser}?otherName=${trade.toUser}`;
+    const url = `${this.baseUrl}/offer/${AccountService.getToken()}`;
     return this.http.post<Trade>(url, trade).pipe();
   }
 
