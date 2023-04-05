@@ -39,6 +39,5 @@ export class TradeService {
     const url = `${this.baseUrl}/offer/${token}`;
 
     return this.http.get<Trade>(url);
-    
   }
 }
