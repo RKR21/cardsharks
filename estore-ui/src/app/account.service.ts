@@ -44,7 +44,6 @@ export class AccountService {
     const urlA = `${this.accountUrl}/${AccountService.getToken()}?userName=${AccountService.getUser()}`;
     const urlB = `${this.cartUrl}/${AccountService.getToken()}`;
     const urlC = `${this.collectionUrl}/${AccountService.getToken()}`;
-    console.log(urlA);
     this.http.delete(urlA).subscribe();
     this.http.delete(urlB).subscribe();
     this.http.delete(urlC).subscribe();
@@ -84,6 +83,7 @@ export class AccountService {
     const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
     return this.http.get<Payment[]>(urlA, this.httpOptions).pipe();
   }
+  
   deletePayment(payment:Payment){
     const urlA = `${this.accountUrl}/${AccountService.getToken()}/payment/?userName=${AccountService.getUser()}`;
     this.http.put<Payment>(urlA, payment, this.httpOptions).subscribe();

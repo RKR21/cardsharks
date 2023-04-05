@@ -7,6 +7,7 @@ import { LogInOutComponent } from './log-in-out/log-in-out.component';
 import { AdminInventoryControlsComponent } from './admin-inventory-controls/admin-inventory-controls.component';
 import { AdminViewDetailsComponent } from './admin-view-details/admin-view-details.component';
 import { CartComponent } from './cart/cart.component';
+import { CollectionComponent } from './collection/collection.component';
 import { PaymentInfoComponent } from './payment-info/payment-info.component';
 import { TradeFormComponent } from './trade-form/trade-form.component';
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'admin-inventory-controls', component: AdminInventoryControlsComponent},
   { path: 'log-in-out', component: LogInOutComponent },
   { path: 'cart', component: CartComponent },
+  { path: 'collection', component: CollectionComponent },
   { path: 'payment-info', component: PaymentInfoComponent}
 ];
 
