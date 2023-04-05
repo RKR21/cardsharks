@@ -11,21 +11,20 @@ import { AccountService } from './account.service';
 })
 export class TradeService {
   private baseUrl = 'http://localhost:8080/collection';
-  private tradesUrl = 'http://localhost:8080/trades';
+
   constructor(private http: HttpClient) { }
 
 
-  makeOffer(token: Token, trade:Trade): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/offer/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
-
-    
-    return this.http.post<Trade>(url, trade);
+  makeOffer(trade:Trade) {
+    const url = `${this.baseUrl}/offer/${AccountService.getToken()}?userName=${trade.fromUser}?otherName=${trade.toUser}`;
+    return this.http.post<Trade>(url, trade).pipe();
   }
+
   getTrades(): Observable<Trade[]>{
     return this.http.get<Trade[]>(this.baseUrl + "/" + AccountService.getToken())
     .pipe();
   }
+
   declineOffer(token: Token, trade:Trade): 
   Observable<Trade>{
     const url = `${this.baseUrl}/offer-reject/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
@@ -33,6 +32,7 @@ export class TradeService {
     
     return this.http.put<Trade>(url, trade);
   }
+
   acceptOffer(token: Token, trade:Trade): 
   Observable<Trade>{
     const url = `${this.baseUrl}/offer-accept/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;

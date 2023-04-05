@@ -436,7 +436,7 @@ public class CollectionControllerTest {
         when(collectionDAO.makeOffer(token, fromUser, toUser, offer, request)).thenReturn(trade);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.makeOffer(token, fromUser, trade);
+        ResponseEntity<Trade> response = collectionController.makeOffer(token, trade);
 
         // Analysis
         assertEquals(HttpStatus.CREATED,response.getStatusCode());
@@ -454,13 +454,13 @@ public class CollectionControllerTest {
         Product offer = new Product(11,"Charmander", 2.50, 15);
         Product request = new Product(12,"Charmeleon", 5.00, 10);
 
-        int token = Account.getToken(toUser);
+        int token = Account.getToken(fromUser);
         Trade trade = new Trade(fromUser, toUser, offer, request);
 
         when(collectionDAO.makeOffer(token, fromUser, toUser, offer, request)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.makeOffer(token, fromUser, trade);
+        ResponseEntity<Trade> response = collectionController.makeOffer(token, trade);
 
         // Analysis
         assertEquals(HttpStatus.CONFLICT,response.getStatusCode());
@@ -482,7 +482,7 @@ public class CollectionControllerTest {
         doThrow(new IOException()).when(collectionDAO).makeOffer(token, fromUser, toUser, offer, request);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.makeOffer(token, fromUser, trade);
+        ResponseEntity<Trade> response = collectionController.makeOffer(token, trade);
 
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
