@@ -18,15 +18,20 @@ export class LogInOutComponent {
   private tokenValue = AccountService.getToken();
   private isLoggedIn = AccountService.isLoggedIn();
 
+  private temp = this.userName;
+
   private MIN = 3;
 
   getUser(user:string){
     if(!this.isLoggedIn){
-      this.userName = user;
-      this.updateDisplay("User Name: " + this.userName);
-      if(user.length > this.MIN && user != AccountService.getUser())
-        this.accountService.logIn(this.userName).subscribe(value => {this.token = value as Token});
+      this.temp = user;
+      this.updateDisplay("User Name: " + this.temp);
     }
+  }
+
+  hover() {
+    this.userName = this.temp;
+    this.accountService.logIn(this.userName).subscribe(value => {this.token = value as Token});
   }
 
   logIn(){
@@ -34,7 +39,7 @@ export class LogInOutComponent {
       if(this.token != null)
         this.tokenValue = this.token.token;
       if(this.tokenValue != 0){
-        this.updateDisplay("logged in as: " + this.userName + " token: " + this.token.token);
+        this.updateDisplay("logged in as: " + this.userName + " token: " + this.tokenValue);
         this.isLoggedIn = true;
         this.update();
       }
@@ -42,26 +47,28 @@ export class LogInOutComponent {
         this.updateDisplay("No user: " + this.userName);
     }
     else
-      this.updateDisplay("Already logged in");
+      this.updateDisplay("Already logged in as: " + this.userName + " token: " + this.tokenValue);
   }
 
   logOut(){
     if(this.isLoggedIn){
       this.updateDisplay("You are no longer logged in");
       this.tokenValue = 0;
+      this.userName = '';
       this.isLoggedIn = false;
+      this.token.token = 0;
       this.update();
     }
     else
-    this.updateDisplay("You are not logged in");
+      this.updateDisplay("You are not logged in");
   }
 
   createAccount(){
     if(!this.isLoggedIn){
       if(this.userName.length > this.MIN){
         if(this.accountService.createAccount(this.userName)){
-          this.logIn();
           this.updateDisplay("Account created!");
+          this.accountService.logIn(this.userName).subscribe(value => {this.token = value as Token});
         }
         else
           this.updateDisplay("failed to create account");
@@ -70,7 +77,7 @@ export class LogInOutComponent {
         this.updateDisplay("user names need to be longer than " + this.MIN + " characters");
     }
     else
-    this.updateDisplay("log out to create account");
+     this.updateDisplay("log out to create account");
   }
 
   deleteAccount(){
@@ -80,19 +87,14 @@ export class LogInOutComponent {
         this.updateDisplay("Account deleted!");
       }
       else
-        this.updateDisplay("failed to create account");
+        this.updateDisplay("failed to delete account");
     }
     else
-      this.updateDisplay("log in to create account");
+      this.updateDisplay("log in to delete account");
   }
 
   loggedInAsCustomer(){
-    if(AccountService.getToken() != 0 && AccountService.getToken() != 92668751){
-      return true;
-    } 
-    
-    return false;
-
+    return (AccountService.getToken() != 0 && AccountService.getToken() != 92668751);
   }
 
   update(){
