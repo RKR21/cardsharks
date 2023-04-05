@@ -70,6 +70,7 @@ export class TradeFormComponent implements OnInit{
     const token = this.trade_map.get(trade);
     if(token != undefined){
       this.tradeService.acceptOffer(token,trade);
+      this.trade_map.delete(trade)
     }
     else{
       console.log("no trade token found")
@@ -81,6 +82,7 @@ export class TradeFormComponent implements OnInit{
     const token = this.trade_map.get(trade);
     if(token != undefined){
       this.tradeService.declineOffer(token,trade);
+      this.trade_map.delete(trade)
     }
     else{
       console.log("no trade token found")
