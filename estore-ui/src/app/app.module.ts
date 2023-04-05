@@ -17,6 +17,7 @@ import { AdminViewDetailsComponent } from './admin-view-details/admin-view-detai
 import { CartComponent } from './cart/cart.component';
 import { PaymentInfoComponent } from './payment-info/payment-info.component';
 import { TradeFormComponent } from './trade-form/trade-form.component';
+import { CollectionComponent } from './collection/collection.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { TradeFormComponent } from './trade-form/trade-form.component';
     LogInOutComponent,
     CartComponent,
     PaymentInfoComponent,
-    TradeFormComponent
+    TradeFormComponent,
+    CollectionComponent
   ],
   bootstrap: [ AppComponent ]
 })
