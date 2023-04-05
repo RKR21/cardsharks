@@ -76,8 +76,10 @@ public class InventoryFileDAO implements InventoryDAO {
     private Product[] getProductArray(String containsText) { // if containsText == null, no filter
         ArrayList<Product> productArrayList = new ArrayList<>();
 
+        containsText = containsText.toLowerCase();
+    
         for (Product product : products.values()) {
-            if (containsText == null || product.getName().contains(containsText)) {
+            if (containsText == null || product.getName().toLowerCase().contains(containsText)) {
                 productArrayList.add(product);
             }
         }
