@@ -277,7 +277,7 @@ public class CollectionControllerTest {
         when(collectionDAO.acceptOffer(token)).thenReturn(true);
 
         // Invoke
-        ResponseEntity<Product> response = collectionController.acceptOffer(token);
+        ResponseEntity<Trade> response = collectionController.acceptOffer(token);
 
         // Analysis
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -294,7 +294,7 @@ public class CollectionControllerTest {
         when(collectionDAO.acceptOffer(token)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Product> response = collectionController.acceptOffer(token);
+        ResponseEntity<Trade> response = collectionController.acceptOffer(token);
 
         // Analysis
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -311,7 +311,7 @@ public class CollectionControllerTest {
         doThrow(new IOException()).when(collectionDAO).acceptOffer(token);
 
         // Invoke
-        ResponseEntity<Product> response = collectionController.acceptOffer(token);
+        ResponseEntity<Trade> response = collectionController.acceptOffer(token);
 
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());

@@ -25,20 +25,14 @@ export class TradeService {
     .pipe();
   }
 
-  declineOffer(token: Token): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/offer-reject/${token}`;
-
-    
-    return this.http.put<Trade>(url, token);
+  declineOffer() {
+    const url = `${this.baseUrl}/offer-reject/${AccountService.getToken()}`;
+    return this.http.get<Trade>(url).pipe();
   }
 
-  acceptOffer(token: Token): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/offer-accept/${token}`;
-
-    
-    return this.http.put<Trade>(url, token);
+  acceptOffer() {
+    const url = `${this.baseUrl}/offer-accept/${AccountService.getToken()}`;
+    return this.http.get<Trade>(url).pipe();
   }
 
   getTrade(token: number): Observable<Trade>{
