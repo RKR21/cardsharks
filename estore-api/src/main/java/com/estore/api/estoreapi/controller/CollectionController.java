@@ -170,6 +170,7 @@ public class CollectionController {
     /**
      * If valid sends a trade offer to another user.
      * 
+     * @param token authentication
      * @param trade trade object to use
      * 
      * @return ResponseEntity with updated {@link Trade trade} object and HTTP status of CREATED if updated
@@ -179,11 +180,8 @@ public class CollectionController {
 
     
     @PostMapping("/offer/{token}")
-    public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
-    @RequestParam String userName, @RequestBody Trade trade) {
-        LOG.info("PUT /collection/offer/{" + token
-        + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
-        + " Offer: " + trade.getOffer() + " Request: " + trade.getRequest());
+    public ResponseEntity<Trade> makeOffer(@PathVariable int token, @RequestBody Trade trade) {
+        LOG.info("POST /collection/offer/" + token + trade );
         try {
             Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
                 trade.getToUser(), trade.getOffer(), trade.getRequest());
@@ -206,8 +204,8 @@ public class CollectionController {
      * ResponseEntity with HTTP status of  NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/offer-accept/{token}")
-    public ResponseEntity<Product> acceptOffer(@PathVariable int token){
+    @GetMapping("/offer-accept/{token}")
+    public ResponseEntity<Trade> acceptOffer(@PathVariable int token){
         LOG.info("PUT /collection/offer-accept/" + token);
         try {
             if(collectionDAO.acceptOffer(token))
@@ -228,7 +226,7 @@ public class CollectionController {
      * ResponseEntity with HTTP status of  NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/offer-reject/{token}")
+    @GetMapping("/offer-reject/{token}")
     public ResponseEntity<Product> rejectOffer(@PathVariable int token){
         LOG.info("PUT /collection/offer-reject/" + token);
         try {

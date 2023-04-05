@@ -4,45 +4,40 @@ import { Observable } from 'rxjs';
 import { Trade } from './trade';
 import { Token } from './token';
 import { Product } from './product';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TradeService {
   private baseUrl = 'http://localhost:8080/collection';
-  private tradesUrl = 'http://localhost:8080/trades';
+
   constructor(private http: HttpClient) { }
 
 
-  makeOffer(token: Token, trade:Trade): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/offer/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
-
-    
-    return this.http.post<Trade>(url, trade);
+  makeOffer(trade:Trade) {
+    const url = `${this.baseUrl}/offer/${AccountService.getToken()}`;
+    return this.http.post<Trade>(url, trade).pipe();
   }
+
   getTrades(): Observable<Trade[]>{
-    return this.http.get<Trade[]>(this.tradesUrl)
-    .pipe(
-      )
-    ;
-  }
-  declineOffer(token: Token, trade:Trade): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/rejectoffer/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
-
-    
-    return this.http.post<Trade>(url, trade);
-  }
-  acceptOffer(token: Token, trade:Trade): 
-  Observable<Trade>{
-    const url = `${this.baseUrl}/accepttoffer/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
-
-    
-    return this.http.post<Trade>(url, trade);
+    return this.http.get<Trade[]>(this.baseUrl + "/" + AccountService.getToken())
+    .pipe();
   }
 
+  declineOffer() {
+    const url = `${this.baseUrl}/offer-reject/${AccountService.getToken()}`;
+    return this.http.get<Trade>(url).pipe();
+  }
 
+  acceptOffer() {
+    const url = `${this.baseUrl}/offer-accept/${AccountService.getToken()}`;
+    return this.http.get<Trade>(url).pipe();
+  }
 
-  
+  getTrade(token: number): Observable<Trade>{
+    const url = `${this.baseUrl}/offer/${token}`;
+
+    return this.http.get<Trade>(url);
+  }
 }
