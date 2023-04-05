@@ -3,28 +3,28 @@
 <br>
 <div>
     <h3> Customer Name </h3>
-    <input type="text" #box placeholder="John" name="fname" />
     <label for="fname"> First Name </label>
-    <input type="text" #box placeholder="Doe" name="lname" />
+    <input type="text" #box placeholder="John" name="fname" />
     <label for="lname"> Last Name </label>
+    <input type="text" #box placeholder="Doe" name="lname" />
 </div> 
 <br>
 <div>
     <h3> Billing Address </h3>
-    <input type="text" #box placeholder="1 Lomb Memorial Drive" name="adr">
     <label for="adr"> Address/PO Box </label>
-    <input type="text" #box placeholder="Rochester" name="city" />
+    <input type="text" #box placeholder="1 Lomb Memorial Drive" name="adr">
     <label for="city"> City </label>
-    <input type="text" #box placeholder="NY" name="state" />
+    <input type="text" #box placeholder="Rochester" name="city" />
     <label for="state"> State </label>
-    <input type="number" #box placeholder="14623" name="zip" />
+    <input type="text" #box placeholder="NY" name="state" />
     <label for="zip"> Zip Code </label>
+    <input type="number" #box placeholder="14623" name="zip" />
 </div>
 <br>
 <div>
     <h3> Payment </h3>
     <li *ngFor="let payment of payments">
-        <input type="checkbox" name="payment.type">
         <label for="payment.type"> {{payment.type}} </label>
+        <input type="checkbox" name="payment.type">
     </li>
 </div>
