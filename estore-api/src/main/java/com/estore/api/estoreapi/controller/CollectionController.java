@@ -179,11 +179,8 @@ public class CollectionController {
 
     
     @PostMapping("/offer/{token}")
-    public ResponseEntity<Trade> makeOffer(@PathVariable int token, 
-    @RequestParam String userName, @RequestBody Trade trade) {
-        LOG.info("PUT /collection/offer/{" + token
-        + "}?userName=" + trade.getFromUser() + "?otherName=" + trade.getToUser()
-        + " Offer: " + trade.getOffer() + " Request: " + trade.getRequest());
+    public ResponseEntity<Trade> makeOffer(@PathVariable int token, @RequestBody Trade trade) {
+        LOG.info("PUT /collection/offer/" + token + trade );
         try {
             Trade tradeOffer = collectionDAO.makeOffer(token, trade.getFromUser(),
                 trade.getToUser(), trade.getOffer(), trade.getRequest());

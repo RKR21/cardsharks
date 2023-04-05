@@ -46,29 +46,24 @@ export class TradeFormComponent implements OnInit{
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
         const trade: Trade = { fromUser, toUser, offer, request };
-        
         console.log("Trade offer made: ", trade);
-        this.tradeService.makeOffer(token, trade)
-          .subscribe((trade: Trade) => {
-            console.log("HEY");
-            this.trade = trade;
-            console.log("THERE")
-            console.log("Trade offer made: ", trade);
-          }, (error) => {
-            console.error("Error offering trade: ", error);
-            console.log(error);
-          });
+        this.tradeService.makeOffer(trade).subscribe()
       })
-    })
-    
+    });
   }
 
   onAccept() {
-    this.tradeService.acceptOffer(AccountService.getToken());
+    AccountService.getToken()
+    const tokenValue = AccountService.getToken();
+    const token: Token = { token: tokenValue };
+    this.tradeService.acceptOffer(token);
   }
 
   onDecline(trade: Trade) {
-    this.tradeService.declineOffer(AccountService.getToken()).subscribe();
+    AccountService.getToken()
+    const tokenValue = AccountService.getToken();
+    const token: Token = { token: tokenValue };
+    this.tradeService.declineOffer(token).subscribe();
   }
 
   getTrades() {
