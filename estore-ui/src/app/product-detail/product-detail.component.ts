@@ -46,24 +46,19 @@ export class ProductDetailComponent implements OnInit {
   addToCart(): void {
     if (this.product) {
       this.cartService.addToCart(this.product).subscribe();
-      this.product.quantity -= 1;
-      this.productService.updateProduct(this.product).subscribe();
-      if (this.product.quantity <= 0) {
-        this.productService.deleteProduct(this.product.id);
-      }
     }
   }
 
-  removeFromCart(): void {
-    if (this.product) {
-      this.cartService.removeFromCart(this.product);
-      this.product.quantity += 1;
-      this.productService.updateProduct(this.product).subscribe();
-      if (this.product.quantity == 0) {
-        this.productService.deleteProduct(this.product.id);
-      }
-    }
-  }
+  // removeFromCart(): void {
+  //   if (this.product) {
+  //     this.cartService.removeFromCart(this.product);
+  //     this.product.quantity += 1;
+  //     this.productService.updateProduct(this.product).subscribe();
+  //     if (this.product.quantity == 0) {
+  //       this.productService.deleteProduct(this.product.id);
+  //     }
+  //   }
+  // }
 
   isAdmin(){
     return (AccountService.getToken()==92668751);
