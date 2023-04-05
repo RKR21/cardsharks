@@ -46,8 +46,7 @@ export class TradeFormComponent implements OnInit{
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
         const trade: Trade = { fromUser, toUser, offer, request };
-        this.tokens.push(token);
-        this.trades.push(trade);
+        
         console.log("Trade offer made: ", trade);
         this.tradeService.makeOffer(token, trade)
           .subscribe((trade: Trade) => {
@@ -59,6 +58,8 @@ export class TradeFormComponent implements OnInit{
             console.error("Error offering trade: ", error);
             console.log(error);
           });
+        this.tokens.push(token);
+        this.trades.push(trade);
       })
     })
   }

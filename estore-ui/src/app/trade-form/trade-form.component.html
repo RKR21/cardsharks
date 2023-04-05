@@ -24,35 +24,17 @@
           routerLink="/trade_detail/{{trade}}">
           {{trade.fromUser}}
           {{trade.toUser}}
-          {{trade.offer}}
-          {{trade.request}}
+          {{trade.offer.id}}
+          {{trade.request.id}}
+          <form (ngSubmit)="onAccept(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+            <button type="submit">Accept</button>
+          </form>
+          
+          <form (ngSubmit)="onDecline(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+            <button type="submit">Decline</button>
+          </form>
         </a>
 
-      <form (ngSubmit)="onAccept(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
-        
-        
-        <label for="otherName">Trade User Name:</label>
-        <input type="text" id="otherName" name="otherName" [(ngModel)]="otherName" required>
-
-        <label for="requestId">Request:</label>
-        <input type="number" id="requestId" name="requestId" [(ngModel)]="requestId" required>
-
-        <label for="offerId">Offer:</label>
-        <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
-        <button type="submit">Accept</button>
-      </form>
       
-      <form (ngSubmit)="onDecline(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
-        
-        <label for="otherName">Trade User Name:</label>
-        <input type="text" id="otherName" name="otherName" [(ngModel)]="otherName" required>
-
-        <label for="requestId">Request:</label>
-        <input type="number" id="requestId" name="requestId" [(ngModel)]="requestId" required>
-
-        <label for="offerId">Offer:</label>
-        <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
-        <button type="submit">Decline</button>
-      </form>
       
 </article>
