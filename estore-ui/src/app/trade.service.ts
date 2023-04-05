@@ -26,23 +26,23 @@ export class TradeService {
     return this.http.get<Trade[]>(this.baseUrl + "/" + AccountService.getToken())
     .pipe();
   }
-  declineOffer(token: Token, trade:Trade): 
+  declineOffer(token: number): 
   Observable<Trade>{
-    const url = `${this.baseUrl}/offer-reject/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
+    const url = `${this.baseUrl}/offer-reject/${token}`;
 
     
-    return this.http.put<Trade>(url, trade);
+    return this.http.put<Trade>(url, token);
   }
-  acceptOffer(token: Token, trade:Trade): 
+  acceptOffer(token: number): 
   Observable<Trade>{
-    const url = `${this.baseUrl}/offer-accept/${token.token}?userName=${trade.fromUser}&otherName=${trade.toUser}`;
+    const url = `${this.baseUrl}/offer-accept/${token}`;
 
     
-    return this.http.put<Trade>(url, trade);
+    return this.http.put<Trade>(url, token);
   }
 
-  getTrade(token: Token): Observable<Trade>{
-    const url = `${this.baseUrl}/offer/${token.token}`;
+  getTrade(token: number): Observable<Trade>{
+    const url = `${this.baseUrl}/offer/${token}`;
 
     return this.http.get<Trade>(url);
     

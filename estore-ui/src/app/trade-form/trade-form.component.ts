@@ -24,7 +24,6 @@ export class TradeFormComponent implements OnInit{
   trade!: Trade;
   
   trades: Trade[] = [];
-  trade_map = new Map<Trade, Token>();
 
   constructor(private tradeService: TradeService, private productService: ProductService, private accountService: AccountService){}
 
@@ -59,34 +58,17 @@ export class TradeFormComponent implements OnInit{
             console.error("Error offering trade: ", error);
             console.log(error);
           });
-          this.trade_map.set(trade,token);
       })
     })
     
   }
 
-  onAccept(trade: Trade) {
-    const curren_user = AccountService.getUser();
-    const token = this.trade_map.get(trade);
-    if(token != undefined){
-      this.tradeService.acceptOffer(token,trade);
-      this.trade_map.delete(trade)
-    }
-    else{
-      console.log("no trade token found")
-    }
+  onAccept() {
+    this.tradeService.acceptOffer(AccountService.getToken());
   }
 
   onDecline(trade: Trade) {
-    const curren_user = AccountService.getUser();
-    const token = this.trade_map.get(trade);
-    if(token != undefined){
-      this.tradeService.declineOffer(token,trade);
-      this.trade_map.delete(trade)
-    }
-    else{
-      console.log("no trade token found")
-    }
+    this.tradeService.declineOffer(AccountService.getToken()).subscribe();
   }
 
   getTrades() {
