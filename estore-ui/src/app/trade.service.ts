@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Trade } from './trade';
 import { Token } from './token';
 import { Product } from './product';
+import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,10 +23,8 @@ export class TradeService {
     return this.http.post<Trade>(url, trade);
   }
   getTrades(): Observable<Trade[]>{
-    return this.http.get<Trade[]>(this.baseUrl)
-    .pipe(
-      )
-    ;
+    return this.http.get<Trade[]>(this.baseUrl + "/" + AccountService.getToken())
+    .pipe();
   }
   declineOffer(token: Token, trade:Trade): 
   Observable<Trade>{
@@ -48,6 +47,4 @@ export class TradeService {
     return this.http.get<Trade>(url);
     
   }
-
-  
 }

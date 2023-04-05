@@ -26,11 +26,11 @@
           {{trade.toUser}}
           {{trade.offer.id}}
           {{trade.request.id}}
-          <form (ngSubmit)="onAccept(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+          <form (ngSubmit)="onAccept(trade)" #tradeForm="ngForm">
             <button type="submit">Accept</button>
           </form>
           
-          <form (ngSubmit)="onDecline(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+          <form (ngSubmit)="onDecline(trade)" #tradeForm="ngForm">
             <button type="submit">Decline</button>
           </form>
         </a>
