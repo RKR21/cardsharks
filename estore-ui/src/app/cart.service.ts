@@ -36,7 +36,7 @@ export class CartService {
 
   removeFromCart (product: Product) {
     const url = `${this.cartUrl}/${AccountService.getToken()}/${product.id}`;
-    return this.http.delete<Product>(url, this.httpOptions).subscribe();
+    return this.http.delete<Product>(url, this.httpOptions).pipe();
   }
 
   /** Log a CartService message with the MessageService */
