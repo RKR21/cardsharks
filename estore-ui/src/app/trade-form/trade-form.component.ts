@@ -56,7 +56,7 @@ export class TradeFormComponent implements OnInit{
     AccountService.getToken()
     const tokenValue = AccountService.getToken();
     const token: Token = { token: tokenValue };
-    this.tradeService.acceptOffer(token);
+    this.tradeService.acceptOffer(token).subscribe();
   }
 
   onDecline(trade: Trade) {
