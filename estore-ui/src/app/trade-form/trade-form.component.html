@@ -19,5 +19,40 @@
       
         <button type="submit">Submit</button>
       </form>
+      <h2>Incoming Trades: </h2>
+      <a *ngFor="let trade of trades"
+          routerLink="/trade_detail/{{trade}}">
+          {{trade.fromUser}}
+          {{trade.toUser}}
+          {{trade.offer}}
+          {{trade.request}}
+        </a>
+
+      <form (ngSubmit)="onAccept(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+        
+        
+        <label for="otherName">Trade User Name:</label>
+        <input type="text" id="otherName" name="otherName" [(ngModel)]="otherName" required>
+
+        <label for="requestId">Request:</label>
+        <input type="number" id="requestId" name="requestId" [(ngModel)]="requestId" required>
+
+        <label for="offerId">Offer:</label>
+        <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
+        <button type="submit">Accept</button>
+      </form>
+      
+      <form (ngSubmit)="onDecline(userName, otherName, requestId, offerId)" #tradeForm="ngForm">
+        
+        <label for="otherName">Trade User Name:</label>
+        <input type="text" id="otherName" name="otherName" [(ngModel)]="otherName" required>
+
+        <label for="requestId">Request:</label>
+        <input type="number" id="requestId" name="requestId" [(ngModel)]="requestId" required>
+
+        <label for="offerId">Offer:</label>
+        <input type="number" id="offerId" name="offerId" [(ngModel)]="offerId" required>
+        <button type="submit">Decline</button>
+      </form>
       
 </article>

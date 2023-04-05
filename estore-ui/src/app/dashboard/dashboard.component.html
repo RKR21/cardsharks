@@ -3,10 +3,9 @@
   <a *ngFor="let product of products"
       routerLink="/detail/{{product.id}}">
       {{product.name}}
-      {{product.price}}
-      {{product.quantity}}
+       | ${{product.price}}
+       In-Stock: {{product.quantity}}
   </a>
 </div>
 
 <app-product-search></app-product-search>
-<app-trade-form></app-trade-form>

@@ -21,6 +21,9 @@ export class TradeFormComponent implements OnInit{
   requestId: number = 0;
   offerId: number = 0;
   trade!: Trade;
+  
+  trades: Trade[] = [];
+  tokens: Token[] = [];
 
   constructor(private tradeService: TradeService, private productService: ProductService, private accountService: AccountService){}
 
@@ -30,6 +33,7 @@ export class TradeFormComponent implements OnInit{
         // extract the names of the products and store them in productNames
         this.productNames = products.map(product => product.name);
       });
+      this.getTrades();
   }
   
 
@@ -42,6 +46,8 @@ export class TradeFormComponent implements OnInit{
     this.productService.getProduct(requestId).subscribe((request: Product) => {
       this.productService.getProduct(offerId).subscribe((offer: Product) => {
         const trade: Trade = { fromUser, toUser, offer, request };
+        this.tokens.push(token);
+        this.trades.push(trade);
         console.log("Trade offer made: ", trade);
         this.tradeService.makeOffer(token, trade)
           .subscribe((trade: Trade) => {
@@ -57,6 +63,56 @@ export class TradeFormComponent implements OnInit{
     })
   }
 
-  
+  onAccept(fromUser: string, toUser: string, requestId: number, offerId: number) {
+    const tokenValue = AccountService.getToken();
+    const token: Token = { token: tokenValue };
+    fromUser = AccountService.getUser();
+
+    this.productService.getProduct(requestId).subscribe((request: Product) => {
+      this.productService.getProduct(offerId).subscribe((offer: Product) => {
+        const trade: Trade = { fromUser, toUser, offer, request };
+        this.tokens.push(token);
+        this.trades.push(trade);
+        console.log("Trade offer made: ", trade);
+        this.tradeService.acceptOffer(token, trade)
+          .subscribe((trade: Trade) => {
+            console.log("HEY");
+            this.trade = trade;
+            console.log("THERE")
+            console.log("Trade offer made: ", trade);
+          }, (error) => {
+            console.error("Error offering trade: ", error);
+            console.log(error);
+          });
+      })
+    })
+  }
+
+  onDecline(fromUser: string, toUser: string, requestId: number, offerId: number) {
+    const tokenValue = AccountService.getToken();
+    fromUser = AccountService.getUser();
+    const token: Token = { token: tokenValue };
+    this.productService.getProduct(requestId).subscribe((request: Product) => {
+      this.productService.getProduct(offerId).subscribe((offer: Product) => {
+        const trade: Trade = { fromUser, toUser, offer, request };
+        console.log("Trade offer made: ", trade);
+        this.tradeService.declineOffer(token,trade)
+          .subscribe((trade: Trade) => {
+            console.log("HEY");
+            this.trade = trade;
+            console.log("THERE")
+            console.log("Trade offer made: ", trade);
+          }, (error) => {
+            console.error("Error offering trade: ", error);
+            console.log(error);
+          });
+      })
+    })
+  }
+
+  getTrades() {
+    this.tradeService.getTrades()
+      .subscribe(trades => this.trades = trades.slice());
+  }
   
 }

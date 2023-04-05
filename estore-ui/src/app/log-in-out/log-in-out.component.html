@@ -4,22 +4,21 @@
 #box
 placeholder="Enter User Name:" 
 name="userName"
-(keyup)=getUser(box.value)
-(keyup.enter)=logIn()/>
+(keyup)=getUser(box.value)/>
 
-<button type="button" class="in-button" (click)=logIn()>
+<button type="button" class="in-button" (mouseenter)=hover() (click)=logIn()>
     Log In
 </button>
 
-<button type="button" class="out-button" (click)=logOut()>
+<button type="button" class="out-button" (mouseenter)=hover() (click)=logOut()>
     Log Out
 </button>
 
-<button type="button" class="in-button" (click)=createAccount()>
+<button type="button" class="in-button" (mouseenter)=hover() (click)=createAccount()>
     Create Account
 </button>
 
-<button type="button" class="out-button" (click)=deleteAccount()>
+<button type="button" class="out-button" (mouseenter)=hover() (click)=deleteAccount()>
     Delete Account
 </button>
 
