@@ -384,12 +384,12 @@ public class CollectionControllerTest {
         when(collectionDAO.getOffer(token)).thenReturn(trade);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.getOffer(token);
+        ResponseEntity<Trade[]> response = collectionController.getOffer(token);
 
         // Analysis
         assertEquals(HttpStatus.OK,response.getStatusCode());
-        assertEquals(trade.getOffer(), response.getBody().getOffer());
-        assertEquals(trade.getRequest(), response.getBody().getRequest());
+        assertEquals(trade.getOffer(), response.getBody()[0].getOffer());
+        assertEquals(trade.getRequest(), response.getBody()[0].getRequest());
     }
 
     // Tests getOffer() method to ensure correct status codes are produced when
@@ -400,7 +400,7 @@ public class CollectionControllerTest {
         when(collectionDAO.getOffer(123)).thenReturn(null);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.getOffer(123);
+        ResponseEntity<Trade[]> response = collectionController.getOffer(123);
 
         // Analysis
         assertEquals(HttpStatus.NOT_FOUND,response.getStatusCode());
@@ -414,7 +414,7 @@ public class CollectionControllerTest {
         doThrow(new IOException()).when(collectionDAO).getOffer(123);
 
         // Invoke
-        ResponseEntity<Trade> response = collectionController.getOffer(123);
+        ResponseEntity<Trade[]> response = collectionController.getOffer(123);
 
         // Analysis
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());

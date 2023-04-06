@@ -249,13 +249,16 @@ public class CollectionController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/offer/{token}")
-    public ResponseEntity<Trade> getOffer(@PathVariable int token)
+    public ResponseEntity<Trade[]> getOffer(@PathVariable int token)
     {
         LOG.info("GET /collection/offer/" + token);
         try {
             Trade tradeOffer = collectionDAO.getOffer(token);
-            if(tradeOffer != null)
-                return new ResponseEntity<>(tradeOffer, HttpStatus.OK);
+            if(tradeOffer != null) {
+                Trade[] trade = new Trade[1];
+                trade[0] = tradeOffer;
+                return new ResponseEntity<>(trade, HttpStatus.OK);
+            }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch (IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());

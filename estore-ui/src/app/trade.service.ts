@@ -21,7 +21,7 @@ export class TradeService {
   }
 
   getTrades() {
-    return this.http.get<Trade>(this.baseUrl + "/" + AccountService.getToken())
+    return this.http.get<Trade[]>(this.baseUrl + "/offer/" + AccountService.getToken())
     .pipe();
   }
 
