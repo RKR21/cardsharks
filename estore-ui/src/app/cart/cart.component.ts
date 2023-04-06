@@ -27,22 +27,21 @@ export class CartComponent implements OnInit {
       .subscribe(cartItems => this.cartItems = cartItems);
   }
 
-  add (product: Product): void {
-    this.cartService.addToCart(product)
-      .subscribe(product => {
-        this.cartItems.push(product)
-      });
-    product.quantity -= 1;
-    this.productService.updateProduct(product);
-  }
+  // add (product: Product): void {
+  //   this.cartService.addToCart(product)
+  //     .subscribe(product => {
+  //       this.cartItems.push(product)
+  //     });
+  //   product.quantity -= 1;
+  //   this.productService.updateProduct(product);
+  // }
 
   remove (product: Product) : void {
     if (product.quantity > 1) {
-      this.cartService.removeFromCart(product);
       product.quantity -= 1;
     } else {
       this.cartItems = this.cartItems.filter(p => p !== product);
-      this.cartService.removeFromCart(product);
     }
+    this.cartService.removeFromCart(product).subscribe();
   }
 }
