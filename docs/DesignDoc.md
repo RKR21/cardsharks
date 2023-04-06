@@ -57,7 +57,7 @@ This section describes the application domain.
 ![Domain Model](sprint2DomainModel.png)
 
 
-A Customer or Admin can Log-In and use the E-Store. The E-Store mediates the selling and buying of Products. These Products can be added/removed from a Customers Cart or added/deleted by an Admin. The Search Bar searches for Products so that a Customer can find them quickly. 
+A Customer or Admin can Log-In and use the E-Store. The E-Store mediates the selling, buying, and trading of Products. These Products can be added/removed from a Customers Cart or added/deleted from the inventory by an Admin. The Search Bar searches for Products so that a Customer can find them quickly. Each Users Account has a Collection that stores the cards they own. A User can trade cards from their Collection to another User in exchange for a card in the other Users collection. 
 
 
 ## Architecture and Design
