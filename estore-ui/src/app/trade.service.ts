@@ -34,10 +34,4 @@ export class TradeService {
     const url = `${this.baseUrl}/offer-accept/${AccountService.getToken()}`;
     return this.http.get<Trade>(url).pipe();
   }
-
-  getTrade(token: number): Observable<Trade>{
-    const url = `${this.baseUrl}/offer/${token}`;
-
-    return this.http.get<Trade>(url);
-  }
 }

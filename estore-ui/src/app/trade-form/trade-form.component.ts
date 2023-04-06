@@ -23,8 +23,7 @@ export class TradeFormComponent implements OnInit{
   offerId: number = 0;
   trade!: Trade;
   
-  trades: Trade[] = [];
-
+  the_trades: Trade[] = [];
   constructor(private tradeService: TradeService, private productService: ProductService, private accountService: AccountService){}
 
   ngOnInit() {
@@ -57,8 +56,12 @@ export class TradeFormComponent implements OnInit{
     this.tradeService.declineOffer().subscribe();
   }
 
+  resolve_trade() {
+    this.the_trades = [];
+  }
+
   getTrades() {
     this.tradeService.getTrades()
-      .subscribe(trades => this.trades = trades.slice());
+      .subscribe(trades => this.the_trades = trades.slice());
   }
 }
