@@ -1,0 +1,40 @@
+<h2>Checkout</h2>
+
+
+<br>
+<div class="cart-items-for-checkout">
+    <a *ngFor="let product of checkoutItems">
+        ${{product.price}} | {{product.name}} | {{product.quantity}}
+    </a>
+</div>
+<div class="cust-name">
+    <h3> Customer Name </h3>
+    <label for="fname"> First Name </label>
+    <input type="text" #box placeholder="John" name="fname" />
+    <label for="lname"> Last Name </label>
+    <input type="text" #box placeholder="Doe" name="lname" />
+</div> 
+<br>
+<div class="billing-address">
+    <h3> Billing Address </h3>
+    <label for="adr"> Address/PO Box </label>
+    <input type="text" #box placeholder="1 Lomb Memorial Drive" name="adr">
+    <label for="city"> City </label>
+    <input type="text" #box placeholder="Rochester" name="city" />
+    <label for="state"> State </label>
+    <input type="text" #box placeholder="NY" name="state" />
+    <label for="zip"> Zip Code </label>
+    <input type="number" #box placeholder="14623" name="zip" />
+</div>
+<br>
+<div class="payment-selection">
+    <h3> Payment </h3>
+    <li *ngFor="let payment of payments">
+        <label for="payment.type"> {{payment.type}} </label>
+        <input type="checkbox" name="payment.type">
+    </li>
+</div>
+
+<button type="button" class="out-button" (click)=checkout()>
+    Checkout
+</button>

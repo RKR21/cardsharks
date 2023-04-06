@@ -18,6 +18,7 @@ import { CartComponent } from './cart/cart.component';
 import { PaymentInfoComponent } from './payment-info/payment-info.component';
 import { TradeFormComponent } from './trade-form/trade-form.component';
 import { CollectionComponent } from './collection/collection.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CollectionComponent } from './collection/collection.component';
     CartComponent,
     PaymentInfoComponent,
     TradeFormComponent,
-    CollectionComponent
+    CollectionComponent,
+    CheckoutComponent
   ],
   bootstrap: [ AppComponent ]
 })
