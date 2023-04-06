@@ -54,7 +54,7 @@ The e-store owners can modify the inventory as items are bought and sold. Our e-
 This section describes the application domain.
 
 
-![Domain Model](sprint2DomainModel.png)
+![Domain Model](sprint3DomainModel.png)
 
 
 A Customer or Admin can Log-In and use the E-Store. The E-Store mediates the selling, buying, and trading of Products. These Products can be added/removed from a Customers Cart or added/deleted from the inventory by an Admin. The Search Bar searches for Products so that a Customer can find them quickly. Each Users Account has a Collection that stores the cards they own. A User can trade cards from their Collection to another User in exchange for a card in the other Users collection. 
@@ -147,9 +147,6 @@ The Pure Fabrication pattern suggests creating a class to do work that can be re
 As stated in the lecture slides for object-oriented design, the controller acts as the separation (or go-between) for system operations and the user interface. Currently, the team’s application uses 3 controllers for the purpose of managing the inventory, accounts, and carts. Specifically, it oversees operations that include altering varias such as adding, deleting and editing these objects. Each controller has different methods since they have different requirements. As seen below the front end only communicates with the back end through http calls to these 3 controllers.
 
 
-
-
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
 ## Static Code Analysis/Future Design Improvements
 > _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
