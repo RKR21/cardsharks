@@ -6,11 +6,23 @@ ul[class="search-result"] li[\*ngFor="let product of products$"] a[routerLink="/
 h2 {
     text-align: center;
   }
-  
-  .heroes-menu {
+
+  .search-label {
     padding: 0;
     margin: auto;
-    max-width: 1000px;
+  
+    /* flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .search-component {
+    padding: 0;
+    margin: auto;
   
     /* flexbox */
     display: flex;
@@ -21,7 +33,21 @@ h2 {
     align-items: flex-start;
   }
   
-  a {
+  .search-result {
+    padding: 0;
+    margin: auto;
+    list-style-type: none;
+  
+    /* flexbox */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: flex-start;
+    align-items: flex-start;
+  }
+  
+  .search-result a {
     background-color: #3f525c;
     border-radius: 2px;
     padding: 1rem;

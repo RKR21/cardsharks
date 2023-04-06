@@ -31,11 +31,6 @@
     background-color: #000000;
   }
   
-  .cart a:active {
-    background-color: #525252;
-    color: #fafafa;
-  }
-  
   .cart .badge {
     display: inline-block;
     font-size: small;
@@ -67,4 +62,24 @@
   button.delete:hover {
     background-color: #ff0000;
     color: rgb(255, 255, 255);
+  }
+
+  .checkout a {
+    background-color: #3f525c;
+    border-radius: 2px;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+    text-align: center;
+    width: 100%;
+    min-width: 70px;
+    margin: .5rem auto;
+    box-sizing: border-box;
+  
+    /* flexbox */
+    order: 0;
+    flex: 0 1 auto;
+    align-self: auto;
   }
