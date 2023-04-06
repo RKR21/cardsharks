@@ -23,4 +23,10 @@ export class CollectionService {
     return this.http.get<Product[]>(this.collectionUrl + "/" + AccountService.getToken())
     .pipe();
   }
+
+  addToCollection(product : Product){
+    const url = `${this.collectionUrl}/${AccountService.getToken()}`;
+    return this.http.put<Product>(url, product, this.httpOptions).pipe();
+  }
+
 }

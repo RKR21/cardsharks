@@ -28,21 +28,16 @@ export class ProductService {
     .pipe();
   }
     
-
   getProduct(id: number): Observable<Product>{
     const url = `${this.productsUrl}/${id}`;
     return this.http.get<Product>(url);
     
   }
 
-  
-
   searchProducts(term: string): Observable<Product[]> {
-    
     if (!term.trim()) {
       return of([]);
     }
-
     const url = `${this.productsUrl}/search?name=${term}`;
     
     return this.http.get<Product[]>(url).pipe(
@@ -59,6 +54,7 @@ export class ProductService {
       })
     );  
   }
+  
   addProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.productsUrl, product, this.httpOptions).pipe(
       tap((newProduct: Product) => this.log(`added product w/ id=${newProduct.id}`)),
@@ -80,6 +76,13 @@ export class ProductService {
       tap(_ => this.log(`updated product id=${product.id}`)),
       catchError(this.handleError<any>('updateProduct'))
     );
+  }
+
+  decrementStock(product: Product){
+    this.getProduct(product.id).subscribe((stock: Product) =>{
+      stock.quantity -= product.quantity;
+      this.updateProduct(stock).subscribe();
+    });
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

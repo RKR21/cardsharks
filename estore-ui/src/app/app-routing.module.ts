@@ -10,6 +10,7 @@ import { CartComponent } from './cart/cart.component';
 import { CollectionComponent } from './collection/collection.component';
 import { PaymentInfoComponent } from './payment-info/payment-info.component';
 import { TradeFormComponent } from './trade-form/trade-form.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'log-in-out', component: LogInOutComponent },
   { path: 'cart', component: CartComponent },
   { path: 'collection', component: CollectionComponent },
-  { path: 'payment-info', component: PaymentInfoComponent}
+  { path: 'payment-info', component: PaymentInfoComponent},
+  { path: 'checkout', component: CheckoutComponent}
 ];
 
 @NgModule({

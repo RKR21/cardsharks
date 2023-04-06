@@ -14,5 +14,9 @@ export class AppComponent {
     return (AccountService.getToken()==92668751);
   }
 
+  loggedIn() {
+    return (AccountService.isLoggedIn())
+  }
+
 }
 
