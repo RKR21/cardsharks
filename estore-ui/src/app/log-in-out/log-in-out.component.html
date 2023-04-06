@@ -1,26 +1,29 @@
 <h2>Account</h2>
 
-<input type="text"
-#box
-placeholder="Enter User Name:" 
-name="userName"
-(keyup)=getUser(box.value)/>
-
-<button type="button" class="in-button" (mouseenter)=hover() (click)=logIn()>
-    Log In
-</button>
-
-<button type="button" class="out-button" (mouseenter)=hover() (click)=logOut()>
-    Log Out
-</button>
-
-<button type="button" class="in-button" (mouseenter)=hover() (click)=createAccount()>
-    Create Account
-</button>
-
-<button type="button" class="out-button" (mouseenter)=hover() (click)=deleteAccount()>
-    Delete Account
-</button>
+<div>
+    <input type="text"
+    #box
+    placeholder="Enter User Name:" 
+    name="userName"
+    (keyup)=getUser(box.value)/>
+</div>
+<div>
+    <button *ngIf="!loginStatus()" type="button" class="in-button" (mouseenter)=hover() (click)=logIn()>
+        Log In
+    </button>
+    
+    <button *ngIf="loginStatus()" type="button" class="out-button" (mouseenter)=hover() (click)=logOut()>
+        Log Out
+    </button>
+    
+    <button type="button" class="in-button" (mouseenter)=hover() (click)=createAccount()>
+        Create Account
+    </button>
+    
+    <button type="button" class="out-button" (mouseenter)=hover() (click)=deleteAccount()>
+        Delete Account
+    </button>
+</div>
 
 <div *ngIf="loggedInAsCustomer()">
     <a routerLink="/payment-info">Edit Payment Details</a>

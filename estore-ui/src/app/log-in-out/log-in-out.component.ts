@@ -106,4 +106,8 @@ export class LogInOutComponent {
   updateDisplay(value : string){
     this.displayValue = value;
   }
+
+  loginStatus () {
+    return (AccountService.isLoggedIn());
+  }
 }
