@@ -34,14 +34,14 @@ export class CheckoutComponent {
 
   remove(product : Product){
     this.collectionService.addToCollection(product).subscribe();
-    this.cartService.removeFromCart(product);
+    this.cartService.removeFromCart(product).subscribe();
   }
 
   checkout(){
     for(let i = 0; i < this.checkoutItems.length; ++i){
-      this.productService.decrementStock(this.checkoutItems[i]); //sub?
+      this.productService.decrementStock(this.checkoutItems[i]);
       for(let j = this.checkoutItems[i].quantity; j > 0; --j){
-        this.remove(this.checkoutItems[i])
+        this.remove(this.checkoutItems[i]);
       }
     }
   }
