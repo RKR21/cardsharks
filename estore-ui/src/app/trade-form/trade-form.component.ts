@@ -48,6 +48,10 @@ export class TradeFormComponent implements OnInit{
     this.tradeService.declineOffer().subscribe();
   }
 
+  resolveFunction(){
+    this.trades = [];
+  }
+
   getTrades() {
     this.tradeService.getTrades()
       .subscribe(val => this.trades = val);
