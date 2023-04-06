@@ -20,8 +20,8 @@ export class TradeService {
     return this.http.post<Trade>(url, trade).pipe();
   }
 
-  getTrades(): Observable<Trade[]>{
-    return this.http.get<Trade[]>(this.baseUrl + "/" + AccountService.getToken())
+  getTrades() {
+    return this.http.get<Trade>(this.baseUrl + "/" + AccountService.getToken())
     .pipe();
   }
 

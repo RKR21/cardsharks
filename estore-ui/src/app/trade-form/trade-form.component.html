@@ -20,14 +20,21 @@
         <button type="submit">Submit</button>
       </form>
       <h2>Incoming Trades: </h2>
-      <li *ngFor="let trade of the_trades">
+      <li>
+        {{the_trade.fromUser}}
+        {{the_trade.toUser}}
+        {{the_trade.offer.id}}
+        {{the_trade.request.id}}
+        <button type="button" (click)="onAccept()" >Accept</button>
+        <button type="button" (click)="onDecline()" >Decline</button>
+      </li>
+      <!-- <li *ngFor="let trade of the_trades">
         {{trade.fromUser}}
         {{trade.toUser}}
         {{trade.offer.id}}
         {{trade.request.id}}
-        <button type="button" (click)="onAccept()" (click)="resolve_trade()">Accept</button>
-        <button type="button" (click)="onDecline()" (click)="resolve_trade()">Decline</button>
-      </li>
+        
+      </li> -->
           
         
 
