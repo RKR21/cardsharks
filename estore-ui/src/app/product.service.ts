@@ -78,6 +78,13 @@ export class ProductService {
     );
   }
 
+  decrementStock(product: Product){
+    this.getProduct(product.id).subscribe((stock: Product) =>{
+      stock.quantity -= product.quantity;
+      this.updateProduct(stock).subscribe();
+    });
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
