@@ -62,6 +62,9 @@ public class CollectionFileDaoTest {
         int token = Account.getToken(userName);
         boolean result = assertDoesNotThrow(() -> collectionFileDAO.deleteCollection(token),
                                 "Unexpected exception thrown");
+
+        boolean deleteNull = collectionFileDAO.deleteCollection(0);
+        assertEquals(false, deleteNull);
         assertEquals(result, true);
     }
 
@@ -73,6 +76,8 @@ public class CollectionFileDaoTest {
         //Product added = assertDoesNotThrow(()-> collectionFileDAO.addToCollection(token, toAdd));
         Product added = collectionFileDAO.addToCollection(token, toAdd);
         assertNotNull(added);
+        Product addBadToken = collectionFileDAO.addToCollection(0, toAdd);
+        assertNull(addBadToken);
         Product[] actual = collectionFileDAO.getCollection(token);
 
         boolean contains = false;
@@ -102,6 +107,9 @@ public class CollectionFileDaoTest {
         boolean success = assertDoesNotThrow(()-> collectionFileDAO.removeFromCollection(token, id),
                                 "Unexpected exception thrown");
         assertTrue(success);
+
+        boolean removeBadToken = collectionFileDAO.removeFromCollection(0, id);
+        assertEquals(false, removeBadToken);
 
         Product[] actual = collectionFileDAO.getCollection(token);
         
