@@ -64,17 +64,18 @@
     color: rgb(255, 255, 255);
   }
 
-  .checkout a {
-    background-color: #3f525c;
+  .checkout {
+    background-color: #ffffff;
     border-radius: 2px;
     padding: 1rem;
     font-size: 1.2rem;
     text-decoration: none;
     display: inline-block;
-    color: #fff;
+    color: #818181;
     text-align: center;
     width: 100%;
     min-width: 70px;
+    max-width: 200px;
     margin: .5rem auto;
     box-sizing: border-box;
   
@@ -82,4 +83,9 @@
     order: 0;
     flex: 0 1 auto;
     align-self: auto;
+  }
+
+  .checkout:hover {
+    background-color: #ff0000;
+    color: #000000;
   }
