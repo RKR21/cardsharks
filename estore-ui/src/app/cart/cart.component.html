@@ -3,13 +3,13 @@
 <ul class="cart">
     <li *ngFor="let product of cartItems">
       <a routerLink="/detail/{{product.id}}">
-        <span class="badge">{{product.id}}</span> {{product.name}} | Quantity: {{product.quantity}}
+        <span class="badge">{{product.id}} | {{product.name}} | Quantity: {{product.quantity}}</span>
       </a>
       <button type="button" class="delete" title="remove from Cart"
         (click)=remove(product)> x </button>
     </li>
-
-    <div>
-      <a routerLink="/checkout"> Checkout </a>
-    </div>
 </ul>
+
+<div>
+  <a routerLink="/checkout"> Checkout </a>
+</div>
