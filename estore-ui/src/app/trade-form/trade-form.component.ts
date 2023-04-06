@@ -39,9 +39,11 @@ export class TradeFormComponent implements OnInit{
       // const trade: Trade = { fromUser: "jim", toUser: "bill", offer: pikachu, request: pikachu};
       // this.the_trade = trade;
   }
+
+  hasTrade(){
+    return !this.the_trade == null;
+  }
   
-
-
   onSubmit(fromUser: string, toUser: string, requestId: number, offerId: number) {
     fromUser = AccountService.getUser();
     this.productService.getProduct(requestId).subscribe((request: Product) => {

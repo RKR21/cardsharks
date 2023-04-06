@@ -21,12 +21,16 @@
       </form>
       <h2>Incoming Trades: </h2>
       <li>
-        {{the_trade.fromUser}}
-        {{the_trade.toUser}}
-        {{the_trade.offer.id}}
-        {{the_trade.request.id}}
-        <button type="button" (click)="onAccept()" >Accept</button>
-        <button type="button" (click)="onDecline()" >Decline</button>
+        <a *ngIf="hasTrade()">
+
+          {{the_trade.fromUser}}
+          {{the_trade.toUser}}
+          {{the_trade.offer.id}}
+          {{the_trade.request.id}}
+          <button type="button" (click)="onAccept()" >Accept</button>
+          <button type="button" (click)="onDecline()" >Decline</button>
+
+        </a>
       </li>
       <!-- <li *ngFor="let trade of the_trades">
         {{trade.fromUser}}
