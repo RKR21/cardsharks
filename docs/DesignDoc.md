@@ -151,16 +151,16 @@ As stated in the lecture slides for object-oriented design, the controller acts 
 
 
 ## Static Code Analysis/Future Design Improvements
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area._
 
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+![StaticCodeAnalysis](StaticTesting.png)
+No bugs are detected in the project but has some remaining code smells. Most of the code smells seem to be false flags or a prference. As seen below most are pointing to using a built in format for argument construction and duplication of mapping URL's. While defining constants is usually preferred it helps readability to leave as is.
+
+![CodeSmells](CodeSmell.png)
+
+Given enough time we would implement more functionality to our 10% trade feature so it would be easier to use and look nicer. We would also spice up the the HTML/CSS for more user satisfaction.
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
+Testing from SonarQube and SonarScanner has detected no bugs. There is also testing for each API model, DAO, and controller to make sure they are working properly.
 
 ### Acceptance Testing
 
