@@ -93,37 +93,30 @@ The e-store web application, is built using the Model–View–ViewModel (MVVM) 
 This section describes the web interface flow; this is how the user views and interacts
 with the e-store application.
 
-> _Provide a summary of the application's user interface.  Describe, from
-> the user's perspective, the flow of the pages in the web application._
-
+The webpage is broken up into several pages. These pages are navigated to with the button on the top bar. Certain buttons such as Cart, Collection, and Edit Inventory are only availble when logged in with edit inventory only available to an admin. 
+![Homepage.png](Homepage.png)
+A customer would go to the account tab, and log in with their username. From there they can add items to their cart, either by finding them in the list or by searching for them. From their they can navigate to the cart tab where they can view and edit their cart, or checkout.  
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
-> of the design that you are describing.  For example, in e-store you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart. 
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
+The view Tier consists of the Angular front end that utilizes html, css, and typescript. It's broken down into several components and services. such as log-in-out, cart, and admin-inventory-controls. Each component consists of an html template, css sheet, and typescript class for functions. In addition there are several services such as the account service which handles comunications with the backend through http calls, and stores session data related to accounts. There are also several data classes which are used when comunicating with the backend and for storing session data. 
 
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
- >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
- >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
- >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
+Some examples of how the View interacts with the viewmodel and user:
+
+The user interacts with the Homepage and item detail page which then calls the cart-service. All comunication with the backend related to carts is handled though this service
+
+![](CartSequence.png)
+
+Here the user creates an account. Similar to above, the account-service handles calls to the ViewModel. 
+
+![CreateAccount.png](CreateAccount.png)
+
 
 ### ViewModel Tier
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as critical attributes and methods._
-> 
-![Replace with your ViewModel Tier class diagram 1, etc.](model-placeholder.png)
+The ViewModel Tier primarily consists of the controllers that contain http functions. The view interacts with the ViewModel exclusively though these functions. These functions specify their http mappings with an annotation.
+
+![](ViewModelUML.png)
 
 ### Model Tier
 
