@@ -43,10 +43,15 @@ In our first working increment, the CardSharks e-store allows users to login and
 The e-store owners can modify the inventory as items are bought and sold. Our e-store handles day to day data persistence, letting users instantly see up-to-date inventory counts.
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+* Login/Logout - Customers and owners can login to view their card collection or make changes to the e-store.
+* Search for Items - A customer can search for a specific item so they can purchase it
+* Add/Edit items from Shopping Cart - A customer can add items to their shopping cart so they can buy them later. They can also edit and remove items from their shopping cart.
+* Checkout - Customers can review their items, add payment info, and purchase items.
+* Inventory Interaction - E-store owners can edit the stores inventory. These changes along with inventory changes due to customer purchases will be saved across sessions using data persistence.
 
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+* Trade Cards - Users are able to trade cards from their collection to another user for one of their cards.
+* Saving Payment Information - Users can add, delete, and edit their payment information so they can use it in the future.
 
 
 ## Application Domain
@@ -164,7 +169,7 @@ Testing from SonarQube and SonarScanner has detected no bugs. There is also test
 
 ### Acceptance Testing
 
-There were five stories in total that had passed all their acceptance criteria tests. These were the admin inventory interaction story, search-bar story, login/logout story, homepage story, and shopping cart backend storage story. We had two stories that didn't pass all their acceptance criteria tests. These were the Add to Shopping Cart and Edit Shopping Cart stories. The issues we found during acceptence testing were related to the shopping cart. We were able to get the inventory count to go down when a product was added to the cart, but that was the extent of the shopping cart functionality. 
+All nine of the sprint 3 stories fully passed their acceptance testing. All the stories that failed acceptance testing in previous sprints have been fixed and now fully pass. 
 
 ### Unit Testing and Code Coverage
 > _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
