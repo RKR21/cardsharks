@@ -13,10 +13,10 @@ geometry: margin=1in
   * Rohan Rao
 
 ## Executive Summary
-This is a summary of the project.
+This e-store is an online hub that allows users to buy, sell, and trade their trading cards with ease. Our e-store's special trading feature supports fast and easy card trading between users. With these seamless transactions, customers can expand their card collection like never before.
 
 ### Purpose
-This e-store is an online hub that allows users to buy, sell, and trade their trading cards with ease. Our e-store's special trading feature supports fast and easy card trading between users. Customers can expand their card collection like never before. 
+This design document is the blueprint of a website that enables users to buy, sell, and trade trading cards. The site consists of a user friendly interface that allows collectors to easily browse and search for their desired cards. Our customers will be able to make an offer with one of their cards and send it to another user who will then accept or decline the trade. They can also quickly make purchases by saving their payment information on-site. These features and tools will let trading card enthusiasts enjoy their hobby to the fullest. 
 
 
 ### Glossary and Acronyms
@@ -24,9 +24,11 @@ This e-store is an online hub that allows users to buy, sell, and trade their tr
 | Term | Definition |
 |------|------------|
 | API | Application Programming Interface |
+| CSS | Cascading Style Sheets |
+| HTML | Hypertext Markup Language |
 | REST | Representational State Transfer(An industry standard for creating APIs) |
 | SPA | Single Page |
-| Persistance | Ability to store and access data across sessions and processes | 
+| Persistence | Ability to store and access data across sessions and processes | 
 
 
 ## Requirements
