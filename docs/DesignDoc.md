@@ -35,14 +35,10 @@ This design document is the blueprint of a website that enables users to buy, se
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
 
-In our first working increment, the CardSharks e-store allows users to login and see their collection. On the store, Customers view a full list of products and a search bar for quickly locating coveted cards. Patrons have access to a shopping cart to add and remove items as well as proceed to checkout.
-The e-store owners can modify the inventory as items are bought and sold. Our e-store handles day to day data persistence, letting users instantly see up-to-date inventory counts.
+The CardSharks e-store MVP allows users to login and see their collection. On the store, Customers view a full list of products and a search bar for quickly locating coveted cards. Patrons have access to a shopping cart to add and remove items as well as proceed to checkout.
+The e-store owners can modify the inventory as new stock is received. Our e-store handles session-to-session data persistence, letting users instantly see up-to-date inventory counts.
 
 ### MVP Features
 * Login/Logout - Customers and owners can login to view their card collection or make changes to the e-store.
