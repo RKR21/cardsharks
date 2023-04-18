@@ -57,7 +57,7 @@ The e-store owners can modify the inventory as new stock is received. Our e-stor
 This section describes the application domain.
 
 
-![Domain Model](sprint3DomainModel.png)
+![Domain Model](domainModel.png)
 
 
 A Customer or Admin can Log-In and use the E-Store. The E-Store mediates the selling, buying, and trading of Products. These Products can be added/removed from a Customer's Cart or added/deleted from the inventory by an Admin. The Search Bar searches for Products so that a Customer can find them quickly. Each Users Account has a Collection that stores the cards they own. A User can trade cards from their Collection to another User in exchange for a card in the other Users collection. 
