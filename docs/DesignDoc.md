@@ -125,23 +125,23 @@ The Account model stores user information and provides methods to get the UserNa
 
 ## OO Design Principles
 
-# Law of Demeter
+#### Law of Demeter
 ![Law of Demeter](lawOfDemeterOO.png)
 
 The Law of Demeter will be followed as all products have private data fields and appropriate getters and setters. The Angular framework will also inherently follow this principle with its use of components. Functionality is encapsulated within components while still allowing interaction between components without sharing internal data. We also use a controller to talk to the Data Access Object interface implementation which stores and modifies the product list in a JSON. So the Angular front end follows the principle as well as the backend. Below demonstrates how the Angular Components talk only to their immediate neighbor, a service, which talks to its neighbor, and so on, instead of the component directly editing the files or talking to the fileDAO or Controller.
 
-# Loose Coupling
+#### Loose Coupling
 ![Loose Coupling](looseCouplingOO.png)
 
 Loose coupling is the concept that systems that interact with each other should know as little as possible about each other. The only thing that matters is the external view of the class such as method signatures and return types. Interfaces are very helpful in enforcing this. For example, in our web application, the controller doesn’t need to worry about how the DAO implements its methods. It could be swapped out with another implementation and as long as the method signatures and return types stay the same, the app would still function. 
 Loose Coupling is also achieved in Angular by using dependency injection. By injecting the services into the components, the components do not need to know implementation details. This is important because it allows us to change the implementation of the dependency without affecting the component.
 
-# Pure Fabrication
+#### Pure Fabrication
 ![Pure Fabrication](pureFabricationOO.png)
 
 The Pure Fabrication pattern suggests creating a class to do work that can be reused by a class or classes. This class does not represent a domain entity. Using this design pattern, low coupling, cohesiveness, and Single Responsibility can be achieved. As the project expands, Pure Fabrication could be applied in situations where some tasks need to be performed that are not directly related to the class that needs it. For example, the E-store or sales class will need to update the inventory data after a purchase is made, a product is created, or stock has been added. The best way to do this is to make a class that handles the data manipulation and have it call the sales class. This way the E-store and sales class can stay in a Single Responsibility state. The Token class is an example of pure fabrication since it is not a domain entity, but it facilitates the authentication of accounts and the making of trades and transactions.
 
-# Controller
+#### Controller
 ![Controller](controllerOO.png)
 
 As stated in the lecture slides for object-oriented design, the controller acts as the separation (or go-between) for system operations and the user interface. Currently, the team’s application uses 4 controllers to manage the inventory, accounts, and carts. Specifically, it oversees operations that include altering various objects such as adding, deleting, and editing these objects. Each controller has different methods since they have different requirements. As seen below the front end only communicates with the back end through HTTP calls to these 4 controllers.
