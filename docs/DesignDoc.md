@@ -151,24 +151,21 @@ As stated in the lecture slides for object-oriented design, the controller acts 
 ## Static Code Analysis/Future Design Improvements
 
 ![StaticCodeAnalysis](StaticTesting.png)
-No bugs are detected in the project but has some remaining code smells. Most of the code smells seem to be false flags or a preference. As seen below most are pointing to using a built-in format for argument construction and duplication of mapping URL's. While defining constants is usually preferred it helps readability to leave as is.
+No bugs are detected in the project but has some remaining code smells. As seen below most are pointing to using a built-in format for argument construction and duplication of mapping URL's. While some of these are valid, such as reversed assertion parameters, many are minor. One of the most common code smell is duplicate strings in controller mapping but arguably adds to readability when trying to understand the correct format for a function. 
 
 ![CodeSmells](CodeSmell.png)
 
-Given enough time we would implement more functionality to our 10% trade feature so it would be easier to use and look nicer. We would also spice up the HTML/CSS for more user satisfaction.
+Given enough time we would implement more functionality to our 10% trade feature so it would be easier to use. As it stands our trade feature, while functional requires users to know the name of an account as well as the ID's of the respective products to trade. This makes trading cards difficult to use. Not only this but the features are lacking messages to inform the user whether or not a trade was successful in creation or acceptance. We would also spice up the HTML/CSS for more user satisfaction as the current CSS is still almost the same as the heroes tutorial css. Some improved organization of HTML fields would also help the aesthetic of the design.
 
 ## Testing
-Testing from SonarQube and SonarScanner has detected no bugs. There is also testing for each API model, DAO, and controller to make sure they are working properly.
+Testing from SonarQube and SonarScanner has detected no bugs. There is also testing for each API model, DAO, and controller to make sure they are working properly. Some of the early created tests for the inventory utility had reversed assertion parameters but were otherwise functional. Various code smells were detected.
 
 ### Acceptance Testing
 
-All nine of the sprint 3 stories fully passed their acceptance testing. All the stories that failed acceptance testing in previous sprints have been fixed and now fully pass. 
+Sprint 2 we were unable to finish all MVP features, therefore we failed some cart acceptance criterion. By end of Sprint 4 we had 10 User Stories completely pass all their acceptance critieria. We had failures in 1 user story due to acceptance critierion not being properly updated to represent the changes made to design of the features. All user story's were functional, albeit a few lacking polish and ease of usability. 
 
 ### Unit Testing and Code Coverage
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
+The strategy deployed for unit testing was focusing on the most complicated code to ensure proper functionality. Model tier was a secondary focus as the model are their functionality were small and simple. Our web store uses four controllers and four file data access objects. Each possible return from each controller was tested and was our highest coverage percent. We tried to cover as much as possible in the FileDAO code but the complexity and scope creep left some holes in form of untested possible returns, with multiple assertions covered in each @Test.
 
 ![Code Coverage](codeCoverage.png)
 
