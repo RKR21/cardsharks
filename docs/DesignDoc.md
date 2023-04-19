@@ -93,7 +93,8 @@ with the e-store application.
 
 The webpage is broken up into several pages. These pages are navigated with the button on the top bar. Certain buttons such as Cart, Collection, and Edit Inventory are only available when logged in with edit inventory only available to an admin. 
 ![Homepage.png](Homepage.png)
-A customer would go to the account tab, and log in with their username. From there, they can add items to their cart, either by finding them in the list or by searching for them. From their they can navigate to the cart tab where they can view and edit their cart, or checkout.  
+A customer would go to the account tab, and log in with their username. From there, they can add items to their cart, either by finding them in the list or by searching for them. From there they can navigate to the cart tab where they can view and edit their cart, or checkout.  
+When logged in as an admin, a tab becomes visible allowing editing of the inventory. 
 
 ### View Tier
 
@@ -118,7 +119,7 @@ The ViewModel Tier primarily consists of the controllers that contain HTTP funct
 
 ### Model Tier
 
-The Account model stores user information and provides methods to get the UserName and the Token assigned to it. Each account has an association with the Cart model. One Cart is assigned to One Account. The Cart can add products from the Product model and remove them too. The Product model stores information such as Id, Name, Price, and Quantity for each product. Finally, we have the Token model which verifies each account and identifies the account a cart is assigned to. 
+The Account model stores user information and provides methods to get the UserName and the Token assigned to it. Each account has an association with the Cart model. One Cart is assigned to One Account. The Cart can add products from the Product model and remove them too. The Product model stores information such as Id, Name, Price, and Quantity for each product. Finally, we have the Token model which verifies each account and identifies the account a cart is assigned to. The token lets the front end comunicate to the backend which user is currently logged in. The token is supplied to the front end when a log in is successful ensuring that a log in attempt must go through the backend. 
 
 
 ![Model Tier](modelTierUML.png)
@@ -128,12 +129,12 @@ The Account model stores user information and provides methods to get the UserNa
 #### Law of Demeter
 ![Law of Demeter](lawOfDemeterOO.png)
 
-The Law of Demeter will be followed as all products have private data fields and appropriate getters and setters. The Angular framework will also inherently follow this principle with its use of components. Functionality is encapsulated within components while still allowing interaction between components without sharing internal data. We also use a controller to talk to the Data Access Object interface implementation which stores and modifies the product list in a JSON. So the Angular front end follows the principle as well as the backend. Below demonstrates how the Angular Components talk only to their immediate neighbor, a service, which talks to its neighbor, and so on, instead of the component directly editing the files or talking to the fileDAO or Controller.
+The Law of Demeter will be followed as all products have private data fields and appropriate getters and setters. The Angular framework will also inherently follow this principle with its use of components. Functionality is encapsulated within components while still allowing interaction between components without sharing internal data. We also use a controller to talk to the Data Access Object interface implementation which stores and modifies the product list in a JSON. So the Angular front end follows the principle as well as the backend. The imagine above shows how the Angular Components talk only to their immediate neighbor, a service, which talks to its neighbor, and so on, instead of the component directly editing the files or talking to the fileDAO or Controller.
 
 #### Loose Coupling
 ![Loose Coupling](looseCouplingOO.png)
 
-Loose coupling is the concept that systems that interact with each other should know as little as possible about each other. The only thing that matters is the external view of the class such as method signatures and return types. Interfaces are very helpful in enforcing this. For example, in our web application, the controller doesn’t need to worry about how the DAO implements its methods. It could be swapped out with another implementation and as long as the method signatures and return types stay the same, the app would still function. 
+Loose coupling is the concept that systems that interact with each other should know as little as possible about each other. The only thing that matters is the external view of the class such as method signatures and return types. Interfaces are very helpful in enforcing this. For example, in our web application, the controller doesn’t need to worry about how the DAO implements its methods and has no information about it's inner workings. It could be swapped out with another implementation and as long as the method signatures and return types stay the same, the app would still function. 
 Loose Coupling is also achieved in Angular by using dependency injection. By injecting the services into the components, the components do not need to know implementation details. This is important because it allows us to change the implementation of the dependency without affecting the component.
 
 #### Pure Fabrication
