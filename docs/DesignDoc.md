@@ -33,7 +33,12 @@ This design document is the blueprint of a website that enables users to buy, se
 
 ## Requirements
 
-This section describes the features of the application.
+* A user will have access to a login page where they can log in either as a customer or an admin
+* A customer will have a shopping cart where they can add or remove products from it.
+* An admin will have access to an inventory where they can add, update, or delete products
+* A customer will have access to their homepage where they can view different cards from stock and add it to their shopping cart.
+* A customer will have an option to purchase the products they add to their shopping cart.
+* A customer will have an option to search for a specific product they desire.
 
 ### Definition of MVP
 
