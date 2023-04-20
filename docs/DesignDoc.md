@@ -106,7 +106,7 @@ The user interacts with the Homepage and item detail page which then calls the c
 
 ![](CartSequence.png)
 
-Here 2 users perform a trade action with eachother. The first user initiates the trade...
+Here 2 users perform a trade action with eachother. The first user initiates the trade which get's created as an object in the model. The second user then calls getTrades by opening the page and accepts the trade, deleting the trade object and updating both user's collections.
 
 ![CreateAccount.png](trade_sequence.png)
 
