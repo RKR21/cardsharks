@@ -106,9 +106,9 @@ The user interacts with the Homepage and item detail page which then calls the c
 
 ![](CartSequence.png)
 
-Here the user creates an account. Similar to the above, the account-service handles calls to the ViewModel. 
+Here 2 users perform a trade action with eachother. The first user initiates the trade...
 
-![CreateAccount.png](CreateAccount.png)
+![CreateAccount.png](trade_sequence.png)
 
 
 ### ViewModel Tier
