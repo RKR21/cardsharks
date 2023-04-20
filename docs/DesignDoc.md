@@ -33,7 +33,12 @@ This design document is the blueprint of a website that enables users to buy, se
 
 ## Requirements
 
-This section describes the features of the application.
+* A user will have access to a login page where they can log in either as a customer or an admin
+* A customer will have a shopping cart where they can add or remove products from it.
+* An admin will have access to an inventory where they can add, update, or delete products
+* A customer will have access to their homepage where they can view different cards from stock and add it to their shopping cart.
+* A customer will have an option to purchase the products they add to their shopping cart.
+* A customer will have an option to search for a specific product they desire.
 
 ### Definition of MVP
 
@@ -152,9 +157,15 @@ As stated in the lecture slides for object-oriented design, the controller acts 
 ## Static Code Analysis/Future Design Improvements
 
 ![StaticCodeAnalysis](StaticTesting.png)
-No bugs are detected in the project but has some remaining code smells. As seen below most are pointing to using a built-in format for argument construction and duplication of mapping URL's. While some of these are valid, such as reversed assertion parameters, many are minor. One of the most common code smell is duplicate strings in controller mapping but arguably adds to readability when trying to understand the correct format for a function. 
+
+No bugs were detected in the project but has some remaining code smells. As seen below most are pointing to using a built-in format for argument construction and duplication of mapping URL's. While some of these are valid, such as reversed assertion parameters, many are minor. One of the most common code smell is duplicate strings in controller mapping but arguably adds to readability when trying to understand the correct format for calling a function. There were some careless code smells such as unused imports in the UI, as seen below, but was low in count and severity.  
 
 ![CodeSmells](CodeSmell.png)
+![CodeSmells](Code_Smell1.png)
+![CodeSmells](Code_Smell2.png)
+![CodeSmells](Code_Smell3.png)
+![codeSmells](Code_Smell4.png)
+
 
 Given enough time we would implement more functionality to our 10% trade feature so it would be easier to use. As it stands our trade feature, while functional requires users to know the name of an account as well as the ID's of the respective products to trade. This makes trading cards difficult to use. Not only this but the features are lacking messages to inform the user whether or not a trade was successful in creation or acceptance. We would also spice up the HTML/CSS for more user satisfaction as the current CSS is still almost the same as the heroes tutorial css. Some improved organization of HTML fields would also help the aesthetic of the design.
 
