@@ -155,6 +155,10 @@ As stated in the lecture slides for object-oriented design, the controller acts 
 No bugs are detected in the project but has some remaining code smells. As seen below most are pointing to using a built-in format for argument construction and duplication of mapping URL's. While some of these are valid, such as reversed assertion parameters, many are minor. One of the most common code smell is duplicate strings in controller mapping but arguably adds to readability when trying to understand the correct format for a function. 
 
 ![CodeSmells](CodeSmell.png)
+![CodeSmells](Code_Smell1.png)
+![CodeSmells](Code_Smell2.png)
+![CodeSmells](Code_Smell2.png)
+
 
 Given enough time we would implement more functionality to our 10% trade feature so it would be easier to use. As it stands our trade feature, while functional requires users to know the name of an account as well as the ID's of the respective products to trade. This makes trading cards difficult to use. Not only this but the features are lacking messages to inform the user whether or not a trade was successful in creation or acceptance. We would also spice up the HTML/CSS for more user satisfaction as the current CSS is still almost the same as the heroes tutorial css. Some improved organization of HTML fields would also help the aesthetic of the design.
 
